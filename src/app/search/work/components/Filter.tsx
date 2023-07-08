@@ -19,7 +19,7 @@ function FilterWork() {
     console.log(filter)
   }
   return (
-    <div>
+    <div className='mb-5 md:mb-0'>
       {/* < */}
       <Button variant="ghost" className='gap-2' onClick={resetFilter}>
         дахин тохируулах 
@@ -31,7 +31,7 @@ function FilterWork() {
             professions.map((pro) => ({ value: pro.slug, label: pro.name }))
           } className='w-full' />
         </FilterRow>
-        <FilterRow label='Байршлыг сонгох'>
+        <FilterRow label='Байршил'>
           <Combobox onSelect={(val) => setFilter({ ...filter, location: val })} placeholder='байршлыг сонгох' values={professions.map((pro) => ({ value: pro.slug, label: pro.name }))} className='w-full' />
         </FilterRow>
       </div>

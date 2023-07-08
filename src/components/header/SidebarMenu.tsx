@@ -24,7 +24,7 @@ const SidebarMenu: React.FC = () => {
           {
             professions.map(pro => (
               <div className='p-1'>
-                <Link href="#" key={pro.slug}>
+                <Link href="/search/work" key={pro.slug}>
                   {pro.name}
                 </Link>
               </div>
@@ -43,7 +43,7 @@ const SidebarMenu: React.FC = () => {
             {
               professions.map(pro => (
                 <div className='p-1'>
-                  <Link href="#" key={pro.slug}>
+                  <Link href="/search/talent" key={pro.slug}>
                     {pro.name}
                   </Link>
                 </div>

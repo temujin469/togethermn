@@ -13,7 +13,7 @@ function AreYouReady() {
         <div
           data-aos="fade-right"
         >
-          <H2>Та төслөө эхлүүлэхэд бэлэн үү?<br /> Яаг одоо ажил нийтэлэх!</H2>
+            <H2>Та төслөө эхлүүлэхэд бэлэн үү?<br /> Яаг одоо ажил нийтлэх!</H2>
         </div>
         <div className='flex flex-col gap-6'
           data-aos='fade-left'>

@@ -23,7 +23,7 @@ function FilterTalent() {
   }
   
   return (
-    <div className='mr-5'>
+    <div className='md:mr-5 mb-5 md:mb-0'>
       {/* < */}
       <Button variant="ghost" className='gap-2' onClick={resetFilter}>
         дахин тохируулах
