@@ -110,6 +110,18 @@
     "locations": {
       "type": "json",
       "required": true
+    },
+    "additionalMaterial": {
+      "type": "text"
+    },
+    "areasOfExpertise": {
+      "type": "json"
+    },
+    "followers": {
+      "displayName": "platform",
+      "type": "component",
+      "repeatable": true,
+      "component": "job.platform"
     }
   }
 }

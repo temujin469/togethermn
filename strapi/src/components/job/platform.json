@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_job_platforms",
+  "info": {
+    "displayName": "platform",
+    "icon": "grid"
+  },
+  "options": {},
+  "attributes": {
+    "instagram": {
+      "type": "biginteger"
+    },
+    "tiktok": {
+      "type": "biginteger"
+    },
+    "youtube": {
+      "type": "biginteger"
+    }
+  }
+}

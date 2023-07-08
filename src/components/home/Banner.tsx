@@ -8,14 +8,14 @@ const Banner = () => {
     <Container className="bg-primary">
 
     
-    <section className='mt-[68px] md:mt-[75px] box-border text-center relative md:text-left'>
-      <div className='xl:container mx-auto flex items-center  sm:pt-16 pb-9 min-h-[calc(100vh-69px)] sm:min-h-[300px] lg:min-h-[calc(100vh-75px)]'>
+      <section className='mt-[68px] md:mt-[75px] box-border text-center relative md:text-left '>
+        <div className='xl:container mx-auto flex items-center  sm:pt-16 pb-9 sm:min-h-[300px] h-[calc(100vh-69px)]  lg:min-h-[calc(100vh-75px)]'>
         <div className='flex gap-12 sm:gap-10 justify-between sm:flex-row flex-col-reverse'>
           {/* text */}
           <div className="items-center flex md:max-w-[50%]">
             <div className="">
               <h1
-                className='text-3xl font-secondary text-secondary bg-clip-text font-bold mb-8 lg:text-4xl lg:leading-snug'
+                className='md:text-3xl text-2xl font-secondary text-secondary bg-clip-text font-bold mb-8 lg:text-4xl lg:leading-snug'
                 data-aos='fade-down'
                 data-aos-delay='500'
 
@@ -38,13 +38,13 @@ const Banner = () => {
 
               >
                 <Link href="/search/talent">
-                  <Button variant="secondary" size="lg" >
+                  <Button variant="secondary" className="whitespace-nowrap" >
                     Мэргэжилтэн олох
                   </Button>
                 </Link>
                 
                 <Link href="#">
-                  <Button variant="outline" className="text-white" size="lg">
+                  <Button variant="outline" className="text-white">
                     Дэлгэрэнгүй
                   </Button>
                 </Link>
@@ -60,7 +60,7 @@ const Banner = () => {
           </div>
         </div>
       </div>
-      <img src="/images/circle.png" className="absolute bottom-0 rotate-180 left-[-300px] w-[800px] h-[400px]"/>
+      <img src="/images/circle.png" className="absolute bottom-0 rotate-180 left-[-300px] md:w-[800px] h-[400px]"/>
     </section>
     </Container>
   );
