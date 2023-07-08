@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_per_day_budgets",
+  "info": {
+    "displayName": "budget",
+    "icon": "database",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "perHour": {
+      "type": "biginteger"
+    },
+    "perDay": {
+      "type": "biginteger"
+    }
+  }
+}

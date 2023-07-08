@@ -1,0 +1,55 @@
+{
+  "collectionName": "components_user_profiles",
+  "info": {
+    "displayName": "detail",
+    "icon": "user",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "location": {
+      "type": "string"
+    },
+    "bio": {
+      "type": "richtext"
+    },
+    "gender": {
+      "type": "enumeration",
+      "enum": [
+        "эрэгтэй",
+        "эмэгтэй"
+      ]
+    },
+    "age": {
+      "type": "integer"
+    },
+    "instaFollowers": {
+      "type": "biginteger"
+    },
+    "tiktokFollowers": {
+      "type": "biginteger"
+    },
+    "photos": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "profileImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "professions": {
+      "type": "json"
+    },
+    "rate": {
+      "type": "integer"
+    }
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "kind": "collectionType",
+  "collectionName": "azhils",
+  "info": {
+    "singularName": "azhil",
+    "pluralName": "azhils",
+    "displayName": "Ажил",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "richtext",
+      "required": true
+    },
+    "files": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "gender": {
+      "type": "enumeration",
+      "enum": [
+        "эрэгтэй",
+        "эмэгтэй",
+        "бүгд"
+      ],
+      "required": true,
+      "default": "бүгд"
+    },
+    "typeOfTalent": {
+      "type": "string",
+      "required": true
+    },
+    "minAge": {
+      "type": "integer",
+      "required": true
+    },
+    "maxAge": {
+      "type": "integer",
+      "required": true
+    },
+    "minHeight": {
+      "type": "integer",
+      "required": true
+    },
+    "bodyType": {
+      "type": "string",
+      "required": true
+    },
+    "shootDate": {
+      "type": "string"
+    },
+    "requiredDate": {
+      "type": "string"
+    },
+    "hairColor": {
+      "type": "string",
+      "required": true
+    },
+    "bookedBy": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "bookedJobs"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "createdJobs"
+    },
+    "profession": {
+      "type": "string",
+      "required": true
+    },
+    "isAdditionalMaterial": {
+      "type": "enumeration",
+      "enum": [
+        "yes",
+        "no"
+      ]
+    },
+    "isUse": {
+      "type": "enumeration",
+      "enum": [
+        "yes",
+        "no"
+      ]
+    },
+    "usageFor": {
+      "type": "json"
+    },
+    "locations": {
+      "type": "json",
+      "required": true
+    }
+  }
+}
