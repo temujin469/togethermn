@@ -10,11 +10,13 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import useSearchTalent from '@/hooks/useTalentSearch';
 import { useQuery } from '@tanstack/react-query';
 import getAttributes from '@/utils/fetch/getAttributes';
+import getProfessions from '@/utils/fetch/getProfessions';
 
 
-function FilterTalent({professions}:{professions?:ResponseProfession[]}) {
+function FilterTalent() {
   const searchTalent = useSearchTalent()
   const [filter, setFilter] = useState<FilterTalent>({...searchTalent.filter});
+  const {data:professions} = useQuery({queryKey:["professions"],queryFn:getProfessions})
 
   const resetFilter = () => {
     setFilter({});

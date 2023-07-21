@@ -2,18 +2,16 @@ import React from 'react';
 import FilterTalent from './components/Filter';
 import Container from '@/components/ui/container';
 import FilteredTalents from './components/FilteredTalents';
-import getProfessions from '@/utils/fetch/getProfessions';
 import FilterHeader from './components/Header';
 
 async function SearchTalent() {
-  const professions = await getProfessions();
   return (
     <div>
       <FilterHeader/>
       <Container className='md:px-10 xl:px-16 my-5 max-w-[1600px]'>
         <div className='md:grid grid-cols-12 gap-5 relative'>
           <div className='col-span-5 xl:col-span-4  md:sticky top-[135px] md:h-[calc(100vh-115px)] overflow-y-scroll'>
-            <FilterTalent professions={professions} />
+            <FilterTalent  />
           </div>
           <div className='xl:col-span-8 col-span-7'>
             <FilteredTalents />

@@ -1,4 +1,5 @@
-import React from 'react';
+"use client"
+import React, { useEffect } from 'react';
 import StepContent from '../components/StepContent';
 import Step1 from './components/Step1';
 import Step2 from './components/Step2';
@@ -15,7 +16,15 @@ const steps = [
   'Баталгаажуулах',
 ];
 
+
+
 function WorkWithCastTalent() {
+
+  useEffect(() => {
+    // you are safe to use the 'document' object here
+    document.title = 'togehthermn';
+  }, []);
+
 
   return (
     <div>

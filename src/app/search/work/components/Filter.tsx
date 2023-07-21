@@ -8,10 +8,13 @@ import useJob from '@/hooks/useSearchJob';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { useQuery } from '@tanstack/react-query';
 import getAttributes from '@/utils/fetch/getAttributes';
+import getProfessions from '@/utils/fetch/getProfessions';
 
-function FilterWork({professions}:{professions?:ResponseProfession[]}) {
+function FilterWork() {
   const job = useJob();
   const [filter,setFilter] = useState<FilterJob>({...job.filter});
+
+  const { data: professions } = useQuery({ queryKey: ["professions"], queryFn: getProfessions })
 
   const { data: attributesData } = useQuery({
     queryKey: ["attributes"],
