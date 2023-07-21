@@ -18,7 +18,7 @@ const Video = () => {
   const [isOpen, setIsOpen] = useState(false);
   // const { data } = useQuery({ queryKey: ["home-page"], queryFn: getHomePageContents })
   return (
-    <Container className="bg-secondary/10 py-6 mt-20">
+    <Container className="bg-secondary/10 py-6 mt-10">
       <div className='xl:container mx-auto'>
         <div className='flex flex-col justify-center items-center text-center sm:flex-row sm:justify-between'>
           <H2 data-aos='fade-right'

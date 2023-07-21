@@ -85,7 +85,7 @@ function CreateProfile() {
         description: "Таны профайл амжилттай үүслээ",
         variant: "success",
       })
-      queryClient.invalidateQueries(["user"])
+      queryClient.invalidateQueries(["me"])
     },
     onError: () => {
       toast({

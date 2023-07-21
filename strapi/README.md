@@ -12,6 +12,9 @@ npm run develop
 yarn develop
 ```
 
+// "node": ">=14.19.1 <=18.x.x",
+// "npm": ">=6.0.0"
+
 ### `start`
 
 Start your Strapi application with autoReload disabled. [Learn more](https://docs.strapi.io/developer-docs/latest/developer-resources/cli/CLI.html#strapi-start)

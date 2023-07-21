@@ -10,7 +10,7 @@ const Banner = () => {
 
   const { data } = useQuery({ queryKey: ["home-page"], queryFn: getHomePageContents })
   return (
-    <Container className="bg-primary">
+    <Container className="">
       <section className='box-border text-center relative md:text-left '>
         <div className='xl:container mx-auto flex items-center pt-16 pb-9 sm:min-h-[300px]'>
         <div className='flex gap-12 sm:gap-10 justify-between sm:flex-row flex-col'>
@@ -52,9 +52,9 @@ const Banner = () => {
                   </Button>
                 </Link>
                 
-                <Link href="#">
-                  <Button variant="outline" className="text-white">
-                    Дэлгэрэнгүй
+                <Link href="/search/work">
+                  <Button variant="outline">
+                    Ажил олох
                   </Button>
                 </Link>
               </div>
@@ -64,7 +64,7 @@ const Banner = () => {
           
         </div>
       </div>
-      <img src="/images/circle.png" className="absolute bottom-0 rotate-180 left-[-300px] md:w-[800px] h-[400px]"/>
+      {/* <img src="/images/circle.png" className="absolute bottom-60 rotate-180 left-[-300px]"/> */}
     </section>
     </Container>
   );

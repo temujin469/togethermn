@@ -7,7 +7,6 @@ import Container from '../ui/container';
 function AreYouReady() {
   return (
     <Container className='bg-secondary/10'>
-      
     <div className='py-10'>
       <div className='flex flex-col sm:flex-row gap-6 xl:container mx-auto justify-between items-center'>
         <div

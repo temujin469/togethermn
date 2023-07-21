@@ -11,11 +11,13 @@ import useSearchTalent from '@/hooks/useTalentSearch';
 import { useUser } from '@/hooks/useUser';
 import { useQuery } from '@tanstack/react-query';
 import getProfessions from '@/utils/fetch/getProfessions';
+import useCreateProfileModal from '@/hooks/useCreateProfileModal';
 
 const SidebarMenu = () => {
   const { data: professions } = useQuery({ queryKey: ["professions"], queryFn: getProfessions })
   
   const { onOpen } = useRegisterModal();
+  const createProfileModal = useCreateProfileModal()
   const {logout ,user} = useUser();
 
   const router = useRouter();
@@ -58,6 +60,15 @@ const SidebarMenu = () => {
               {
                 user.profileType === "talent" && (
                   <Link href="/profile" className='font-medium text-[16px]'>Профайл</Link>
+                )
+              }
+              {
+                user?.profileType === "talent" && (
+                      user?.isCreatedProfile ? (
+                        <Link href="/profile" className='font-medium text-[16px]'>Профайл</Link>
+                      ) : (
+                        <div onClick={createProfileModal.onOpen} className='font-medium text-[16px]'>Профайл</div>
+                      )
                 )
               }
               <Link href="/reviews" className='font-medium text-[16px]'>Тойм</Link>

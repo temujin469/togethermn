@@ -34,7 +34,7 @@ function UserMenu({ user }: { user?: User }) {
                     user?.isCreatedProfile ? (
                       <Link href="/profile" className='font-medium text-[16px]'>Профайл</Link>
                     ) : (
-                      <div onClick={onOpen} className='font-medium text-[16px]'>Профайл үүсгэх</div>
+                      <div onClick={onOpen} className='font-medium text-[16px]'>Профайл</div>
                     )
                   }
                 </MenubarItem>

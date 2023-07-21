@@ -9,28 +9,39 @@ import qs from 'qs';
 import useSearchTalent from '@/hooks/useTalentSearch';
 import { AxiosResponse } from 'axios';
 import { NumericFormat } from 'react-number-format';
-import { Rating } from '@mui/material';
+import { Rating, useMediaQuery, useTheme } from '@mui/material';
 
-const TalentCard = ({ attributes, id, firstname }: { attributes: Profile, id: number, firstname: string }) => (
-  <Link href={`/talent/${id}`}>
-    <div className='w-full max-w-[360px] rounded-lg overflow-hidden shadow hover:shadow-lg cursor-pointer'>
-      <div className='h-[170px] md:h-[220px] lg:h-[200px] xl:h-[240px] w-full'>
-        <img
-          src={Boolean(attributes.profileImage?.data) ? attributes.profileImage?.data?.attributes.url : "/images/no-user.jpg"}
-          alt={firstname}
-          className="h-full w-full object-cover"
-        />
+
+const TalentCard = ({ attributes, id, firstname }: { attributes: Profile, id: number, firstname: string }) =>{
+const theme = useTheme();
+const sm = useMediaQuery(theme.breakpoints.down('sm'));
+  return (
+    <Link href={`/talent/${id}`}>
+      <div className='w-full max-w-[360px] rounded-md border overflow-hidden shadow hover:shadow-lg cursor-pointer'>
+        <div className='h-[170px] md:h-[220px] lg:h-[200px] xl:h-[240px] w-full'>
+          <img
+            src={Boolean(attributes.profileImage?.data) ? attributes.profileImage?.data?.attributes.url : "/images/no-user.jpg"}
+            alt={firstname}
+            className="h-full w-full object-cover"
+          />
+        </div>
+        <div className='sm:p-4 p-3 lg:p-5'>
+          <h4 className='sm:text-lg font-semibold'>{firstname}</h4>
+          <Rating size={sm ? "small" : "medium"} value={attributes.rate} readOnly />
+          <div className='flex gap-1 text-sm sm:text-[16px] items-center text-gray-500'><p>{attributes.location}</p></div>
+          <div className='flex md:hidden gap-1 text-sm sm:text-[16px] whitespace-nowrap overflow-hidden items-center text-gray-700'>
+            {attributes.professions.slice(0, 2).join(", ").length > 18 ?
+              attributes.professions.slice(0, 2).join(", ").slice(0, 18) + "..." : attributes.professions.slice(0, 2).join(", ")}
+          </div>
+          <div className='hidden md:flex gap-1 text-sm sm:text-[16px] whitespace-nowrap overflow-hidden items-center text-gray-700'>
+            {attributes.professions.slice(0, 2).join(", ")}
+          </div>
+          {/* <div className='flex text-sm sm:text-[16px] gap-1 items-center text-gray-700'><p><NumericFormat thousandSeparator value={attributes.instagramFollowers} /></p></div> */}
+        </div>
       </div>
-      <div className='p-4 lg:p-5'>
-        <h4 className='text-lg font-semibold'>{firstname}</h4>
-        <Rating value={attributes.rate} readOnly />
-        <div className='flex gap-1 items-center text-gray-500'><p>{attributes.location}</p></div>
-        <div className='flex gap-1 items-center text-gray-700'><p>{attributes.professions.slice(0, 2).join(", ")}</p></div>
-        <div className='flex gap-1 items-center text-gray-700'><p><NumericFormat thousandSeparator value={attributes.instagramFollowers} /></p></div>
-      </div>
-    </div>
-  </Link>
-)
+    </Link>
+  )
+}
 
 function FilteredTalents() {
   const [page, setPage] = useState(1);
@@ -85,7 +96,7 @@ function FilteredTalents() {
             $gte: filter?.minAge
           },
         },
-         {
+        {
           age: {
             $lte: filter?.maxAge
           },
@@ -125,8 +136,8 @@ function FilteredTalents() {
 
   const pagination = data?.meta.pagination
   return (
-    <div className='shadow p-5'>
-      <div className='grid sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-5'>
+    <div className='sm:shadow sm:p-5'>
+      <div className='grid grid-cols-2 md:grid-cols-2 xl:grid-cols-3 sm:gap-5 gap-4'>
         {
           talents?.map(({ attributes, id }) => (
             <TalentCard key={id} attributes={attributes} id={id} firstname={attributes.user.data.attributes.username} />
