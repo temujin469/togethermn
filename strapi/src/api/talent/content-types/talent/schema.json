@@ -1,0 +1,114 @@
+{
+  "kind": "collectionType",
+  "collectionName": "talents",
+  "info": {
+    "singularName": "talent",
+    "pluralName": "talents",
+    "displayName": "Профайл",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "bio": {
+      "type": "text",
+      "required": false
+    },
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "profile"
+    },
+    "profileImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "photos": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "videos": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "videos"
+      ]
+    },
+    "rate": {
+      "type": "integer"
+    },
+    "location": {
+      "type": "string",
+      "required": true
+    },
+    "gender": {
+      "type": "enumeration",
+      "enum": [
+        "эрэгтэй",
+        "эмэгтэй",
+        "бусад"
+      ],
+      "required": false
+    },
+    "professions": {
+      "type": "json",
+      "required": true
+    },
+    "age": {
+      "type": "integer"
+    },
+    "instagramFollowers": {
+      "type": "biginteger"
+    },
+    "tiktokFollowers": {
+      "type": "biginteger"
+    },
+    "youtubeFollowers": {
+      "type": "biginteger"
+    },
+    "bodyType": {
+      "type": "string"
+    },
+    "hairColor": {
+      "type": "string"
+    },
+    "eyeColor": {
+      "type": "string"
+    },
+    "shoeSize": {
+      "type": "string"
+    },
+    "shirtSize": {
+      "type": "string"
+    },
+    "maritalStatus": {
+      "type": "string"
+    },
+    "height": {
+      "type": "integer"
+    },
+    "firstname": {
+      "type": "string",
+      "required": true
+    },
+    "lastname": {
+      "type": "string",
+      "required": true
+    },
+    "diet": {
+      "type": "string"
+    }
+  }
+}

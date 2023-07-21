@@ -1,0 +1,52 @@
+{
+  "collectionName": "components_job_type_cast_talents",
+  "info": {
+    "displayName": "castTalent",
+    "icon": "briefcase",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "minHeight": {
+      "type": "integer",
+      "required": true
+    },
+    "shootDate": {
+      "type": "string",
+      "required": true
+    },
+    "requiredDate": {
+      "type": "string",
+      "required": true
+    },
+    "isMakeContract": {
+      "type": "boolean",
+      "required": true
+    },
+    "hairColor": {
+      "type": "enumeration",
+      "enum": [
+        "хар",
+        "цагаан",
+        "улаан",
+        "бор",
+        "шаргал",
+        "буржгар"
+      ]
+    },
+    "bodyType": {
+      "type": "json",
+      "required": true
+    },
+    "useMediaTypes": {
+      "type": "json"
+    },
+    "howLongUse": {
+      "type": "string"
+    },
+    "descTypeOfTalent": {
+      "type": "text",
+      "required": true
+    }
+  }
+}

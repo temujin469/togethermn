@@ -13,7 +13,7 @@ const AboutTab: React.FC = () => {
 
   return (
     <Container>
-      <div className='xl:container mx-auto my-20'>
+      <div className='xl:container mx-auto mb-20'>
         {/* <Tabs defaultActiveKey="1" onChange={onChange} type='card' centered>
           <TabPane tab="Брэндийн хувьд" key="1">
             <ForBrandsTab tabContents={about1} />

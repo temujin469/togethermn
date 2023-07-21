@@ -1,22 +1,27 @@
 import { create } from "zustand";
 
-
 interface PostJobStore {
   job: Job | null;
   step: number;
+  type: "create" | "upadate";
+  setType: (type: "create" | "update") => void;
   setStep: (step: number) => void;
   setJob: (job: Partial<Job>) => void;
   nextStep: () => void;
   previousStep: () => void;
+  clearJobState: () => void;
 }
 
 const usePostJob = create<PostJobStore>((set) => ({
+  type:"create",
   job: null,
   step: 1,
   setStep: (step) => set({ step: step }),
-  setJob: (job) => set((state) => ({ job:{...state.job as Job,...job} })),
+  setType:(type) => ({ type}),
+  setJob: (job) => set({job:{...job} as Job}),
   nextStep: () => set((state) => ({ step: state.step + 1 })),
   previousStep: () => set((state) => ({ step: state.step - 1 })),
+  clearJobState: () => set({ job: null, step: 1 }),
 }));
 
 export default usePostJob;

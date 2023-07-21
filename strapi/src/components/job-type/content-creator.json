@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_job_type_content_creators",
+  "info": {
+    "displayName": "contentCreator",
+    "icon": "briefcase",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "categoryOfCreator": {
+      "type": "json",
+      "required": true
+    },
+    "additionalInfo": {
+      "type": "text",
+      "required": false
+    },
+    "descTypeOfCreator": {
+      "type": "text",
+      "required": true
+    }
+  }
+}

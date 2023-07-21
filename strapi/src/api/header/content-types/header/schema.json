@@ -1,0 +1,42 @@
+{
+  "kind": "singleType",
+  "collectionName": "headers",
+  "info": {
+    "singularName": "header",
+    "pluralName": "headers",
+    "displayName": "Толгой хэсэг",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "cast_talent": {
+      "type": "component",
+      "repeatable": false,
+      "max": 3,
+      "min": 3,
+      "required": true,
+      "component": "header.mergezhilijn-t-r-l"
+    },
+    "influencer": {
+      "type": "component",
+      "repeatable": false,
+      "component": "header.mergezhilijn-t-r-l",
+      "required": true
+    },
+    "content_creator": {
+      "type": "component",
+      "repeatable": false,
+      "component": "header.mergezhilijn-t-r-l",
+      "required": true
+    },
+    "creative_production": {
+      "type": "component",
+      "repeatable": false,
+      "component": "header.mergezhilijn-t-r-l",
+      "required": true
+    }
+  }
+}

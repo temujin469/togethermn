@@ -113,7 +113,7 @@ const Modal: React.FC<ModalProps> = ({
               lg:h-auto
               md:h-auto
               border-0 
-              rounded-lg 
+              md:rounded-lg 
               shadow-lg 
               relative 
               flex 
@@ -175,12 +175,14 @@ const Modal: React.FC<ModalProps> = ({
                       variant="outline"
                     >{secondaryActionLabel}</Button>
                   )}
-                  <Button
-                  variant="secondary"
-                    disabled={disabled}
-                    // label={actionLabel}
-                    onClick={handleSubmit}
-                  >{actionLabel}</Button>
+                  <div className="flex justify-end w-full">
+                    <Button
+                      variant="secondary"
+                      disabled={disabled}
+                      // label={actionLabel}
+                      onClick={handleSubmit}
+                    >{actionLabel}</Button>
+                  </div>
                 </div>
                 {footer}
               </div>

@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_job_type_influencers",
+  "info": {
+    "displayName": "influencer",
+    "icon": "briefcase",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "areaOfExpertise": {
+      "type": "json",
+      "required": true
+    },
+    "instagramFollowers": {
+      "type": "biginteger",
+      "required": true
+    },
+    "tiktokFollowers": {
+      "type": "biginteger",
+      "required": true
+    },
+    "youtubeFollowers": {
+      "type": "biginteger"
+    },
+    "additionalInfo": {
+      "type": "text"
+    },
+    "descTypeOfInfluencer": {
+      "type": "text",
+      "required": true
+    }
+  }
+}

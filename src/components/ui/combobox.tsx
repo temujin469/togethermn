@@ -22,6 +22,7 @@ import {
 type Props = {
   className?: string,
   placeholder?:string
+  value?:string
   values:{
     value:string,
     label:string
@@ -29,9 +30,8 @@ type Props = {
   onSelect: (value: string) => void,
 }
 
-export function Combobox({className,values,placeholder,onSelect}:Props) {
+export function Combobox({className,values,placeholder,onSelect,value}:Props) {
   const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState("")
 
   return (
     <Popover open={open} onOpenChange={setOpen} >
@@ -50,15 +50,16 @@ export function Combobox({className,values,placeholder,onSelect}:Props) {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="p-0 w-full">
-        <Command>
+        <Command >
           <CommandInput placeholder="Хайх" />
           <CommandEmpty>Үр дүн олдсонгүй</CommandEmpty>
-          <CommandGroup>
+          <CommandGroup >
             {values?.map((val) => (
               <CommandItem
                 key={val.value}
+                
                 onSelect={(currentValue) => {
-                  setValue(val.value === value ? "" : val.value)
+                  // setValue(val.value === value ? "" : val.value)
                   setOpen(false)
                   onSelect(val.value)
                 }}

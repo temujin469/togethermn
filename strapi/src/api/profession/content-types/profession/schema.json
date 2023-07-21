@@ -15,6 +15,24 @@
     "name": {
       "type": "string",
       "required": true
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "cast-talent",
+        "creative-production",
+        "influencer",
+        "content-creator"
+      ],
+      "required": true
+    },
+    "background_image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
     }
   }
 }

@@ -2,19 +2,19 @@ import React from 'react';
 import FilterWork from './components/Filter';
 import Container from '@/components/ui/container';
 import FilteredWorks from './components/FilteredJob';
-import SubHeader from '@/components/header/SubHeader';
+import getProfessions from '@/utils/fetch/getProfessions';
+import FilterHeader from './components/Header';
 
-function SearchJob() {
+async function SearchJob() {
+  const professions = await getProfessions();
+
   return (
     <div>
-      <SubHeader
-        left={"Ажил олох"}
-        right={"үр дүн 8"}
-      />
-      <Container className='md:px-10 xl:px-16 my-5'>
+      <FilterHeader />
+      <Container className='md:px-10 xl:px-16 my-5 max-w-[1600px]'>
         <div className='md:grid grid-cols-12 gap-10 relative'>
-          <div className='col-span-5 xl:col-span-4 md:sticky top-[115px] md:h-[calc(100vh-115px)]'>
-            <FilterWork />
+          <div className='col-span-5 xl:col-span-4  md:sticky top-[135px] md:h-[calc(100vh-115px)]'>
+            <FilterWork professions={professions} />
           </div>
           <div className='xl:col-span-8 col-span-7'>
             <FilteredWorks />
@@ -22,6 +22,7 @@ function SearchJob() {
         </div>
       </Container>
     </div>
+
   );
 }
 

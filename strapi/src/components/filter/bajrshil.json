@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_filter_bajrshil",
+  "info": {
+    "displayName": "Байршил",
+    "icon": "oneToOne"
+  },
+  "options": {},
+  "attributes": {
+    "value": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

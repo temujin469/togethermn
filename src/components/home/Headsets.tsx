@@ -1,11 +1,16 @@
+"use client"
 import Image from "next/image";
 import Link from "next/link";
 import { H2 } from "../ui/Typography/Heading";
 import { Button } from "../ui/button";
 import Container from "../ui/container";
-import { professions } from "@/utils/data";
+import getProfessions from "@/utils/fetch/getProfessions";
+import { useQuery } from "@tanstack/react-query";
 
 const Headsets = () => {
+
+  const { data } = useQuery({ queryKey: ["professions"], queryFn:getProfessions })
+
   return (
     <Container>
     <section className='py-12 lg:py-24'>
@@ -17,19 +22,19 @@ const Headsets = () => {
           <div className='grid xl:mx-16 gap-5 sm:gap-8 md:gap-10 lg:gap-8 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4'>
             {/* item */}
             {
-              professions.map((pro) => (
+              data?.slice(0,8).map((pro) => (
                 <div
                   data-aos='zoom-in'
                   data-aos-delay='0'
-                  key={pro.slug}
+                  key={pro.id}
                   className='border overflow-hidden p-2 border-pink-400 rounded-lg h-[200px] sm:h-[250px]  lg:h-[300px] md:max-w-[250px] lg:max-w-[300px]'>
                   <div
                     className='relative w-full h-full overflow-hidden'
 
                   >
-                    <Image src={pro.bg_img} alt='' className="object-cover w-full rounded-lg" layout="fill" />
+                    <Image src={pro.attributes.background_image?.data.attributes.url} alt='' className="object-cover w-full rounded-lg" layout="fill" />
                     <div className='absolute rounded-lg left-0 bottom-0 h-full p-6 w-full flex flex-col justify-between items-center hover:backdrop-blur-sm transition-all duration-200'>
-                      <h4 className='text-white sub-heading mb-2'>{pro.name}</h4>
+                      <h4 className='text-white sub-heading mb-2'>{pro.attributes.name}</h4>
                         <Link href="/search/talent">
                           <Button variant="outline" className="text-white">
                             бүгдийг үзэх

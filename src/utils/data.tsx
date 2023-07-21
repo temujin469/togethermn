@@ -120,7 +120,7 @@ export const talents: Talent[] = [
     location: "Улаанбаатар",
     followers: 15000,
     bookedJobs: 5,
-    professions:["Model","Influencer"]
+    professions: ["Model", "Influencer"]
   },
   {
     name: "Мөнхжин",
@@ -131,17 +131,17 @@ export const talents: Talent[] = [
     location: "Дархан",
     followers: 2400,
     bookedJobs: 0,
-    professions:["Model","Influencer"]
+    professions: ["Model", "Influencer"]
   },
   {
     name: "Мөнх чимэг",
-    profileImg:"https://images.pexels.com/photos/5272566/pexels-photo-5272566.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    profileImg: "https://images.pexels.com/photos/5272566/pexels-photo-5272566.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     slug: "munh-chimeg",
     rate: 4,
     location: "Эрдэнэт",
     followers: 5600,
     bookedJobs: 0,
-    professions:["Model","Influencer"]
+    professions: ["Model", "Influencer"]
   },
   {
     name: "Буяннэмэх",
@@ -152,7 +152,7 @@ export const talents: Talent[] = [
     location: "Улаанбаатар",
     followers: 11300,
     bookedJobs: 0,
-    professions:["Model","Influencer"]
+    professions: ["Model", "Influencer"]
   },
 ];
 
@@ -217,72 +217,20 @@ export const about2: About[] = [
 ];
 
 
-export const jobs:Partial<Job>[] = [
-  {
-    title:
-      "Elevate Your Swimwear Game: Create content for Azure Belle Period Swimwear",
-    description:
-      "Azure Belle Period Swimwear is seeking passionate content creators to create content for our leading period swimwear brand designed in Australia, by women, for women. You will create content that showcases the stylish and discreet period swimwear options that Azure Belle offers, highlighting the comfort, functionality, and leak-proof protection it provides during periods. Through your content, you'll help to inspire and empower ladies and teens to embrace their periods without sacrificing their love for water activities. You'll create engaging and relatable video and photo content that resonates with our female audience while promoting a brand that values sustainability. Content could include GRWM, beach day styling, showcasing the swimwear in or out of water/pool/beach. Join us in revolutionising the swimwear industry and empowering ladies and teens worldwide to embrace their periods with style and confidence. If you're passionate about promoting freedom for all women, no matter what day of the month we'd love to hear from you.",
-    budget: "up to 200$",
-    perDay:200000,
-    perHour:100000,
-    minAge:18,
-    maxAge:20,
-    gender: "эрэгтэй",
-    locations: ["Ulaanbaatar"],
-    profession: "Content creator",
-  },
-  {
-    title: "Software Engineer Intern",
-    description:
-      "We are looking for a talented and motivated Software Engineer Intern to join our team. As an intern, you will work on various software development projects, gaining hands-on experience and mentorship from experienced engineers. You will contribute to the design, development, and testing of software solutions that meet our clients' needs. This is a great opportunity to enhance your programming skills and work on real-world projects. If you're passionate about software development and eager to learn, we'd love to have you on our team.",
-    budget: "up to 200$",
-    perDay: 200000,
-    perHour: 100000,
-    minAge: 18,
-    maxAge: 20,
-    gender: "эрэгтэй",
-    locations: ["Ulaanbaatar"],
-    profession: "Content creator",
-  },
-  {
-    title: "Graphic Designer",
-    description:
-      "We are seeking a creative and talented Graphic Designer to join our design team. In this role, you will be responsible for creating visually appealing designs for both print and digital media. You will collaborate with clients and team members to understand design requirements and deliver high-quality designs that communicate the desired message effectively. Proficiency in design software and a strong portfolio of past work are essential for this role. If you have a passion for design and enjoy bringing ideas to life, we would love to hear from you.",
-    budget: "up to 200$",
-    perDay: 200000,
-    perHour: 100000,
-    minAge: 18,
-    maxAge: 20,
-    gender: "эрэгтэй",
-    locations: ["Ulaanbaatar"],
-    profession: "Content creator",
-  },
-  {
-    title: "Data Analyst",
-    description:
-      "We are looking for a skilled Data Analyst to join our team. In this role, you will analyze and interpret complex datasets to provide insights and support decision-making processes. You will work with various stakeholders to understand data requirements, develop data models and visualizations, and present findings. Proficiency in data analysis tools and strong analytical skills are required. If you have a passion for data and enjoy turning raw information into actionable insights, we would love to have you on our team.",
-    budget: "up to 200$",
-    perDay: 200000,
-    perHour: 100000,
-    minAge: 18,
-    maxAge: 20,
-    gender: "эрэгтэй",
-    locations: ["Ulaanbaatar"],
-    profession: "Content creator",
-  },
-  {
-    title: "Marketing Specialist",
-    description:
-      "We are seeking a talented Marketing Specialist to join our marketing team. In this role, you will be responsible for developing and implementing marketing strategies to promote our products and services. You will conduct market research, create and manage marketing campaigns, and measure their effectiveness. Strong analytical skills, creativity, and a passion for marketing are key for this role. If you enjoy working in a dynamic environment and have a knack for driving business growth, we would love to hear from you.",
-    budget: "up to 200$",
-    perDay: 200000,
-    perHour: 100000,
-    minAge: 18,
-    maxAge: 20,
-    gender: "эрэгтэй",
-    locations: ["Ulaanbaatar"],
-    profession: "Content creator",
-  },
-];
+export const hairColors:string[] = [
+  "Хар",
+  "Бор",
+  "Улаан",
+  "Цагаан",
+  "Саарал",
+  "Шаргал"
+]
+
+export const genders = ["Эрэгтэй","Эмэгтэй","Бусад"]
+export const bodyTypes: string[] = ["туранхай", "булчинлаг", "тарган", "дундаж"]
+export const eyeColors: string[] = ["Хар", "Цагаан", "Улаан", "Цэнхэр","Бор"]
+export const shoeSizes: number[] = [40, 41, 42, 43]
+export const shirtSizes: string[] = ["2XL", "3XL", "XL", "L","M"]
+
+
 

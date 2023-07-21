@@ -110,12 +110,12 @@ const SelectSeparator = React.forwardRef<
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName;
 
 type SelectProps = {
-  values:{
-    value:string
-    label:string
+  values?:{
+    value:string | number
+    label:string | number
   }[]
   placeholder?:string
-  defaultValue?:string
+  defaultValue?:string | number
   onChange:(value:string)=>void
   className?:string
 }
@@ -123,14 +123,14 @@ type SelectProps = {
 
 const Select = ({values,placeholder,defaultValue, onChange,className}:SelectProps)=>{
   return (
-    <Selector value={defaultValue} onValueChange={onChange}>
+    <Selector value={String(defaultValue).toLowerCase()} onValueChange={onChange}>
       <SelectTrigger className={cn(className)}>
-        <SelectValue  placeholder={placeholder || "Сонгох"} className="placeholder:text-gray-400" />
+        <SelectValue placeholder={placeholder} className="placeholder:text-gray-400" />
       </SelectTrigger>
-      <SelectContent   className="max-h-[175px]">
+      <SelectContent className={cn("max-h-[175px] z-[2500]",className)}>
         {
-          values.map((val)=>(
-            <SelectItem value={val.value.toString()} key={val.value}>{val.label}</SelectItem>
+           values?.map((val)=>(
+            <SelectItem value={String(val.value).toLowerCase()} key={val.value}>{val.label}</SelectItem>
           ))
         }
       </SelectContent>

@@ -71,12 +71,6 @@
       "target": "api::azhil.azhil",
       "mappedBy": "user"
     },
-    "bookedJobs": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::azhil.azhil",
-      "mappedBy": "bookedBy"
-    },
     "profileType": {
       "type": "enumeration",
       "enum": [
@@ -85,10 +79,60 @@
       ],
       "required": true
     },
+    "reviews": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::review.review",
+      "mappedBy": "recieved"
+    },
+    "reviewsIGave": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::review.review",
+      "mappedBy": "user"
+    },
     "profile": {
-      "type": "component",
-      "repeatable": false,
-      "component": "user.profile"
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::talent.talent",
+      "mappedBy": "user"
+    },
+    "firstname": {
+      "type": "string"
+    },
+    "lastname": {
+      "type": "string"
+    },
+    "mobileNumber": {
+      "type": "string"
+    },
+    "favourites": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::favourite.favourite",
+      "mappedBy": "user"
+    },
+    "isCreatedProfile": {
+      "type": "boolean",
+      "required": true
+    },
+    "invitedJobs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::azhil.azhil",
+      "mappedBy": "invitedUser"
+    },
+    "bookedJobs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::azhil.azhil",
+      "mappedBy": "bookedBy"
+    },
+    "appliedJobs": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::azhil.azhil",
+      "mappedBy": "appliedUsers"
     }
   }
 }

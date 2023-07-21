@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_filter_snij_ng",
+  "info": {
+    "displayName": "Үсний өнгө",
+    "icon": "oneToOne",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "value": {
+      "type": "string",
+      "required": true,
+      "unique": false
+    }
+  }
+}

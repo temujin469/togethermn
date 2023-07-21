@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_filter_gerleltijn_bajdal",
+  "info": {
+    "displayName": "Гэрлэлтийн байдал",
+    "icon": "oneToOne",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "value": {
+      "type": "string",
+      "required": true,
+      "unique": false
+    }
+  }
+}

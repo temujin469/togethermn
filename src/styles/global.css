@@ -85,6 +85,30 @@
   .footer-link {
     @apply text-sm text-gray-400 hover:text-white
   }
-  
+}
+
+
+
+.ql-container {
+  /* border-bottom-left-radius: 0.5em; */
+  /* border-bottom-right-radius: 0.5em; */
+  /* border-bottom: 0; */
+  border: none !important;
+}
+
+.ql-toolbar {
+  display: block;
+  padding: 0 !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-top-left-radius: 0.5em;
+  border-top-right-radius: 0.5em;
+}
+
+
+.ql-editor {
+  min-height: 100px;
+  padding:8px !important;
 }
 

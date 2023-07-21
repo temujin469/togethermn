@@ -1,18 +1,21 @@
+"use client"
 import React from 'react'
 import { H2 } from '../ui/Typography/Heading';
 import Link from 'next/link';
 import { Button } from '../ui/button';
 import Container from '../ui/container';
+import { useQuery } from '@tanstack/react-query';
+import getHomePageContents from '@/utils/fetch/getHomePageContents';
 
 
 const Experience = () => {
+  const { data } = useQuery({ queryKey: ["home-page"], queryFn: getHomePageContents })
   return (
     <Container>
-    <section className='my-16 lg:mb-24'>
+    <section className='mb-16 md:mt-16 lg:mb-24 mt-4'>
       <div className='xl:container mx-auto'>
         <div className='flex flex-col md:space-x-10 min-h-[480px] lg:space-x-20 md:flex-row'>
-          <div className='flex-1 xxl:min-h-[580px] md:pt-[100px] pt-0 lg:pt-0 justify-between xxl:justify-start  flex space-x-4 items-center lg:space-x-12'>
-            {/* images */}
+          {/* <div className='flex-1 xxl:min-h-[580px] md:pt-[100px] pt-0 lg:pt-0 justify-between xxl:justify-start  flex space-x-4 items-center lg:space-x-12'>
             <div
               className='self-start'
               data-aos='fade-down'
@@ -23,6 +26,10 @@ const Experience = () => {
             <div className='self-end' data-aos='fade-up'>
               <img src='/images/exp-img2.png' alt='' className='w-auto' />
             </div>
+          </div> */}
+
+            <div className='flex-1 lg:h-[600px] '>
+              <img src={data?.attributes.section1_image.data.attributes.url} className='h-full rounded-tr-3xl rounded-md '/>
           </div>
           {/* text */}
           <div

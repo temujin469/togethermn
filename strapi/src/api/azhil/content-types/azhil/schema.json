@@ -8,7 +8,7 @@
     "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
@@ -29,11 +29,6 @@
         "files"
       ]
     },
-    "slug": {
-      "type": "uid",
-      "targetField": "title",
-      "required": true
-    },
     "gender": {
       "type": "enumeration",
       "enum": [
@@ -44,39 +39,9 @@
       "required": true,
       "default": "бүгд"
     },
-    "typeOfTalent": {
-      "type": "string",
-      "required": true
-    },
-    "minAge": {
-      "type": "integer",
-      "required": true
-    },
-    "maxAge": {
-      "type": "integer",
-      "required": true
-    },
-    "minHeight": {
-      "type": "integer",
-      "required": true
-    },
-    "bodyType": {
-      "type": "string",
-      "required": true
-    },
-    "shootDate": {
-      "type": "string"
-    },
-    "requiredDate": {
-      "type": "string"
-    },
-    "hairColor": {
-      "type": "string",
-      "required": true
-    },
     "bookedBy": {
       "type": "relation",
-      "relation": "manyToMany",
+      "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "bookedJobs"
     },
@@ -90,23 +55,6 @@
       "type": "string",
       "required": true
     },
-    "isAdditionalMaterial": {
-      "type": "enumeration",
-      "enum": [
-        "yes",
-        "no"
-      ]
-    },
-    "isUse": {
-      "type": "enumeration",
-      "enum": [
-        "yes",
-        "no"
-      ]
-    },
-    "usageFor": {
-      "type": "json"
-    },
     "locations": {
       "type": "json",
       "required": true
@@ -114,14 +62,81 @@
     "additionalMaterial": {
       "type": "text"
     },
-    "areasOfExpertise": {
-      "type": "json"
-    },
-    "followers": {
-      "displayName": "platform",
+    "castTalent": {
       "type": "component",
-      "repeatable": true,
-      "component": "job.platform"
+      "repeatable": false,
+      "component": "job-type.cast-talent"
+    },
+    "influencer": {
+      "type": "component",
+      "repeatable": false,
+      "component": "job-type.influencer"
+    },
+    "contentCreator": {
+      "type": "component",
+      "repeatable": false,
+      "component": "job-type.content-creator"
+    },
+    "creativeProduction": {
+      "type": "component",
+      "repeatable": false,
+      "component": "job-type.creative-production"
+    },
+    "isAdditionalMaterial": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "cast-talent",
+        "creative-production",
+        "influencer",
+        "content-creator"
+      ],
+      "required": true
+    },
+    "budget": {
+      "type": "string",
+      "required": true
+    },
+    "minAge": {
+      "type": "integer",
+      "required": false
+    },
+    "maxAge": {
+      "type": "integer"
+    },
+    "isClosed": {
+      "type": "boolean",
+      "default": false,
+      "required": false
+    },
+    "invitedJobsCount": {
+      "type": "integer"
+    },
+    "invitedUser": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "invitedJobs"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "хүлээгдэж байгаа",
+        "татгалзcaн",
+        "батлагдсан"
+      ],
+      "default": "хүлээгдэж байгаа",
+      "required": true
+    },
+    "appliedUsers": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "appliedJobs"
     }
   }
 }

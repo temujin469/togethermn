@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_job_type_creative_productions",
+  "info": {
+    "displayName": "creativeProduction",
+    "icon": "briefcase",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "isMakeContract": {
+      "type": "boolean",
+      "required": true
+    },
+    "howLongUse": {
+      "type": "string"
+    },
+    "useMediaTypes": {
+      "type": "json"
+    },
+    "shootDate": {
+      "type": "string",
+      "required": true
+    },
+    "requiredDate": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

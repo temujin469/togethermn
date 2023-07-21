@@ -1,73 +1,101 @@
 "use client"
-import { H4 } from '@/components/ui/Typography/Heading';
-import { Button } from '@/components/ui/button';
-import { jobs } from '@/utils/data';
 import { Pagination } from '@mui/material';
-import Link from 'next/link';
-import React from 'react';
-
-const ShowDetail = ({value,label}:{value?:string,label:string})=>{
-
-  if(!value) return null
-
-  return (
-      <tr>
-        <td>
-          <p className='font-semibold'>{label}</p>
-        </td>
-        <td>{value}</td>
-      </tr>
-  )
-}
+import { useQuery } from '@tanstack/react-query';
+import React, { useEffect, useState } from 'react';
+import { myApi } from '@/utils/axios';
+import qs from "qs"
+import { Skeleton } from '@/components/ui/skeleton';
+import JobItem from './JobItem';
+import useSearchJob from '@/hooks/useSearchJob';
 
 
-const JobItem = ({job}:{job:Partial<Job>}) => {
 
-  const budget = job.budgetType == "perDay" ? job.perDay : job.perHour
-  return (
-
-    <div className='mb-10 flex flex-col lg:flex-row gap-5 justify-between'>
-      <div>
-        <H4 className='text-primary scroll-m-0 mb-2'>{job.title}</H4>
-        <p className='font-semibold mb-2'>{job.profession} - {budget} </p>
-        <blockquote className='border-l-2 pl-6 border-l-secondary'>
-          {
-            job.description && (
-              <p>{
-                (job.description.length > 150) ? `${job.description?.slice(0, 150)}...` : job.description
-              }</p>
-            )
-          }
-
-          <table>
-            <tbody>
-              <ShowDetail value={job.locations![0]} label={"Байршил: "} />
-              <ShowDetail value={`${job.minAge}-${job.maxAge}`} label={"Нас: "} />
-              <ShowDetail value={job.gender} label={"Хүйс: "} />
-            </tbody>
-          </table>
-        </blockquote>
-      </div>
-      <Link href={`/job/${job.title}`}>
-        <Button>дэлгэрэнгүй</Button>
-      </Link>
-    </div>
-  )
-}
 
 function FilteredJob() {
+  const [page, setPage] = useState(1);
+  const { setResult, filter } = useSearchJob()
+
+  const query = qs.stringify({
+    filters: {
+      status:{
+        $eqi:"батлагдсан"
+      }
+    }
+  }, { encodeValuesOnly: true });
+
+  const filterquery = qs.stringify({
+    filters: {
+      profession: {
+        $eqi: filter?.profession
+      },
+      locations: {
+        $contains: filter?.location
+      }
+    }
+  }, { encodeValuesOnly: true });
+
+  const paginationQuery = qs.stringify({
+    pagination: {
+      page: page,
+      pageSize: 10
+    }
+  }, { encodeValuesOnly: true })
+
+
+  // console.log(filter)
+  useEffect(()=>{
+    setPage(1);
+  },[query])
+
+  const { data, isError, isLoading } = useQuery<JobsResponse>({
+    queryKey: ["jobs", query, paginationQuery],
+    queryFn: async () => {
+      const res = await myApi.get(`/azhils?${query}&${filter && filterquery}&${paginationQuery}`);
+      setResult(res.data.meta.pagination.total);
+      return res.data;
+    }
+  });
+
+  // console.log(data)
+  const jobs = data?.data
+  const pagination = data?.meta.pagination
+
   return (
     <div className='shadow p-5 xl:p-10'>
       {
-        jobs?.map((job)=>(
-          <JobItem job={job}/>
-        ))
+        isLoading ? (
+          <div className='space-y-10'>
+            {
+              Array(3).fill(null).map((_,i) => (
+                <div key={i}>
+                  <Skeleton className='h-[50px] mb-3' />
+                  <Skeleton className='h-[140px]' />
+                </div>
+              ))
+            }
+          </div>
+        ) : jobs ? (
+          <>
+            {
+              jobs?.map((job) => (
+                <JobItem key={job.id} job={job.attributes} id={job.id} />
+              ))
+            }
+            <div className='flex justify-center mt-10'>
+              <Pagination count={pagination?.pageCount} onChange={(e, val) =>{
+                  setPage(val)
+                  window.scrollTo({top:0,behavior:"smooth"})
+              }} page={page} variant="outlined" shape="rounded" size="medium" />
+            </div>
+          </>
+        ) : (
+          <div>
+            Ажил алга
+          </div>
+        )
       }
-      <div className='flex justify-center mt-10'>
-        <Pagination count={5} variant="outlined" shape="rounded" size="medium"  />
     </div>
-    </div>
-    
+
   );
 }
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import Container from '../ui/container';
 
 type Props = {
   left?:React.ReactNode
@@ -8,11 +7,11 @@ type Props = {
 
 function SubHeader({left,right}:Props) {
   return (
-    <div className='h-[40px] z-10 shadow sticky w-full top-[70px] md:top-[75px] bg-white'>
-      <Container className='flex h-full items-center justify-between'>
+    <div className='pt-[40px]'>
+      <div className='h-[40px] z-10 flex justify-between px-4 shadow fixed w-full top-[70px] md:top-[75px] bg-white'>
         <div className='font-medium flex items-center text-sm'>{left}</div>
         <div className='font-medium flex items-center text-sm'>{right}</div>
-      </Container>
+      </div>
     </div>
   );
 }

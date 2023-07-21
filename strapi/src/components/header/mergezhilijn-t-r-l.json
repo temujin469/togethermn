@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_header_mergezhilijn_t_r_l",
+  "info": {
+    "displayName": "Мэргэжилийн төрөл",
+    "icon": "bulletList",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "background_image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

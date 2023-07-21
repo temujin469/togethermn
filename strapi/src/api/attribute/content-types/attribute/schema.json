@@ -1,0 +1,57 @@
+{
+  "kind": "singleType",
+  "collectionName": "attributes",
+  "info": {
+    "singularName": "attribute",
+    "pluralName": "attributes",
+    "displayName": "Шинж тэмдэг",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "bodyTypes": {
+      "type": "component",
+      "repeatable": true,
+      "component": "filter.bieijn-hemzhee"
+    },
+    "shirtSizes": {
+      "type": "component",
+      "repeatable": true,
+      "component": "filter.czamczny-hemzhee"
+    },
+    "maritalStatus": {
+      "type": "component",
+      "repeatable": true,
+      "component": "filter.gerleltijn-bajdal"
+    },
+    "genders": {
+      "type": "component",
+      "repeatable": true,
+      "component": "filter.h-js"
+    },
+    "diets": {
+      "type": "component",
+      "repeatable": true,
+      "component": "filter.hoolny-deglem"
+    },
+    "eyeColors": {
+      "type": "component",
+      "repeatable": true,
+      "component": "filter.n-dnij-ng"
+    },
+    "hairColors": {
+      "type": "component",
+      "repeatable": true,
+      "component": "filter.snij-ng"
+    },
+    "locations": {
+      "displayName": "Байршил",
+      "type": "component",
+      "repeatable": true,
+      "component": "filter.bajrshil"
+    }
+  }
+}

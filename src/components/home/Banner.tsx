@@ -1,16 +1,25 @@
+"use client"
 import Link from "next/link";
 import { Button } from "../ui/button";
 import Container from "../ui/container";
+import { useQuery } from "@tanstack/react-query";
+import getHomePageContents from "@/utils/fetch/getHomePageContents";
 
 
 const Banner = () => {
+
+  const { data } = useQuery({ queryKey: ["home-page"], queryFn: getHomePageContents })
   return (
     <Container className="bg-primary">
-
-    
-      <section className='mt-[68px] md:mt-[75px] box-border text-center relative md:text-left '>
-        <div className='xl:container mx-auto flex items-center  sm:pt-16 pb-9 sm:min-h-[300px] h-[calc(100vh-69px)]  lg:min-h-[calc(100vh-75px)]'>
-        <div className='flex gap-12 sm:gap-10 justify-between sm:flex-row flex-col-reverse'>
+      <section className='box-border text-center relative md:text-left '>
+        <div className='xl:container mx-auto flex items-center pt-16 pb-9 sm:min-h-[300px]'>
+        <div className='flex gap-12 sm:gap-10 justify-between sm:flex-row flex-col'>
+            {/* image */}
+            <div className="px-16 sm:px-0">
+              <div data-aos='fade-up' data-aos-delay='800' className="flex justify-center max-w-[480px] 2xl:max-w-full">
+                <img src={data?.attributes.section1_image.data.attributes.url} alt='' className="float-center w-full h-full max-h-[calc(100vh-200px)] " />
+              </div>
+            </div>
           {/* text */}
           <div className="items-center flex md:max-w-[50%]">
             <div className="">
@@ -52,12 +61,7 @@ const Banner = () => {
             </div>
             {/* <Users /> */}
           </div>
-          {/* image */}
-          <div className="px-16 sm:px-0">
-            <div data-aos='fade-up' data-aos-delay='800' className="flex justify-center max-w-[480px] 2xl:max-w-full">
-              <img src='/images/Success.png' alt='' className="float-center w-full h-full max-h-[calc(100vh-200px)] " />
-            </div>
-          </div>
+          
         </div>
       </div>
       <img src="/images/circle.png" className="absolute bottom-0 rotate-180 left-[-300px] md:w-[800px] h-[400px]"/>

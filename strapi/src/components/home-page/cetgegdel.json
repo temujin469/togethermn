@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_home_page_cetgegdel",
+  "info": {
+    "displayName": "Cэтгэгдэл",
+    "icon": "quote"
+  },
+  "options": {},
+  "attributes": {
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    }
+  }
+}
