@@ -6,13 +6,14 @@ import { useRouter } from 'next/navigation';
 
 
 function layout({ children }: { children: React.ReactNode }) {
-  const { job,step} = usePostJob()
+  const { job } = usePostJob()
   const router = useRouter()
 
   useEffect(() => {
     if (!job?.profession) router.back()
       window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [job?.profession,step])
+  }, [])
+
   return (
     <div className='min-h-screen bg-gray-100'>
       <Header title={job?.profession as string} />
