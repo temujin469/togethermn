@@ -50,10 +50,9 @@ function SelectProfession() {
     const profession = value.profession.toLowerCase();
     const selectedProfession = professions?.find(pro=>pro.attributes.name.toLowerCase() == profession)
     setStep(1);
-    setJob({ profession,category:selectedProfession?.attributes.category });
+    setJob({ profession:selectedProfession?.attributes.name,category:selectedProfession?.attributes.category });
     push(`/post-a-job/${selectedProfession?.attributes.category}`);
   }
-
 
   return (
     <div>
