@@ -58,7 +58,7 @@ export const useUser = () => {
   // };
 
   const getUser = async () => {
-    const user = await myApi.get<User>("/users/me", {
+    const user = await myApi.get<User>("/api/users/me", {
       headers: {
         Authorization: "Bearer " + token,
       },

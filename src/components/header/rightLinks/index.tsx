@@ -15,7 +15,7 @@ import QueryString from 'qs';
 
 function RightLinks() {
   const { onOpen } = useRegisterModal();
-  const {user,isLoading,token } = useUser();
+  const {isLoading,token,user } = useUser();
 
   const meQuery = QueryString.stringify({
     fields: ["favourites", "id"],
@@ -34,7 +34,7 @@ function RightLinks() {
   const favourites = useQuery<any>({
     queryKey: ["me", token],
     queryFn: async () => {
-      const res = await myApi.get(`/users/me?${meQuery}`, {
+      const res = await myApi.get(`/api/users/me?${meQuery}`, {
         headers: {
           Authorization: "Bearer " + token
         }
