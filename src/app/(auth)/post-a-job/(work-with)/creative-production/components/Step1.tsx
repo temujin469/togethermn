@@ -51,7 +51,7 @@ function Step1() {
     resolver: zodResolver(jobShema),
     defaultValues: {
       locations: [],
-      files:job?.files as any | [],
+      files:job?.files as any| [],
       shootDate: job?.creativeProduction?.shootDate,
       requiredDate: job?.creativeProduction?.requiredDate,
       ...job

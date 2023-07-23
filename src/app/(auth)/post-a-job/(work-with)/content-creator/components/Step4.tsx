@@ -37,7 +37,7 @@ function Step4() {
 
         let uploadedFiles: undefined | File[];
         // // first upload files if file exists
-        if (job?.files.length) {
+        if (job?.files?.length) {
           const formData = new FormData();
           job?.files?.forEach((file) => formData.append("files", file, file.name));
 
@@ -136,7 +136,7 @@ function Step4() {
           <div>
             <Label>
               Бүтээгчийн аль ангилал хамгийн тохиромжтой вэ</Label>
-            <p className='text-gray-500'>{job?.contentCreator.categoryOfCreator?.join(",\n")}</p>
+            <p className='text-gray-500'>{job?.contentCreator?.categoryOfCreator?.join(",\n")}</p>
           </div>
 
           <div>
@@ -148,7 +148,7 @@ function Step4() {
           <div>
             <Label>
               Байршил</Label>
-            <p className='text-gray-500'>{job?.locations.join("\n")}</p>
+            <p className='text-gray-500'>{job?.locations?.join("\n")}</p>
           </div>
 
         </div>
