@@ -1,11 +1,11 @@
 /** @type {import('next').NextConfig} */
 
 const ContentSecurityPolicy = `
-  default-src 'self' http://147.182.246.185:1337;
-  script-src 'self';
-  child-src example.com;
-  style-src 'self' example.com;
-  font-src 'self';
+  default-src *;
+  script-src *;
+  child-src *;
+  style-src *;
+  font-src *;
 `;
 const nextConfig = {
   images: {
