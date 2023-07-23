@@ -5,7 +5,7 @@ import { AppBar, Avatar, AvatarGroup, CircularProgress, Dialog, DialogActions, D
 import AppliedTalentItem from './AppliedTalentItem';
 
 
-function AppliedUsersModal({ job }: { job: Job }) {
+function AppliedUsersModal({ job }: { job: ResponseJob }) {
 
   console.log(job);
 
