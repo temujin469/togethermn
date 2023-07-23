@@ -37,11 +37,12 @@ function Step1() {
 
   const [isAdditionalMaterial, setIsAdditionalMaterial] = useState(job?.isAdditionalMaterial);
 
+
   const form = useForm<z.infer<typeof jobShema>>({
     resolver: zodResolver(jobShema),
     defaultValues: {
       locations: [],
-      files: [],
+      files: job?.files as any | [],
       ...job
     }
   })

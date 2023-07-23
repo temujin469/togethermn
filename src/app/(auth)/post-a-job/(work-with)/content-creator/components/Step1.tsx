@@ -40,7 +40,7 @@ function Step1() {
     resolver: zodResolver(jobShema),
     defaultValues: {
       locations: [],
-      files: [],
+      files: job?.files as any | [],
       ...job
     }
   })
