@@ -128,7 +128,7 @@ function JobsToInvite({ onChange, jobId: selectedJobId }: { onChange: (jobId: nu
   const { data, isError, isLoading } = useQuery<JobsResponse>({
     queryKey: ["myJobs", query, paginationQuery, user?.id],
     queryFn: async () => {
-      const res = await myApi.get(`/azhils?${query}&${paginationQuery}`, {
+      const res = await myApi.get(`/api/azhils?${query}&${paginationQuery}`, {
         headers: {
           Authorization: "Bearer " + token
         }

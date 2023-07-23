@@ -69,7 +69,7 @@ function FavouriteUsers() {
   const { data, isError, isLoading } = useQuery<any>({
     queryKey: ["myFavourites", query, paginationQuery, token],
     queryFn: async () => {
-      const res = await myApi.get(`/favourites?${query}&${paginationQuery}`, {
+      const res = await myApi.get(`/api/favourites?${query}&${paginationQuery}`, {
         headers: {
           Authorization: "Bearer " + token
         }

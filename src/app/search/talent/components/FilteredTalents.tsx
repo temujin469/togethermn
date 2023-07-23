@@ -122,7 +122,7 @@ function FilteredTalents() {
   const { data, isError, isLoading } = useQuery<ProfilesResponse>({
     queryKey: ["profiles", paginationQuery, filterQuery],
     queryFn: async () => {
-      const res: AxiosResponse<ProfilesResponse> = await myApi.get(`/talents?${query}&${filter && filterQuery}&${paginationQuery}`);
+      const res: AxiosResponse<ProfilesResponse> = await myApi.get(`/api/talents?${query}&${filter && filterQuery}&${paginationQuery}`);
       setResult(res.data.meta.pagination.total);
       return res.data;
     }

@@ -24,7 +24,7 @@ function Features({id}:{id:number}) {
   const { data, isLoading, isError } = useQuery<ProfileDetailResponse>({
     queryKey: ["profile", "features", id],
     queryFn: async () => {
-      const res = await myApi.get(`/talents/${id}?${query}`);
+      const res = await myApi.get(`/api/talents/${id}?${query}`);
       return res.data;
     }
   });

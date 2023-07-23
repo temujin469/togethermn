@@ -38,7 +38,7 @@ function LeftContent({ profileId }: { profileId: number }) {
   const { data, isLoading: profileIsLoading, isError } = useQuery<ProfileDetailResponse>({
     queryKey: ["profile", profileId],
     queryFn: async () => {
-      const res = await myApi.get(`/talents/${profileId}?${query}`);
+      const res = await myApi.get(`/api/talents/${profileId}?${query}`);
       return res.data;
     }
   });
@@ -63,7 +63,7 @@ function LeftContent({ profileId }: { profileId: number }) {
   const me = useQuery<User>({
     queryKey: ["me", token],
     queryFn: async () => {
-      const res = await myApi.get(`/users/me?${meQuery}`, {
+      const res = await myApi.get(`/api/users/me?${meQuery}`, {
         headers: {
           Authorization: "Bearer " + token
         }
@@ -81,7 +81,7 @@ function LeftContent({ profileId }: { profileId: number }) {
   const favouriteMutation = useMutation({
     mutationFn: async () => {
       if (Boolean(isFavourite)) {
-        const res = await myApi.delete(`/favourites/${isFavourite?.id}`, {
+        const res = await myApi.delete(`/api/favourites/${isFavourite?.id}`, {
           headers: {
             Authorization: "Bearer " + token
           }
@@ -89,7 +89,7 @@ function LeftContent({ profileId }: { profileId: number }) {
         return res.data;
       } else {
 
-        const res = await myApi.post(`/favourites`, {
+        const res = await myApi.post(`/api/favourites`, {
           data: {
             user: user?.id,
             favourite: profile?.user.data.id

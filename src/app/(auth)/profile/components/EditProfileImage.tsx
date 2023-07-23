@@ -75,7 +75,7 @@ function EditProfileImage({ profileId, imageId }: { profileId?: number, imageId?
 
       // first delete old photo
       if (imageId) {
-        await myApi.delete(`/upload/files/${imageId}`, {
+        await myApi.delete(`/api/upload/files/${imageId}`, {
           headers: {
             Authorization: "Bearer " + token
           }
@@ -84,7 +84,7 @@ function EditProfileImage({ profileId, imageId }: { profileId?: number, imageId?
 
       // second upload new photo
       formData.append("files", photo as Blob);
-      const uploadRes = await myApi.post<any[]>("/upload", formData, {
+      const uploadRes = await myApi.post<any[]>("/api/upload", formData, {
         headers: {
           Authorization: "Bearer " + token
         }
@@ -93,7 +93,7 @@ function EditProfileImage({ profileId, imageId }: { profileId?: number, imageId?
       // console.log("iplouded",uploadedPhoto)
 
       // then update profile image
-      const res = await myApi.put<any[]>(`/talents/${profileId}`, { data: { profileImage: uploadedPhoto } }, {
+      const res = await myApi.put<any[]>(`/api/talents/${profileId}`, { data: { profileImage: uploadedPhoto } }, {
         headers: {
           Authorization: "Bearer " + token
         }

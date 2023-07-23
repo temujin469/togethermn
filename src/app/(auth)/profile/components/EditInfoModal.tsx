@@ -70,7 +70,7 @@ function EditInfoModal() {
   const { data: user, isError, isLoading } = useQuery<Partial<User>>({
     queryKey: ["myProfile", "me", token],
     queryFn: async () => {
-      const res = await myApi.get(`/users/me?${query}`, {
+      const res = await myApi.get(`/api/users/me?${query}`, {
         headers: {
           Authorization: "Bearer " + token
         }
@@ -94,7 +94,7 @@ function EditInfoModal() {
 
   const updateMutation = useMutation({
     mutationFn: async (values: z.infer<typeof infoShema>) => {
-      const res = await myApi.put(`/talents/${user?.profile?.id}`, { data: values }, {
+      const res = await myApi.put(`/api/talents/${user?.profile?.id}`, { data: values }, {
         headers: {
           Authorization: "Bearer " + token
         }

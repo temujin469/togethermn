@@ -29,7 +29,7 @@ function Bio() {
   const { data: user, isLoading, isError } = useQuery<User>({
     queryKey: ["myProfile", "bio", token],
     queryFn: async () => {
-      const res = await myApi.get(`/users/me?${query}`, {
+      const res = await myApi.get(`/api/users/me?${query}`, {
         headers: {
           Authorization: "Bearer " + token
         }
@@ -42,7 +42,7 @@ function Bio() {
 
   const updateMutation = useMutation({
     mutationFn: async (bio: string) => {
-      const res = await myApi.put(`/talents/${user?.profile?.id}`, {
+      const res = await myApi.put(`/api/talents/${user?.profile?.id}`, {
         data: {
           bio
         }

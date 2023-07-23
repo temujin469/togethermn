@@ -30,7 +30,7 @@ function page() {
   const { data:user, isError, isLoading } = useQuery<Partial<User>>({
     queryKey: ["accountDetails","me",token],
     queryFn: async () => {
-      const res = await myApi.get("/users/me", {
+      const res = await myApi.get("/api/users/me", {
         headers: {
           Authorization: "Bearer " + token
         }
@@ -51,7 +51,7 @@ function page() {
 
   const updateMutation = useMutation({
     mutationFn: async (detail: z.infer<typeof detailShema>) => {
-      const res = await myApi.put(`/users/${user?.id}`, detail, {
+      const res = await myApi.put(`/api/users/${user?.id}`, detail, {
         headers: {
           Authorization: "Bearer " + token
         }

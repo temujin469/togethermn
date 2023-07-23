@@ -71,7 +71,7 @@ function ClosedJobs() {
   const { data, isError, isLoading } = useQuery<JobsResponse>({
     queryKey: ["closedJobs", "myJobs", query, paginationQuery, token],
     queryFn: async () => {
-      const res = await myApi.get(`/azhils?${query}&${paginationQuery}`, {
+      const res = await myApi.get(`/api/azhils?${query}&${paginationQuery}`, {
         headers: {
           Authorization: "Bearer " + token
         }
@@ -92,7 +92,7 @@ function ClosedJobs() {
   const deleteMutation = useMutation({
     mutationKey: ["deleteJob"],
     mutationFn: async (id: number) => {
-      const res = await myApi.delete(`/azhils/${id}`, {
+      const res = await myApi.delete(`/api/azhils/${id}`, {
         headers: {
           Authorization: "Bearer " + token
         }
@@ -119,7 +119,7 @@ function ClosedJobs() {
   const publishMutation = useMutation({
     mutationKey: ["publishJob"],
     mutationFn: async (id: number) => {
-      const res = await myApi.put(`/azhils/${id}`, { data: { isClosed: false } }, {
+      const res = await myApi.put(`/api/azhils/${id}`, { data: { isClosed: false } }, {
         headers: {
           Authorization: "Bearer " + token
         }

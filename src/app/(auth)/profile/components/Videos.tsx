@@ -26,7 +26,7 @@ function Videos() {
   const { data, isLoading, isError } = useQuery<User>({
     queryKey: ["myProfile", "videos", userId, user?.token],
     queryFn: async () => {
-      const res = await myApi.get(`/users/me?${query}`, {
+      const res = await myApi.get(`/api/users/me?${query}`, {
         headers: {
           Authorization: "Bearer " + user?.token
         }

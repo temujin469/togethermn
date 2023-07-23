@@ -43,7 +43,7 @@ function MyJobs() {
   const { data, isError, isLoading } = useQuery<any>({
     queryKey: ["jobs", query,user],
     queryFn: async () => {
-      const res = await myApi.get(`/azhils?${query}&${paginationQuery}`, {
+      const res = await myApi.get(`/api/azhils?${query}&${paginationQuery}`, {
         headers: {
           Authorization: "Bearer " + token
         }

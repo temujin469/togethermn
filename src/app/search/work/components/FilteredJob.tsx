@@ -50,7 +50,7 @@ function FilteredJob() {
   const { data, isError, isLoading } = useQuery<JobsResponse>({
     queryKey: ["jobs", query, paginationQuery],
     queryFn: async () => {
-      const res = await myApi.get(`/azhils?${query}&${filter && filterquery}&${paginationQuery}`);
+      const res = await myApi.get(`/api/azhils?${query}&${filter && filterquery}&${paginationQuery}`);
       setResult(res.data.meta.pagination.total);
       return res.data;
     }

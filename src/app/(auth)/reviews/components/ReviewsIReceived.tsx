@@ -46,7 +46,7 @@ function ReviewsIReceived() {
   const { data, isError, isLoading } = useQuery<any>({
     queryKey: ["reviewsRecieved", query, paginationQuery, user],
     queryFn: async () => {
-      const res = await myApi.get(`/reviews?${query}&${paginationQuery}`);
+      const res = await myApi.get(`/api/reviews?${query}&${paginationQuery}`);
       return res.data;
     }
   });

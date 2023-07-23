@@ -40,7 +40,7 @@ function InviteTalentModal({ talentId }: { talentId?: number }) {
   const { data: talent,isLoading } = useQuery<User>({
     queryKey: ["user"],
     queryFn: async () => {
-      const res = await myApi.get(`/users/${talentId}?${query}`);
+      const res = await myApi.get(`/api/users/${talentId}?${query}`);
       return res.data;
     }
   })
@@ -49,7 +49,7 @@ function InviteTalentModal({ talentId }: { talentId?: number }) {
 
   const inviteMutation = useMutation({
     mutationFn: async () => {
-      const res = await myApi.put(`/users/${talentId}`,
+      const res = await myApi.put(`/api/users/${talentId}`,
         { invitedJobs: talent?.invitedJobs.length ? [...talent?.invitedJobs, jobId] : [jobId] },
         {
           headers: {

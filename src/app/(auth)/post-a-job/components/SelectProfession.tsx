@@ -18,8 +18,6 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { useRouter } from 'next/navigation';
 import usePostJob from '@/hooks/usePostJob';
 import RowWithIcon from './RowWithIcon';
-import getProfessions from '@/utils/fetch/getProfessions';
-import { useQuery } from '@tanstack/react-query';
 
 
 function SelectProfession({professions}:{professions?:ResponseProfession[]}) {

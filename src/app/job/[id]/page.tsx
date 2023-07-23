@@ -25,7 +25,7 @@ function page({ params }: Props) {
   const { data, isLoading, isError } = useQuery<JobDetailResponse>({
     queryKey: ["job-detail", params.id],
     queryFn: async () => {
-      const res = await myApi.get(`/azhils/${params.id}?populate=*`);
+      const res = await myApi.get(`/api/azhils/${params.id}?populate=*`);
       return res.data;
     }
   });

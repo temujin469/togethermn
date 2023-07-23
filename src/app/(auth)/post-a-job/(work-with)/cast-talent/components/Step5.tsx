@@ -27,7 +27,7 @@ function Step5() {
     mutationKey: ["job"],
     mutationFn: async () => {
       if (update) {
-        const res = await myApi.put(`/azhils/${update}`, { data: { ...job, user: user?.id, status: "хүлээгдэж байгаа" } }, {
+        const res = await myApi.put(`/api/azhils/${update}`, { data: { ...job, user: user?.id, status: "хүлээгдэж байгаа" } }, {
           headers: {
             Authorization: "Bearer " + token
           }
@@ -42,7 +42,7 @@ function Step5() {
           const formData = new FormData();
           job?.files?.forEach((file) => formData.append("files", file, file.name));
 
-          const uploadRes = await myApi.post<any[]>("/upload", formData, {
+          const uploadRes = await myApi.post<any[]>("/api/upload", formData, {
             headers: {
               Authorization: "Bearer " + token,
             }
@@ -50,7 +50,7 @@ function Step5() {
           uploadedFiles = uploadRes.data;
         }
 
-        const res = await myApi.post("/azhils",
+        const res = await myApi.post("/api/azhils",
           { data: { ...job, user: user?.id, files: uploadedFiles, status: "хүлээгдэж байгаа" } },
           {
             headers: {

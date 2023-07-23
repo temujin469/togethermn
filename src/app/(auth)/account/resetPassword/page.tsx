@@ -60,7 +60,7 @@ function page() {
 
   const updateMutation = useMutation({
     mutationFn: async (password: string) => {
-      const res = await myApi.put(`/users/${user?.id}`, {password}, {
+      const res = await myApi.put(`/api/users/${user?.id}`, {password}, {
         headers: {
           Authorization: "Bearer " + token
         }

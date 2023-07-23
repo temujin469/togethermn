@@ -21,7 +21,7 @@ function page() {
   const { data: user, isError, isLoading } = useQuery<Partial<User>>({
     queryKey: ["accountDetails", "me", token],
     queryFn: async () => {
-      const res = await myApi.get("/users/me", {
+      const res = await myApi.get("/api/users/me", {
         headers: {
           Authorization: "Bearer " + token
         }
@@ -34,7 +34,7 @@ function page() {
 
   const deleteMutation = useMutation({
     mutationFn: async () => {
-      const res = await myApi.delete(`/users/${user?.id}`, {
+      const res = await myApi.delete(`/api/users/${user?.id}`, {
         headers: {
           Authorization: "Bearer " + token
         }

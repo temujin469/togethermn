@@ -3,7 +3,7 @@ export default async function getProfessions(): Promise<
 > {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL}/professions?populate=*`,
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/professions?populate=*`,
       {
         headers: { Accept: "*/*", "Content-Type": "application/json" },
       }

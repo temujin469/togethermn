@@ -97,7 +97,7 @@ function Jobs() {
   const { data, isError, isLoading } = useQuery<JobsResponse>({
     queryKey: ["openJobs", "myJobs", query, paginationQuery, user?.id],
     queryFn: async () => {
-      const res = await myApi.get(`/azhils?${query}&${paginationQuery}`, {
+      const res = await myApi.get(`/api/azhils?${query}&${paginationQuery}`, {
         headers: {
           Authorization: "Bearer " + token
         }
@@ -122,7 +122,7 @@ function Jobs() {
 
   const closeMutation = useMutation({
     mutationFn: async (id: number) => {
-      const res = await myApi.put(`/azhils/${id}`, { data: { isClosed: true } }, {
+      const res = await myApi.put(`/api/azhils/${id}`, { data: { isClosed: true } }, {
         headers: {
           Authorization: "Bearer " + token
         }

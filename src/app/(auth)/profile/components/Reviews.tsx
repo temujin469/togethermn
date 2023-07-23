@@ -44,7 +44,7 @@ function Reviews() {
   const { data, isError, isLoading } = useQuery<any>({
     queryKey: ["reviewsIGave", query, paginationQuery, user?.id],
     queryFn: async () => {
-      const res = await myApi.get(`/reviews?${query}&${paginationQuery}`);
+      const res = await myApi.get(`/api/reviews?${query}&${paginationQuery}`);
       return res.data;
     }
   });

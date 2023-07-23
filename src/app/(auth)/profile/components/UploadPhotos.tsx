@@ -17,14 +17,14 @@ function UploadPhotos({ profileId }: { profileId?: number }) {
     mutationFn: async () => {
 
       // get old photos
-      const oldPhotosRes = await myApi.get(`/talents/${profileId}?populate=photos&fields[0]=id`)
+      const oldPhotosRes = await myApi.get(`/api/talents/${profileId}?populate=photos&fields[0]=id`)
       const oldPhotos: any[] = oldPhotosRes.data?.data?.attributes?.photos.data;
 
       // // first upload new photo
       const formData = new FormData();
       Array.from(photos as Iterable<File> | ArrayLike<File>)?.forEach((photo) => formData.append("files", photo, photo.name));
 
-      const uploadRes = await myApi.post<any[]>("/upload", formData, {
+      const uploadRes = await myApi.post<any[]>("/api/upload", formData, {
         headers: {
           Authorization: "Bearer " + token,
         }
@@ -33,7 +33,7 @@ function UploadPhotos({ profileId }: { profileId?: number }) {
       // console.log("iplouded",uploadedPhoto)
 
       // then update profile photos
-      const res = await myApi.put<any[]>(`/talents/${profileId}`,
+      const res = await myApi.put<any[]>(`/api/talents/${profileId}`,
         { data: { photos: Boolean(oldPhotos?.length) ?  [...oldPhotos, ...uploadedPhotos] : uploadedPhotos} }, {
         headers: {
           Authorization: "Bearer " + token
