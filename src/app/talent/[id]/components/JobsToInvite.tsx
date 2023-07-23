@@ -12,7 +12,7 @@ import { H4 } from '@/components/ui/Typography/Heading';
 
 
 type JobItemProps = {
-  job: Partial<Job>
+  job: Partial<ResponseJob>
   isInvitedTalent: boolean
   isSelected: boolean
   jobId: number
