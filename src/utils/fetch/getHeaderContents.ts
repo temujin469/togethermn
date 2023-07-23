@@ -49,7 +49,7 @@ const query = QueryString.stringify(
 export default async function getHeaderContents(): Promise<ContentsResponse | undefined> {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/header?${query}`,
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/header?${query}`,
       {
         headers: { Accept: "*/*", "Content-Type": "application/json" },
       }

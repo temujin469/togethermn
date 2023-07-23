@@ -16,7 +16,7 @@ export default async function getHomePageContents(): Promise<
 > {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/home-page?populate=*`,
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/home-page?populate=*`,
       {
         headers: { Accept: "*/*", "Content-Type": "application/json" },
       }
