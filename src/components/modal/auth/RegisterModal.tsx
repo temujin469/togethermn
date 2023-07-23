@@ -77,7 +77,7 @@ function RegisterModal() {
     setIsLoading(true)
     setIsError(false)
     try {
-      const res = await myApi.post("/auth/local/register", { ...values, isCreatedProfile:false });
+      const res = await myApi.post("/api/auth/local/register", { ...values, isCreatedProfile:false });
 
       const data = res.data;
       if (data) {

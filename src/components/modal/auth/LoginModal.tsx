@@ -52,7 +52,7 @@ function LoginModal() {
     setIsLoading(true)
     setIsError(false)
     try {
-      const res = await myApi.post("/auth/local", {
+      const res = await myApi.post("/api/auth/local", {
         identifier: values.email,
         password: values.password
       });
