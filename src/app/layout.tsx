@@ -7,7 +7,6 @@ import getQueryClient from '@/utils/getQueryClient'
 import getAttributes from '@/utils/fetch/getAttributes'
 import { Hydrate, dehydrate } from '@tanstack/react-query'
 import getProfessions from '@/utils/fetch/getProfessions'
-import { Head } from 'next/document'
 
 export const metadata = {
   title: 'Together',
@@ -26,9 +25,6 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <Head>
-        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"/>
-      </Head>
       <body className=''>
         <QueryProvider>
           <Hydrate state={dehydratedState}>
