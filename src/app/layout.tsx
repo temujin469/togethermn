@@ -25,6 +25,9 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
+      {/* <Head>
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"/>
+      </Head> */}
       <body className=''>
         <QueryProvider>
           <Hydrate state={dehydratedState}>
