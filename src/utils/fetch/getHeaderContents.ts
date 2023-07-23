@@ -51,7 +51,7 @@ export default async function getHeaderContents(): Promise<ContentsResponse | un
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/header?${query}`,
       {
-        headers: { Accept: "*/*" },
+        headers: { Accept: "*/*", "Content-Type": "application/json" },
       }
     );
     const data = await res.json();

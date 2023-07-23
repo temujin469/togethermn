@@ -1,7 +1,10 @@
 import Image from 'next/image';
 import SelectProfession from './components/SelectProfession';
+import getProfessions from '@/utils/fetch/getProfessions';
 
- function PostAJob() {
+ async function PostAJob() {
+  const professions = await getProfessions()
+  console.log(professions)
   return (
     <div className='min-h-screen bg-white'>
       <div className='md:grid grid-cols-2 h-screen'>
@@ -12,7 +15,7 @@ import SelectProfession from './components/SelectProfession';
         </div>
         <div className='p-5 md:p-10  flex justify-center'>
           <div className='max-w-[500px]'>
-            <SelectProfession />
+            <SelectProfession professions={professions} />
           </div>
         </div>
       </div>

@@ -3,39 +3,6 @@
 import QueryString from "qs";
 
 
-type ContentsResponse = {
-  id: number;
-  attributes: {
-    banner_images: {
-      data: {
-        id: number;
-        attributes: {
-          url: string;
-        };
-      }[];
-    };
-    section1_image: {
-      data: {
-        attributes: {
-          url: string;
-        };
-      };
-    };
-    section2_video: {
-      data: {
-        attributes: {
-          url: string;
-        };
-      };
-    };
-    featured_talents:{
-      data:{
-        id:number,
-        attributes:User
-      }
-    }[]
-  };
-};
 
 // const query = QueryString.stringify(
 //   {
@@ -51,7 +18,7 @@ export default async function getHomePageContents(): Promise<
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/home-page?populate=*`,
       {
-        headers: { Accept: "*/*" },
+        headers: { Accept: "*/*", "Content-Type": "application/json" },
       }
     );
     const data = await res.json();

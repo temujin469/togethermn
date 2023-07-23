@@ -18,7 +18,7 @@ const ShowDetail = ({ value, label }: { value?: string, label: string }) => {
   )
 }
 
-const JobItem = ({ job, id }: { job: Job, id: number }) => {
+const JobItem = ({ job, id }: { job: ResponseJob, id: number }) => {
 
   // const proType = job.typeOfProfession;
   return (

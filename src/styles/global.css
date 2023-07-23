@@ -85,6 +85,7 @@
   .footer-link {
     @apply text-sm text-gray-400 hover:text-white
   }
+  
 }
 
 
@@ -111,4 +112,5 @@
   min-height: 100px;
   padding:8px !important;
 }
+
 

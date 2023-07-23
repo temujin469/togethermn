@@ -37,7 +37,7 @@ function FilteredJob() {
   const paginationQuery = qs.stringify({
     pagination: {
       page: page,
-      pageSize: 10
+      pageSize: 7
     }
   }, { encodeValuesOnly: true })
 

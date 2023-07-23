@@ -262,17 +262,30 @@ type Meta = {
   };
 };
 
+interface ResponseJob extends Job {
+  files:{
+    data:{
+      id:number,
+      attributes:{
+        name:string,
+        ext:string,
+        url:string
+      }
+    }[]
+  }
+}
+
 interface JobResponse extends Job {
   data: {
     id: number;
-    attributes: Job;
+    attributes: ResponseJob;
   };
 }
 
 type JobsResponse = {
   data: {
     id: number;
-    attributes: Job;
+    attributes: ResponseJob;
   }[];
   meta: Meta;
 };
@@ -280,7 +293,7 @@ type JobsResponse = {
 type JobDetailResponse = {
   data: {
     id: string;
-    attributes: Job;
+    attributes: ResponseJob;
   };
 };
 
@@ -300,4 +313,57 @@ type ProfileDetailResponse = {
     attributes: Profile;
   };
   meta: Meta;
+};
+
+
+// fetch
+
+type ResponseProfession = {
+  id: number;
+  attributes: {
+    name: string;
+    category: string;
+    background_image: {
+      data: {
+        id: number;
+        attributes: {
+          url: string;
+        };
+      };
+    };
+  };
+};
+
+type ContentsResponse = {
+  id: number;
+  attributes: {
+    banner_images: {
+      data: {
+        id: number;
+        attributes: {
+          url: string;
+        };
+      }[];
+    };
+    section1_image: {
+      data: {
+        attributes: {
+          url: string;
+        };
+      };
+    };
+    section2_video: {
+      data: {
+        attributes: {
+          url: string;
+        };
+      };
+    };
+    featured_talents: {
+      data: {
+        id: number;
+        attributes: User;
+      };
+    }[];
+  };
 };

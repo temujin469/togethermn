@@ -27,9 +27,11 @@
     "uuid": "8c5483a7-5eec-4c7a-ba63-4f038e84af1f"
   },
   "engines": {
-    
-    "node": "18.16.1",
+    "node": "17.x",
     "npm": "9.5.1"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
 }

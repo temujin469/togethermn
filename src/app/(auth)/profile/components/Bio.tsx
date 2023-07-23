@@ -85,6 +85,7 @@ function Bio() {
       {
         isLoading ? <Skeleton className='h-[100px] w-full' /> : (
           <p>{user?.profile?.bio}</p>
+          // <Textarea placeholder='Био' value={bio} readOnly rows={10}>{user?.profile?.bio}</Textarea>
         )
       }
       <div className='flex justify-end mt-5'>

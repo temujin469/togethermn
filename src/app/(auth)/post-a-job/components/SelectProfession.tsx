@@ -22,10 +22,10 @@ import getProfessions from '@/utils/fetch/getProfessions';
 import { useQuery } from '@tanstack/react-query';
 
 
-function SelectProfession() {
+function SelectProfession({professions}:{professions?:ResponseProfession[]}) {
 
 
-  const { data: professions } = useQuery({ queryKey: ["professions"], queryFn: getProfessions })
+  // const { data: professions } = useQuery({ queryKey: ["professions"], queryFn: getProfessions })
 
 
   const pros = professions?.map(pro => pro.attributes.name.toLowerCase())
