@@ -58,11 +58,6 @@ const SidebarMenu = () => {
               <Link href="/favourites" className='font-medium text-[16px]'>Миний дуртай</Link>
               <Link href="/account" className='font-medium text-[16px]'>Бүртгэлийн тохиргоо</Link>
               {
-                user.profileType === "talent" && (
-                  <Link href="/profile" className='font-medium text-[16px]'>Профайл</Link>
-                )
-              }
-              {
                 user?.profileType === "talent" && (
                       user?.isCreatedProfile ? (
                         <Link href="/profile" className='font-medium text-[16px]'>Профайл</Link>
