@@ -32,7 +32,7 @@ const Banner = () => {
                 Шилдэг загвар өмсөгч, жүжигчид болон инфлүүнсер мэргэжилтэнгүүдийг захиал
               </h1>
               <p
-                className='text-xl lg:text-2xl font-secondary bg-clip-text text-white mb-12 max-w-[440px] mx-auto lg:mx-0'
+                className='text-xl lg:text-2xl font-secondary bg-clip-text text-gray-600 mb-12 max-w-[440px] mx-auto lg:mx-0'
                 data-aos='fade-down'
                 data-aos-offset='0'
               >

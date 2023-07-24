@@ -14,6 +14,7 @@ import { useToast } from '@/components/ui/use-toast';
 import { Scroll } from 'lucide-react';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { DialogClose } from '@radix-ui/react-dialog';
+import AppliedUsersModal from './AppliedUsersModal';
 
 
 function ClosedJobs() {
@@ -49,6 +50,19 @@ function ClosedJobs() {
       },
       bookedBy: {
         fields: ["id"]
+      },
+      appliedUsers: {
+        fields: ["id", "username", "profile"],
+        populate: {
+          profile: {
+            fields: ["profileImage", "professions", "firstname", "rate", "instagramFollowers", "location"],
+            populate: {
+              profileImage: {
+                fields: ["formats", "url"]
+              }
+            }
+          }
+        },
       },
 
     }
@@ -202,8 +216,7 @@ function ClosedJobs() {
             </div>
             <div className='flex gap-5'>
               <div className='flex flex-col items-center'>
-                <p className='text-xl font-medium'>{attributes?.appliedUsers?.data.length}</p>
-                <p>Захиалагдсан</p>
+                <AppliedUsersModal job={attributes} />
               </div>
             </div>
           </div>

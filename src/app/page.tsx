@@ -20,6 +20,7 @@ export default async function Home() {
   const dehydratedState = dehydrate(queryClient)
   return (
     <Hydrate state={dehydratedState}>
+      <div className='bg-white'>
       <Header />
       <Carousel />
       <Banner />
@@ -32,6 +33,7 @@ export default async function Home() {
       <BestRated />
       <Testimonial />
       <Footer />
+      </div>
     </Hydrate>
   )
 }

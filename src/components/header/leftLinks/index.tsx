@@ -7,21 +7,27 @@ import useRegisterModal from '@/hooks/useRegisterModal';
 import { useRouter } from 'next/navigation';
 import useAuth from '@/hooks/useAuth';
 import Image from 'next/image';
-import { useUser } from '@/hooks/useUser';
+import { useToast } from '@/components/ui/use-toast';
+import usePostAJobModal from '@/hooks/usePostAJobModal';
 
 
 function LeftLinks() {
   const { isAuth } = useAuth();
-  const {token,user} = useUser()
-  const { onOpen, setAfterUrl } = useRegisterModal()
-  const router = useRouter()
+  // const {token,user} = useUser()
+  const registerModal = useRegisterModal()
+  const postAJobModal = usePostAJobModal()
+  const {toast} = useToast()
 
   const handleCLick = () => {
     if (isAuth) {
-      return router.push("/post-a-job");
+      return postAJobModal.onOpen()
     }
-    onOpen()
-    setAfterUrl("/post-a-job");
+    toast({
+      title: "Cистемд нэвтрэх шаардлагатай",
+      variant: "default",
+    });
+    registerModal.onOpen()
+    registerModal.setAfterUrl("/post-a-job");
   }
   // console.log(afterUrl)
   return (

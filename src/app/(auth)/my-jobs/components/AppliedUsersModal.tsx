@@ -7,7 +7,7 @@ import AppliedTalentItem from './AppliedTalentItem';
 
 function AppliedUsersModal({ job }: { job: ResponseJob }) {
 
-  console.log(job);
+  // console.log(job);
 
   // const { token, user } = useUser()
   // const { toast } = useToast()

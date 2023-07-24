@@ -25,7 +25,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className=''>
+      <body>
         <QueryProvider>
           <Hydrate state={dehydratedState}>
             <Toaster />

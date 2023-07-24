@@ -1,7 +1,6 @@
 "use client"
 import useLoginModal from '@/hooks/useLoginModal';
 import React, { useCallback, useState } from 'react';
-import Modal from '../Modal';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -15,6 +14,7 @@ import { useRouter } from 'next/navigation';
 import useAuth from '@/hooks/useAuth';
 import { myApi } from '@/utils/axios';
 import { useToast } from '@/components/ui/use-toast';
+import { Dialog, DialogContent, DialogTitle, useMediaQuery, useTheme } from '@mui/material';
 
 const loginFormSchema = z.object({
   email: z.string().email({
@@ -32,6 +32,9 @@ function LoginModal() {
   const registerModal = useRegisterModal()
   const auth = useAuth()
   const router = useRouter()
+
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
   // const cookieStore = cookies()
 
   const form = useForm({
@@ -88,7 +91,7 @@ function LoginModal() {
 
   const content = (
     <Form {...form}>
-      <form className='space-y-6'>
+      <form className='space-y-6 mt-5' onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
           control={form.control}
           name="email"
@@ -118,6 +121,11 @@ function LoginModal() {
         {isError && (
           <div className='text-red-400 text-center mt-5'>Имэйл эсвэл нууц үг буруу байна!</div>
         )}
+        <div className='flex justify-end mb-5 pb-3'>
+          <Button type='submit' variant="secondary">
+            Нэвтрэх
+          </Button>
+        </div>
       </form>
     </Form>
   )
@@ -146,31 +154,35 @@ function LoginModal() {
           font-light
         "
       >
-        <p>Шинээр Бүртгүүлэх
-          <span
-            onClick={onToggle}
-            className="
+        <p 
+        onClick={onToggle}
+          className="
               text-neutral-800
               cursor-pointer 
               hover:underline
-            "
-          > Бүртгүүлэх</span>
+            ">Шинээр Бүртгүүлэх
         </p>
       </div>
     </div>
   )
   return (
-    <Modal
-      disabled={isLoading}
-      isOpen={loginModal.isOpen}
-      title="Нэвтрэх"
-      actionLabel="Үргэлжлүүлэх"
+    <Dialog
+      open={loginModal.isOpen}
       onClose={loginModal.onClose}
-      onSubmit={form.handleSubmit(onSubmit)}
-      body={content}
-      footer={footerContent}
-    />
-
+      fullScreen={fullScreen}
+      fullWidth
+      maxWidth="sm"
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
+    >
+      <DialogTitle id="alert-dialog-title" className='border-b'>
+        Нэвтрэх
+      </DialogTitle>
+      <DialogContent>
+        {content}
+        {footerContent}
+      </DialogContent>
+    </Dialog>
   );
 }
 

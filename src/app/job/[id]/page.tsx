@@ -306,10 +306,10 @@ function page({ params }: Props) {
 
 
   return (
-    <div className='bg-gray-100'>
+    <div className='bg-gray-100 md:py-10'>
       {/* <Header/> */}
       <SubHeader left={<div className='flex items-center gap-2 font-medium cursor-pointer' onClick={() => router.back()}><ArrowLeft />Буцах</div>} />
-      <div className='max-w-[800px] min-h-[calc(100vh-70px)] mx-auto px-4 py-5 md:p-10 block bg-white'>
+      <div className='max-w-[800px] min-h-[calc(100vh-70px)] mx-auto px-4 pt-5 pb-10 md:p-10 block bg-white'>
         {
           job && !isLoading ? (
             detail

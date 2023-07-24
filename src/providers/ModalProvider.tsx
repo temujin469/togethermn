@@ -1,6 +1,7 @@
 import LoginModal from '@/components/modal/auth/LoginModal';
 import RegisterModal from '@/components/modal/auth/RegisterModal';
 import CreateProfile from '@/components/modal/createProfile/CreateProfile';
+import PostAJobModal from '@/components/modal/postAJob/PostAJobModal';
 import React from 'react';
 
 function ModalProvider() {
@@ -9,6 +10,7 @@ function ModalProvider() {
       <LoginModal/>
       <RegisterModal/>
       <CreateProfile/>
+      <PostAJobModal/>
     </>
   );
 }

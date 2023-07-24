@@ -20,19 +20,6 @@ type ResponseUser = {
   id: number;
 };
 
-// type User = {
-//   username: string;
-//   profileImage: string;
-//   location: string;
-//   slug: string;
-//   invited_jobs: string[];
-//   complated_jobs: string[];
-//   applied_jobs: string[];
-//   unsuccessful_jobs: string[];
-//   rate: number;
-//   followers: number;
-// };
-
 type About = {
   img: string;
   title: string;
@@ -228,8 +215,6 @@ interface MyProfile extends Profile {
 type User = {
   id: number;
   username: string;
-  firstname: string;
-  lastname: string;
   mobileNumber: string;
   email: string;
   confirmed: boolean;
@@ -366,4 +351,29 @@ type ContentsResponse = {
       };
     }[];
   };
+};
+
+interface FavouriteUser extends User {
+  profile:{
+    data:{
+      attributes:Profile
+      id:number
+    }
+  }
+}
+
+
+type Favourites = {
+  data: {
+    id: number;
+    attributes: {
+      favourite: {
+        data: {
+          id: number;
+          attributes: FavouriteUser;
+        };
+      };
+    };
+  }[];
+  meta: Meta;
 };

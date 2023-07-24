@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import React from 'react';
 import FavouriteUsers from './components/FavouriteUsers';
+import Footer from '@/components/footer/Footer';
 
 function page() {
   return (
@@ -25,6 +26,7 @@ function page() {
       <div className='max-w-[1000px] mx-auto px-4 pb-10'>
         <FavouriteUsers/>
       </div>
+      <Footer/>
     </div>
   );
 }

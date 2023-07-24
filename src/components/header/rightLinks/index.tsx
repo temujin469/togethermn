@@ -9,41 +9,19 @@ import useRegisterModal from '@/hooks/useRegisterModal';
 import UserMenu from './UserMenu';
 import { useUser } from '@/hooks/useUser';
 import { useQuery } from '@tanstack/react-query';
-import { myApi } from '@/utils/axios';
-import QueryString from 'qs';
+import getMyFavouritesCount from '@/utils/fetch/getMyFavouritesCount';
 
 
 function RightLinks() {
   const { onOpen } = useRegisterModal();
   const {isLoading,token,user } = useUser();
 
-  const meQuery = QueryString.stringify({
-    fields: ["favourites", "id"],
-    populate: {
-      favourites: {
-        fields: ["favourite"],
-        populate: {
-          favourite: {
-            fields: ["id"]
-          }
-        }
-      }
-    },
-  }, { encodeValuesOnly: true });
 
-  const favourites = useQuery<any>({
-    queryKey: ["me", token],
-    queryFn: async () => {
-      const res = await myApi.get(`/api/users/me?${meQuery}`, {
-        headers: {
-          Authorization: "Bearer " + token
-        }
-      });
-      return res.data;
-    }
+  const favouritesCount = useQuery({
+    queryKey: ["favouritesCount","me", token],
+    queryFn:() => getMyFavouritesCount(token!)
   });
 
-  const myFavourites = favourites?.data?.favourites;
 
 
   return (
@@ -63,8 +41,8 @@ function RightLinks() {
           <div className='hidden md:flex items-center gap-6'>
             <Link href="/favourites" className='relative'>
               {
-                Boolean(myFavourites?.length) && (
-                  <div className='absolute top-[-9px] right-[-10px] bg-secondary w-5 h-5 flex items-center justify-center text-sm rounded-full'>{myFavourites.length}</div>
+                Boolean(favouritesCount.data) && (
+                  <div className='absolute top-[-9px] right-[-10px] bg-secondary w-5 h-5 flex items-center justify-center text-sm rounded-full'>{favouritesCount.data}</div>
                 )
               }
               <Heart size={20} strokeWidth={2.5} className='hover:text-secondary' />

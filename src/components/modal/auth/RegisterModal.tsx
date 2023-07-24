@@ -1,7 +1,6 @@
 "use client"
 import useRegisterModal from '@/hooks/useRegisterModal';
 import React, { useCallback, useState } from 'react';
-import Modal from '../Modal';
 import useLoginModal from '@/hooks/useLoginModal';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
@@ -21,6 +20,7 @@ import { useRouter } from 'next/navigation';
 import useAuth from '@/hooks/useAuth';
 import { myApi } from '@/utils/axios';
 import { useToast } from '@/components/ui/use-toast';
+import { Dialog, DialogContent, DialogTitle, useMediaQuery, useTheme } from '@mui/material';
 
 
 const registerFormSchema = z.object({
@@ -63,6 +63,8 @@ function RegisterModal() {
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast()
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   const form = useForm<z.infer<typeof registerFormSchema>>({
     resolver: zodResolver(registerFormSchema),
@@ -109,7 +111,7 @@ function RegisterModal() {
 
   const content = (
     <Form {...form}>
-      <form className='space-y-5'>
+      <form className='space-y-5 mt-5' onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
 
           control={form.control}
@@ -201,6 +203,11 @@ function RegisterModal() {
         {isError && (
           <div className='text-red-400 text-center mt-5'>Алдаа гарлаа</div>
         )}
+        <div className='flex justify-end mb-5 pb-3'>
+          <Button type='submit' variant="secondary">
+            Бүртгүүлэх
+          </Button>
+        </div>
       </form>
     </Form>
   )
@@ -245,16 +252,23 @@ function RegisterModal() {
 
 
   return (
-    <Modal
-      disabled={isLoading}
-      isOpen={registerModal.isOpen}
-      title="Бүртгүүлэх"
-      actionLabel="Үргэлжлүүлэх"
+        <Dialog
+      open={registerModal.isOpen}
       onClose={registerModal.onClose}
-      onSubmit={form.handleSubmit(onSubmit)}
-      body={content}
-      footer={footerContent}
-    />
+      fullScreen={fullScreen}
+      fullWidth
+      maxWidth="sm"
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
+    >
+      <DialogTitle id="alert-dialog-title" className='border-b'>
+        Бүртгүүлэх
+      </DialogTitle>
+      <DialogContent className='pt-5'>
+        {content}
+        {footerContent}
+      </DialogContent>
+    </Dialog>
 
   );
 }

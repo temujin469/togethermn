@@ -12,13 +12,14 @@ import { useUser } from '@/hooks/useUser';
 import { useQuery } from '@tanstack/react-query';
 import getProfessions from '@/utils/fetch/getProfessions';
 import useCreateProfileModal from '@/hooks/useCreateProfileModal';
+import getMyFavouritesCount from '@/utils/fetch/getMyFavouritesCount';
 
 const SidebarMenu = () => {
   const { data: professions } = useQuery({ queryKey: ["professions"], queryFn: getProfessions })
   
   const { onOpen } = useRegisterModal();
   const createProfileModal = useCreateProfileModal()
-  const {logout ,user} = useUser();
+  const {logout ,user,token} = useUser();
 
   const router = useRouter();
   const { setFilter } = useSearchTalent()
@@ -27,6 +28,13 @@ const SidebarMenu = () => {
     router.push('/search/talent')
     router.refresh()
   }
+
+
+  const favouritesCount = useQuery({
+    queryKey: ["favouritesCount","me", token],
+    queryFn:()=>getMyFavouritesCount(token!)
+  });
+
 
 
   return (
@@ -55,7 +63,14 @@ const SidebarMenu = () => {
           user ? (
             <>
               <Link href="/my-jobs" className='font-medium text-[16px]'>Миний ажилууд</Link>
-              <Link href="/favourites" className='font-medium text-[16px]'>Миний дуртай</Link>
+              <Link href="/favourites" className='font-medium text-[16px] flex gap-2 items-center'>
+                Миний дуртай
+                {
+                  Boolean(favouritesCount.data) && (
+                    <div className=' bg-secondary w-5 h-5 text-white flex items-center justify-center text-sm rounded-full'>{favouritesCount.data}</div>
+                  )
+                }
+              </Link>
               <Link href="/account" className='font-medium text-[16px]'>Бүртгэлийн тохиргоо</Link>
               {
                 user?.profileType === "talent" && (

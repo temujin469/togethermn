@@ -2,11 +2,13 @@ import Footer from '@/components/footer/Footer';
 import Header from '@/components/header';
 import React from 'react';
 
-function layout({ children }: { children: React.ReactNode }) {
+function layout({children}:{children:React.ReactNode}) {
   return (
-    <div>
+    <div className='flex flex-col h-screen'>
       <Header/>
-      {children}
+      <div className='flex-[1]'>
+        {children}
+      </div>
       <Footer/>
     </div>
   );

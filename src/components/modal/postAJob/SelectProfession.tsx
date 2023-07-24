@@ -18,6 +18,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { useRouter } from 'next/navigation';
 import usePostJob from '@/hooks/usePostJob';
 import RowWithIcon from './RowWithIcon';
+import usePostAJobModal from '@/hooks/usePostAJobModal';
 
 
 function SelectProfession({professions}:{professions?:ResponseProfession[]}) {
@@ -41,8 +42,9 @@ function SelectProfession({professions}:{professions?:ResponseProfession[]}) {
   })
 
   const { setJob,job,setStep } = usePostJob();
+  const {onClose} = usePostAJobModal()
 
-  const { push, back } = useRouter()
+  const { push} = useRouter()
 
   function onSubmit(value: z.infer<typeof FormSchema>) {
     const profession = value.profession.toLowerCase();
@@ -50,6 +52,7 @@ function SelectProfession({professions}:{professions?:ResponseProfession[]}) {
     setStep(1);
     setJob({ profession:selectedProfession?.attributes.name,category:selectedProfession?.attributes.category });
     push(`/post-a-job/${selectedProfession?.attributes.category}`);
+    onClose()
   }
 
   return (
@@ -92,7 +95,7 @@ function SelectProfession({professions}:{professions?:ResponseProfession[]}) {
             )}
           />
           <div className='flex justify-between fixed md:static bottom-0 left-0 w-full px-5 py-2 bg-white border-t md:border-none md:p-0'>
-            <Button type="button" variant="ghost" size="lg" onClick={back}>Буцах</Button>
+            <Button type="button" variant="ghost" size="lg" onClick={onClose}>Буцах</Button>
             <Button type="submit" variant="secondary" size="lg">Үргэлжлүүлэх</Button>
           </div>
         </form>
