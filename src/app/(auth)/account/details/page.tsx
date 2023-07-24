@@ -105,7 +105,7 @@ function page() {
           <Form {...form}>
             <form className='grid grid-cols-1 sm:grid-cols-2 gap-10'>
               <FormField
-              defaultValue={user.firstname}
+              defaultValue={user.username}
                 control={form.control}
                 name="username"
                 render={({ field }) => (
