@@ -4,13 +4,13 @@ import React from 'react';
 
 function layout({ children }: { children: React.ReactNode }) {
   return (
-    <>
+    <div className='bg-white'>
       <Header />
       <div className='relative'>
         {children}
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
 

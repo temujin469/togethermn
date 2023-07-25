@@ -17,7 +17,7 @@ const theme = useTheme();
 const sm = useMediaQuery(theme.breakpoints.down('sm'));
   return (
     <Link href={`/talent/${id}`}>
-      <div className='w-full max-w-[360px] rounded-md border overflow-hidden shadow hover:shadow-lg cursor-pointer'>
+      <div className='w-full bg-white max-w-[360px] rounded-md border overflow-hidden shadow hover:shadow-lg cursor-pointer'>
         <div className='h-[170px] md:h-[220px] lg:h-[200px] xl:h-[240px] w-full'>
           <img
             src={Boolean(attributes.profileImage?.data) ? attributes.profileImage?.data?.attributes.url : "/images/no-user.jpg"}

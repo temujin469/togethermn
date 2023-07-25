@@ -12,7 +12,7 @@ import usePostJob from '@/hooks/usePostJob';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/components/ui/use-toast';
 import { MoreHorizontal, Scroll } from 'lucide-react';
-import AppliedUsersModal from './AppliedUsersModal';
+import AppliedUsersModal from '../../AppliedUsersModal';
 // import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 // import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSeparator, MenubarTrigger } from '@/components/ui/menubar';
 

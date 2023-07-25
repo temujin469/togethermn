@@ -14,7 +14,7 @@ import { useToast } from '@/components/ui/use-toast';
 import { Scroll } from 'lucide-react';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { DialogClose } from '@radix-ui/react-dialog';
-import AppliedUsersModal from './AppliedUsersModal';
+import AppliedUsersModal from '../../AppliedUsersModal';
 
 
 function ClosedJobs() {
