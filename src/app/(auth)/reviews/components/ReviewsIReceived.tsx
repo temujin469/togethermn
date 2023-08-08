@@ -8,6 +8,10 @@ import { useUser } from '@/hooks/useUser';
 import Link from 'next/link';
 import { Pagination, Rating  } from '@mui/material';
 import moment from 'moment';
+import EmptyStatus from '@/components/element/EmptyStatus';
+import { Skeleton } from '@/components/ui/skeleton';
+moment().locale('mn')
+
 
 
 
@@ -55,7 +59,19 @@ function ReviewsIReceived() {
   const reviews = data?.data;
   const pagination = data?.meta.pagination;
 
-  console.log("recieved",reviews)
+  // console.log("recieved",reviews)
+
+
+  if (isLoading) return (
+    <div>
+      <Skeleton className='h-[222px] sm:h-[112px] w-full mb-4' />
+      <Skeleton className='h-[222px] sm:h-[112px] w-full mb-4' />
+      <Skeleton className='h-[222px] sm:h-[112px] w-full mb-4' />
+    </div>
+  )
+
+  if (!isLoading && !Boolean(reviews?.length)) return <EmptyStatus />
+
 
   return (
     <div>
@@ -64,11 +80,12 @@ function ReviewsIReceived() {
         reviews?.map(({ attributes, id }: any) => (
           <div key={id} className='flex bg-white p-4 sm:p-8 rounded-lg flex-col pb-5 mb-5 border-b-2'>
             <div>
-              <h2 className='font-medium text-lg'>{attributes.user.data.attributes.firstname}</h2>
+              {/* <h2 className='font-medium text-lg'>{attributes.user.data.attributes.firstname}</h2> */}
               <h2 className='font-medium text-lg'>{attributes.user.data.attributes.username}</h2>
+              <p className='text-gray-500'>{moment(attributes.createdAt).format('ll')}</p>
+
               <div className='flex mb-4 gap-3'>
                 <Rating value={attributes.rate} readOnly />
-                <p >{moment(attributes.createdAt).format('ll')}</p>
               </div>
               <div className='text-gray-600'>{attributes.description}</div>
             </div>

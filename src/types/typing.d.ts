@@ -12,14 +12,6 @@ type Skill = {
   slug: string;
 };
 
-type ResponseUser = {
-  username: string;
-  email: string;
-  confirmed: string;
-  profileType: string;
-  id: number;
-};
-
 type About = {
   img: string;
   title: string;
@@ -48,11 +40,10 @@ type FilterTalent = {
 };
 
 type Job = {
-  id:number
+  id: number;
   isClosed: boolean;
   status: "татгалзcaн" | "хүлээгдэж байгаа" | "батлагдсан";
   user: string;
-
   title: string;
   profession: string;
   category: string;
@@ -108,25 +99,27 @@ type Job = {
       attributes: User;
     };
   };
+  bookedDate?: string;
+  invitedDate?: string;
   bookedBy?: {
     data: {
       attributes: User;
       id: number;
     };
   };
-  appliedUsers?:{
-    data:{
-      id:number
-      attributes:{
-        username:string
-        profile:{
-          data:{
-            attributes:Profile
-            id:number
-          }
-        }
-      }
-    }[]
+  appliedUsers?: {
+    data: {
+      id: number;
+      attributes: {
+        username: string;
+        profile: {
+          data: {
+            attributes: Profile;
+            id: number;
+          };
+        };
+      };
+    }[];
   };
   user: any;
 };
@@ -154,11 +147,11 @@ type Profile = {
     data: {
       id: number;
       attributes: {
-        formats:{
-          thumbnail:{
-            url:string
-          }
-        }
+        formats: {
+          thumbnail: {
+            url: string;
+          };
+        };
         url: string;
       };
     };
@@ -169,10 +162,7 @@ type Profile = {
       attributes: {
         url: string;
         formats: {
-          large: {
-            url: string;
-          };
-          medium: {
+          thumbnail: {
             url: string;
           };
         };
@@ -202,10 +192,7 @@ interface MyProfile extends Profile {
     id: number;
     url: string;
     formats: {
-      large: {
-        url: string;
-      };
-      medium: {
+      thumbnail: {
         url: string;
       };
     };
@@ -227,6 +214,13 @@ type User = {
   appliedJobs: Job[];
 };
 
+interface UserResponse extends User {
+  reviews?: {
+    id: number;
+    rate: number;
+  }[];
+}
+
 type Talent = {
   name: string;
   profileImg: string;
@@ -247,17 +241,46 @@ type Meta = {
   };
 };
 
+interface JobPopulatedUser extends User {
+  profile: {
+    data: {
+      id: number;
+      attributes: Profile;
+    };
+  };
+}
+
 interface ResponseJob extends Job {
-  files:{
-    data:{
-      id:number,
-      attributes:{
-        name:string,
-        ext:string,
-        url:string
-      }
-    }[]
-  }
+  createdAt: string;
+  updatedAt: string;
+  user: {
+    data: {
+      id: number;
+      attributes: JobPopulatedUser;
+    };
+  };
+  bookedBy: {
+    data: {
+      id: number;
+      attributes: JobPopulatedUser;
+    };
+  };
+  invitedUser: {
+    data: {
+      id: number;
+      attributes: JobPopulatedUser;
+    };
+  };
+  files: {
+    data: {
+      id: number;
+      attributes: {
+        name: string;
+        ext: string;
+        url: string;
+      };
+    }[];
+  };
 }
 
 interface JobResponse extends Job {
@@ -282,8 +305,6 @@ type JobDetailResponse = {
   };
 };
 
-
-
 type ProfilesResponse = {
   data: {
     id: number;
@@ -299,7 +320,6 @@ type ProfileDetailResponse = {
   };
   meta: Meta;
 };
-
 
 // fetch
 
@@ -347,21 +367,20 @@ type ContentsResponse = {
     featured_talents: {
       data: {
         id: number;
-        attributes: User;
-      };
-    }[];
+        attributes: Profile;
+      }[];
+    };
   };
 };
 
 interface FavouriteUser extends User {
-  profile:{
-    data:{
-      attributes:Profile
-      id:number
-    }
-  }
+  profile: {
+    data: {
+      attributes: Profile;
+      id: number;
+    };
+  };
 }
-
 
 type Favourites = {
   data: {

@@ -56,13 +56,16 @@ function Reviews({userId}:{userId?:number}) {
 
       {
         reviews?.map(({ attributes, id }: any) => (
-          <div key={id} className='flex bg-white sm:items-center p-4 flex-col gap-5 sm:flex-row pb-5 mb-5'>
+          <div key={id} className='flex bg-white p-4 sm:p-8 flex-col pb-5 mb-5 border-b'>
             <div>
-              <h2 className='font-medium text-lg'>{attributes.user.data.attributes.firstname}</h2>
+              {/* <h2 className='font-medium text-lg'>{attributes.user.data.attributes.firstname}</h2> */}
               <h2 className='font-medium text-lg'>{attributes.user.data.attributes.username}</h2>
+
+             
+
               <div className='flex mb-4 gap-3'>
                 <Rating value={attributes.rate} readOnly />
-                <p >{moment(attributes.createdAt).format('ll')}</p>
+                <p className='text-gray-500'>{moment(attributes.createdAt).format('ll')}</p>
               </div>
               <div className='text-gray-600'>{attributes.description}</div>
             </div>

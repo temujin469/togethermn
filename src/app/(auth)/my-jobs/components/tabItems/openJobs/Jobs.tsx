@@ -13,6 +13,7 @@ import { useRouter } from 'next/navigation';
 import { useToast } from '@/components/ui/use-toast';
 import { MoreHorizontal, Scroll } from 'lucide-react';
 import AppliedUsersModal from '../../AppliedUsersModal';
+import EmptyStatus from '@/components/element/EmptyStatus';
 // import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 // import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSeparator, MenubarTrigger } from '@/components/ui/menubar';
 
@@ -184,12 +185,7 @@ function Jobs() {
     </div>
   )
 
-  if (!isLoading && !Boolean(myJobs?.length)) return (
-    <div className='flex select-none text-gray-300 flex-col items-center justify-center'>
-      <Scroll size={80} />
-      <p className='font-medium'>Хоосон байна</p>
-    </div>
-  )
+  if (!isLoading && !Boolean(myJobs?.length)) return <EmptyStatus />
 
 
   //   Mongolian

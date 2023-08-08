@@ -4,6 +4,12 @@ import SubHeader from '@/components/header/SubHeader';
 import { ArrowLeft } from 'lucide-react';
 import ReviewsTab from './components/ReviewsTab';
 
+import moment from 'moment';
+import "moment/locale/mn"
+
+moment().locale('mn')
+
+
 
 function Reviews() {
 

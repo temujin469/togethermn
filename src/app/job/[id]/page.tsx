@@ -3,8 +3,6 @@ import SubHeader from '@/components/header/SubHeader';
 import { H2 } from '@/components/ui/Typography/Heading';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { myApi } from '@/utils/axios';
-import { useQuery } from '@tanstack/react-query';
 import { ArrowLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import React from 'react';
@@ -13,6 +11,14 @@ import { NumericFormat } from 'react-number-format';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import 'react-photo-view/dist/react-photo-view.css';
+import { useUser } from '@/hooks/useUser';
+import GetAppliedModal from './components/GetAppliedModal';
+import useGetJobFullInfo from '@/hooks/job/useGetJobFullInfo';
+import { Button } from '@/components/ui/button';
+import moment from 'moment';
+import "moment/locale/mn"
+
+moment().locale('mn')
 
 type Props = {
   params: {
@@ -21,27 +27,30 @@ type Props = {
 }
 
 function page({ params }: Props) {
+  const { user } = useUser();
+  const jobId = params.id;
 
-  const { data, isLoading, isError } = useQuery<JobDetailResponse>({
-    queryKey: ["job-detail", params.id],
-    queryFn: async () => {
-      const res = await myApi.get(`/api/azhils/${params.id}?populate=*`);
-      return res.data;
-    }
-  });
-
-  console.log(data);
+  const { data, isLoading, isError } = useGetJobFullInfo({ variables: { jobId: Number(jobId) } })
 
   const job = data?.data?.attributes;
 
-  const images = job?.files.data.filter((file) => file.attributes.ext === ".jpg")
-  const docs = job?.files.data.filter((file) => file.attributes.ext === ".docx")
+
+  const isCreatedByMe = job?.user.data.id === user?.id;
+  const isAppliedByMe = Boolean(job?.appliedUsers?.data.find(appliedUser => appliedUser.id === user?.id))
+
+  let docs, images;
+
+  if (job?.files?.data) {
+    images = job.files.data.filter((file) => file.attributes.ext === ".jpg")
+    docs = job.files.data.filter((file) => file.attributes.ext === ".docx")
+  }
+
 
   const detail = (
     <div>
 
       <H2>{job?.title}</H2>
-      <p className='text-gray-400 font-semibold'>ID-{params.id}</p>
+      <p className='text-gray-600 font-semibold'>Зар нийтэлсэн огноо: {moment(job?.createdAt).format('ll')}</p>
       <p className='text-lg font-semibold mb-2'>{job?.profession}</p>
       <p className='text-lg font-semibold'>Ажлын дэлгэрэнгүй мэдээлэл</p>
       <div className='mb-5'>
@@ -256,35 +265,39 @@ function page({ params }: Props) {
         ) : null
       }
 
-        <p className='text-lg font-semibold'>
-          Нэмэлт материалууд</p>
-        <p className='mb-5'>
-          {job?.additionalMaterial}
-        </p>
+      <p className='text-lg font-semibold'>
+        Нэмэлт материалууд</p>
+      <p className='mb-5'>
+        {job?.additionalMaterial}
+      </p>
 
 
-      <div>
-        <p className='text-lg font-semibold'>
-          Хавсралтууд</p>
-        {
-          docs?.map((file) => (
-            <div key={file.id} className='mb-4'>
-              <a className='text-blue-500 hover:underline' href={file.attributes.url}>{file.attributes.name}</a>
-            </div>
-          ))
-        }
-        <PhotoProvider>
-          <div className='grid grid-cols-2 gap-4'>
+      {
+        job?.files?.data?.length && (
+          <div>
+            <p className='text-lg font-semibold'>
+              Хавсралтууд</p>
             {
-              images?.map((file) => (
-                <PhotoView src={file.attributes.url}>
-                  <img key={file.id} src={file.attributes.url} alt={file.attributes.name} className='rounded-md w-full object-contain' />
-                </PhotoView>
+              docs?.map((file) => (
+                <div key={file.id} className='mb-4'>
+                  <a className='text-blue-500 hover:underline' href={file.attributes.url}>{file.attributes.name}</a>
+                </div>
               ))
             }
+            <PhotoProvider>
+              <div className='grid grid-cols-2 gap-4'>
+                {
+                  images?.map((file) => (
+                    <PhotoView src={file.attributes.url}>
+                      <img key={file.id} src={file.attributes.url} alt={file.attributes.name} className='rounded-md w-full object-contain' />
+                    </PhotoView>
+                  ))
+                }
+              </div>
+            </PhotoProvider>
           </div>
-        </PhotoProvider>
-      </div>
+        )
+      }
 
     </div>
 
@@ -315,6 +328,19 @@ function page({ params }: Props) {
             detail
           ) : loading
         }
+        <div className='text-right mt-[30px]'>
+          {
+            !isCreatedByMe && !isLoading && job?.isClosed !== true && (
+              isAppliedByMe ? (
+                <Button variant="secondary" className='cursor-not-allowed' disabled size="lg">
+                  Хүсэлт илгээгдсэн
+                </Button>
+              ) : (
+                <GetAppliedModal jobId={Number(jobId)} />
+              )
+            )
+          }
+        </div>
       </div>
     </div>
   );

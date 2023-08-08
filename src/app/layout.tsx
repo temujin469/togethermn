@@ -1,5 +1,4 @@
 import '@/styles/global.css'
-import "moment/locale/mn"
 import ModalProvider from '@/providers/ModalProvider'
 import QueryProvider from '@/providers/QueryClientProvider'
 import { Toaster } from '@/components/ui/toaster'
@@ -7,6 +6,7 @@ import getQueryClient from '@/utils/getQueryClient'
 import getAttributes from '@/utils/fetch/getAttributes'
 import { Hydrate, dehydrate } from '@tanstack/react-query'
 import getProfessions from '@/utils/fetch/getProfessions'
+
 
 export const metadata = {
   title: 'Together',

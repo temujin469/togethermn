@@ -9,10 +9,11 @@ import useAuth from '@/hooks/useAuth';
 import Image from 'next/image';
 import { useToast } from '@/components/ui/use-toast';
 import usePostAJobModal from '@/hooks/usePostAJobModal';
+import { useUser } from '@/hooks/useUser';
 
 
 function LeftLinks() {
-  const { isAuth } = useAuth();
+  const {isAuth,user} = useUser()
   // const {token,user} = useUser()
   const registerModal = useRegisterModal()
   const postAJobModal = usePostAJobModal()
@@ -45,12 +46,17 @@ function LeftLinks() {
       {
         isAuth && (
           <>
-            {/* <Link href="/dashboard" className='hover:bg-secondary h-[75px] font-semibold text-[16px] transition-all hover:text-white px-3 items-center hidden md:flex lg:flex'>
-              
-            </Link> */}
-            <Link href="/my-jobs" className='hover:bg-secondary h-[75px] font-semibold text-[16px] transition-all hover:text-white px-3 items-center hidden md:flex lg:flex'>
-              Миний ажилууд
-            </Link>
+            {
+              user?.profileType === "talent" ? (
+                <Link href="/my-jobs" className='hover:bg-secondary h-[75px] font-semibold text-[16px] transition-all hover:text-white px-3 items-center hidden md:flex lg:flex'>
+                  Миний ажилууд
+                </Link>
+              ) : user?.profileType === "employer" ? (
+                  <Link href="/dashboard" className='hover:bg-secondary h-[75px] font-semibold text-[16px] transition-all hover:text-white px-3 items-center hidden md:flex lg:flex'>
+                    Миний ажилууд
+                  </Link>
+              ) : null
+            }
           </>
         )
       }

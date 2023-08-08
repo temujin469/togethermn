@@ -137,6 +137,14 @@
       "relation": "manyToMany",
       "target": "plugin::users-permissions.user",
       "inversedBy": "appliedJobs"
+    },
+    "bookedDate": {
+      "type": "string",
+      "required": false
+    },
+    "invitedDate": {
+      "type": "string",
+      "required": false
     }
   }
 }

@@ -61,7 +61,7 @@ function Step4() {
       }
     },
     onSuccess: () => {
-      router.push("/my-jobs");
+      router.push("/dashboard");
       toast({
         title: "Хүсэлт амжилттай",
         description: "Та шинээр ажил нэмэлээ",

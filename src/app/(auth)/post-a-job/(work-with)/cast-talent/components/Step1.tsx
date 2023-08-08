@@ -16,9 +16,11 @@ import FileInput from '../../components/FileInput';
 import Tip1 from '../../components/tip/Tip1';
 import MultipleSelect from '@/components/ui/MultipleSelect';
 import ReactQuill from 'react-quill';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import getAttributes from '@/utils/fetch/getAttributes';
+import { PhotoProvider, PhotoView } from 'react-photo-view';
+import 'react-photo-view/dist/react-photo-view.css';
 
 
 const jobShema = z.object({
@@ -33,35 +35,104 @@ const jobShema = z.object({
 
 function Step1() {
 
-  const {data} = useQuery({queryKey:["attributes"], queryFn:getAttributes})
+  const params = useSearchParams()
+  const update = params.get("update");
+
+  const { data } = useQuery({ queryKey: ["attributes"], queryFn: getAttributes })
   const attributes = data?.attributes;
 
 
   const { nextStep, job, setJob } = usePostJob()
   const router = useRouter()
 
+
+
+  console.log(job)
+
   const [isAdditionalMaterial, setIsAdditionalMaterial] = useState(job?.isAdditionalMaterial);
 
-  useEffect(()=>{
+  useEffect(() => {
     form.resetField("additionalMaterial");
-  },[isAdditionalMaterial])
+    if(Boolean(update) && !job){
+      router.back();
+    }
+    if(Boolean(update)){
+      form.setValue("files", undefined)
+    }
+  }, [isAdditionalMaterial,job])
 
   const form = useForm<z.infer<typeof jobShema>>({
     resolver: zodResolver(jobShema),
     defaultValues: {
       locations: [],
       files: job?.files as any | [],
-      shootDate:job?.castTalent?.shootDate,
+      shootDate: job?.castTalent?.shootDate,
       requiredDate: job?.castTalent?.requiredDate,
       ...job
     }
   })
 
-  const handleSubmit = ({title,description,files,requiredDate,shootDate,locations,additionalMaterial}: z.infer<typeof jobShema>) => {
+  const handleSubmit = ({ title, description, files, requiredDate, shootDate, locations, additionalMaterial }: z.infer<typeof jobShema>) => {
     // console.log(values)
 
-    setJob({...job, castTalent: { ...job?.castTalent,shootDate, requiredDate},title,description,files,additionalMaterial,isAdditionalMaterial,locations})
+    setJob({ ...job, castTalent: { ...job?.castTalent, shootDate, requiredDate }, title, description, files, additionalMaterial, isAdditionalMaterial, locations })
     nextStep()
+  }
+
+
+  let filesField;
+
+  if (Boolean(update)) {
+    
+    let docs, images;
+
+    const updateJob:ResponseJob = job as any;
+
+    if (updateJob?.files?.data) {
+      images = updateJob.files.data.filter((file) => file.attributes.ext === ".jpg")
+      docs = updateJob.files.data.filter((file) => file.attributes.ext === ".docx")
+    }
+
+    filesField = updateJob?.files?.data?.length ? (
+      <div>
+        <p className='text-lg font-semibold mb-3'>
+          Хавсралтууд</p>
+        {
+          docs?.map((file) => (
+            <div key={file.id} className='mb-4'>
+              <a className='text-blue-500 hover:underline' href={file.attributes.url}>{file.attributes.name}</a>
+            </div>
+          ))
+        }
+        <PhotoProvider>
+          <div className='grid grid-cols-2 gap-4'>
+            {
+              images?.map((file) => (
+                <PhotoView src={file.attributes.url}>
+                  <img key={file.id} src={file.attributes.url} alt={file.attributes.name} className='rounded-md w-full object-contain' />
+                </PhotoView>
+              ))
+            }
+          </div>
+        </PhotoProvider>
+      </div>
+    ) : null
+  } else {
+    filesField = (
+      <FormField
+        control={form.control}
+        name="files"
+        render={({ field }) => (
+          <FormItem>
+            <Label>Зөв өргөдөл гаргагчдыг олж авахад тань туслахын тулд гэрэл зураг эсвэл лавлах медиа нэмнэ үү!</Label>
+            <FormControl>
+              <FileInput onChange={(file) => field.onChange(file)} files={field.value as File[]} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+    )
   }
 
 
@@ -104,19 +175,9 @@ function Step1() {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="files"
-              render={({ field }) => (
-                <FormItem>
-                  <Label>Зөв өргөдөл гаргагчдыг олж авахад тань туслахын тулд гэрэл зураг эсвэл лавлах медиа нэмнэ үү!</Label>
-                  <FormControl>
-                    <FileInput onChange={field.onChange} files={field.value as File[]}/>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            {/* conditionaly render */}
+            {filesField}
+
             <div className='flex w-full gap-5'>
               <FormField
                 control={form.control}
@@ -162,7 +223,7 @@ function Step1() {
                 <FormItem>
                   <Label>Байршил</Label>
                   <FormControl>
-                    <MultipleSelect value={field.value} values={attributes?.locations.map((location)=>location.value)} onChange={(val)=>field.onChange(val as any)} />
+                    <MultipleSelect value={field.value} values={attributes?.locations.map((location) => location.value)} onChange={(val) => field.onChange(val as any)} />
                   </FormControl>
                   <FormDescription>
                     Шаардлагатай бол та олон байршлыг сонгож болно</FormDescription>
@@ -173,7 +234,7 @@ function Step1() {
 
 
             <RadioGroup
-              onValueChange={(val)=>setIsAdditionalMaterial(val === "true")}
+              onValueChange={(val) => setIsAdditionalMaterial(val === "true")}
               defaultValue={String(isAdditionalMaterial)}
             >
               <Label>
@@ -213,7 +274,7 @@ function Step1() {
               )
             }
             <div className='flex justify-end gap-4 pt-10'>
-              <Button type="button" variant="ghost" size="lg" onClick={()=>router.back()}>Буцах</Button>
+              <Button type="button" variant="ghost" size="lg" onClick={() => router.back()}>Буцах</Button>
               <Button type='submit' className='' variant="secondary" size="lg">
                 Үргэлжлүүлэх
               </Button>
@@ -222,7 +283,7 @@ function Step1() {
         </Form>
       </Box>
       {/* tip1 for step1 */}
-      <Tip1/>
+      <Tip1 />
     </div>
   );
 }

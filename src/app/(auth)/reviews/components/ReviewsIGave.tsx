@@ -5,10 +5,15 @@ import { useQuery } from '@tanstack/react-query';
 import qs from "qs"
 import { myApi } from '@/utils/axios';
 import { useUser } from '@/hooks/useUser';
-import { Pagination, Rating } from '@mui/material';
+import { Avatar, Pagination, Rating } from '@mui/material';
 import moment from 'moment';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { DialogClose } from '@radix-ui/react-dialog';
+
+import DeleteReviewModal from '@/components/modal/review/DeleteReviewModal';
+import Link from 'next/link';
+import "moment/locale/mn"
+import EmptyStatus from '@/components/element/EmptyStatus';
+import { Skeleton } from '@/components/ui/skeleton';
+moment().locale('mn')
 
 
 function ReviewsIGave() {
@@ -20,11 +25,21 @@ function ReviewsIGave() {
   const query = qs.stringify({
     // fields: ["id"],
     filters: {
-      user:user?.id
+      user: user?.id
     },
     populate: {
       recieved: {
-        fields: ["username", "firstname"]
+        fields: ["username", "firstname", "profile"],
+        populate: {
+          profile: {
+            fields: ["id", "profileImage"],
+            populate: {
+              profileImage: {
+                fields: ["url"]
+              }
+            }
+          }
+        },
       },
       user: {
         fields: ["username", "firstname"]
@@ -44,7 +59,7 @@ function ReviewsIGave() {
 
 
   const { data, isError, isLoading } = useQuery<any>({
-    queryKey: ["reviewsIGave", query, paginationQuery,user],
+    queryKey: ["reviewsIGave", query, paginationQuery, user],
     queryFn: async () => {
       const res = await myApi.get(`/api/reviews?${query}&${paginationQuery}`);
       return res.data;
@@ -55,7 +70,18 @@ function ReviewsIGave() {
   const reviewsIGave = data?.data;
   const pagination = data?.meta.pagination;
 
-  console.log(reviewsIGave)
+  // console.log(reviewsIGave)
+
+
+  if (isLoading) return (
+    <div>
+      <Skeleton className='h-[222px] sm:h-[112px] w-full mb-4' />
+      <Skeleton className='h-[222px] sm:h-[112px] w-full mb-4' />
+      <Skeleton className='h-[222px] sm:h-[112px] w-full mb-4' />
+    </div>
+  )
+
+  if (!isLoading && !Boolean(reviewsIGave?.length)) return <EmptyStatus />
 
   return (
     <div>
@@ -63,45 +89,29 @@ function ReviewsIGave() {
         reviewsIGave?.map(({ attributes, id }: any) => (
           <div key={id} className='flex bg-white sm:items-center p-4 sm:p-8 rounded-lg flex-col gap-5 sm:flex-row justify-between pb-5 mb-5 border-b-2'>
             <div>
-              <div className='flex items-center gap-2 mb-2'>
-                <h2 className='font-medium text-lg'>{attributes.user.data.attributes.username}</h2>
-                -
-                <h2 className='font-medium text-lg'>{attributes.recieved.data.attributes.username}</h2>
-              </div>
+
+              <Link href={`/talent/${attributes.recieved.data?.attributes.profile?.data.id}`}
+                className='flex gap-2 mb-3 items-center'>
+                <Avatar sx={{ width: 56, height: 56 }} src={attributes.recieved.data?.attributes.profile?.data.attributes.profileImage?.data?.attributes.url} />
+                <div>
+                  <h2 className='font-medium text-lg'>{attributes.recieved.data?.attributes.username}</h2>
+                  <p className='text-gray-500'>{moment(attributes.createdAt).format('ll')}</p>
+                </div>
+              </Link>
               <div className='flex mb-4 gap-3'>
                 <Rating value={attributes.rate} readOnly />
-                <p >{moment(attributes.createdAt).format('ll')}</p>
               </div>
               <div className='text-gray-600'>{attributes.description}</div>
             </div>
-            <div className='flex gap-4'>
-              <Button className='flex-[1] sm:flex-[0]'>
+            {/* <div className='flex gap-4'> */}
+            {/* <Button className='flex-[1] sm:flex-[0]'>
                 Засах
-              </Button>
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button variant="destructive" className='flex-[1] sm:flex-[0]' >
-                    Устгах
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-[425px]">
-                  <DialogHeader>
-                    <DialogTitle>Устгах</DialogTitle>
-                    <DialogDescription>
-                      Та энэ ажлыг устгахдаа итгэлтэй байна уу?
-                    </DialogDescription>
-                  </DialogHeader>
-                  <DialogFooter>
-                    <div className='flex gap-2 justify-end'>
-                      <DialogClose>
-                        <Button type="submit" variant="ghost">Үгүй</Button>
-                      </DialogClose>
-                      <Button type="submit" variant="destructive">Тийм</Button>
-                    </div>
-                  </DialogFooter>
-                </DialogContent>
-              </Dialog>
+              </Button> */}
+            <div>
+              <DeleteReviewModal reviewId={id} />
             </div>
+
+            {/* </div> */}
           </div>
         ))
       }

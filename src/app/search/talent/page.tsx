@@ -9,8 +9,8 @@ async function SearchTalent() {
     <div>
       <FilterHeader/>
       <Container className='md:px-10 xl:px-16 my-5 max-w-[1600px]'>
-        <div className='md:grid grid-cols-12 gap-5 relative'>
-          <div className='col-span-5 xl:col-span-4  md:sticky top-[135px] md:h-[calc(100vh-115px)] overflow-y-scroll'>
+        <div className='md:grid grid-cols-12 gap-10 relative'>
+          <div className='col-span-5 xl:col-span-4  md:sticky top-[135px] md:h-[calc(100vh-115px)]'>
             <FilterTalent  />
           </div>
           <div className='xl:col-span-8 col-span-7'>

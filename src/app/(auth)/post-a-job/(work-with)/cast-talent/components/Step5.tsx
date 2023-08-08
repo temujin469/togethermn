@@ -27,7 +27,7 @@ function Step5() {
     mutationKey: ["job"],
     mutationFn: async () => {
       if (update) {
-        const res = await myApi.put(`/api/azhils/${update}`, { data: { ...job, user: user?.id, status: "хүлээгдэж байгаа" } }, {
+        const res = await myApi.put(`/api/azhils/${update}`, { data: { ...job, user: user?.id,files:undefined, status: "хүлээгдэж байгаа" } }, {
           headers: {
             Authorization: "Bearer " + token
           }
@@ -61,7 +61,7 @@ function Step5() {
       }
     },
     onSuccess: () => {
-      router.push("/my-jobs");
+      router.push("/dashboard");
       toast({
         title: "Хүсэлт амжилттай",
         description: "Та шинээр ажил нэмэлээ",

@@ -79,9 +79,8 @@ function UploadPhotos({ profileId }: { profileId?: number }) {
     handleUpdate()
   };
   return (
-    <div>
-
-      <div onClick={() => ref.current?.click()} className='w-full rounded-md bg-gray-100 cursor-pointer h-[185px] border-2 border-dashed flex items-center justify-center'>
+    <div className='h-[250px]'>
+      <div onClick={() => ref.current?.click()} className='w-full rounded-md bg-gray-100 cursor-pointer h-full border-2 border-dashed flex items-center justify-center'>
         {
           updateMutation.isLoading ? (
             <div className='absolute w-full flex justify-center items-center h-full'>

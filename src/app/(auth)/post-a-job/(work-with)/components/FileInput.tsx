@@ -4,15 +4,16 @@ import React, { useRef, useState } from "react";
 
 
 const FileInput = ({files,onChange}:{
-  files:File[],
-  onChange:(files:File[])=>void
+  files?:File[],
+  onChange:(files?:File[])=>void
 }) => {
   const ref = useRef<HTMLInputElement>(null);
+
 
   const [error,setError] = useState<string | undefined>()
 
   const removeFile = (name:string)=>{
-    const removedFile = files.filter(file=>file.name !== name)
+    const removedFile = files?.filter(file=>file.name !== name)
     onChange(removedFile)
   }
 
@@ -28,11 +29,13 @@ const FileInput = ({files,onChange}:{
 
       Array.from(e.currentTarget.files!).forEach(file => {
         if (file.size > maxAllowedSize) {
-          return setError("Файл бүрийн хамгийн их хэмжээ 1ГБ")
+          return setError("Файл бүрийн хамгийн их хэмжээ 5MБ")
         }
         setError(undefined)
         const selectedfile = file;
-        onChange([...files,selectedfile])
+        console.log(file)
+
+        onChange(files ? [...files,selectedfile] : [selectedfile])
       });
       
     }

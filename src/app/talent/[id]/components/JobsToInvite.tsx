@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react';
-import {  useQuery} from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import qs from "qs"
 import { myApi } from '@/utils/axios';
 import { useUser } from '@/hooks/useUser';
@@ -19,7 +19,7 @@ type JobItemProps = {
   onChange: (jobId: number) => void
 }
 
-const JobItem = ({job, isInvitedTalent, isSelected, jobId, onChange }: JobItemProps) => {
+const JobItem = ({ job, isInvitedTalent, isSelected, jobId, onChange }: JobItemProps) => {
 
   const active = "border-secondary";
 
@@ -29,7 +29,7 @@ const JobItem = ({job, isInvitedTalent, isSelected, jobId, onChange }: JobItemPr
 
   const handleClick = () => {
     // if (!isInvitedTalent) {
-      onChange(jobId)
+    onChange(jobId)
     // }
   }
 
@@ -98,9 +98,19 @@ function JobsToInvite({ onChange, jobId: selectedJobId }: { onChange: (jobId: nu
 
   const query = qs.stringify({
     filters: {
-      isPublished: {
-        $eq: true
-      },
+      $and: [
+        {
+          status: {
+            $eqi: "батлагдсан"
+          },
+        },
+        {
+          isClosed: {
+            $eq: false
+          },
+        }
+      ],
+
       user: user?.id
     },
     populate: {

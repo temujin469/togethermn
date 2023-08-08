@@ -64,7 +64,7 @@ function Step4() {
         variant: "success",
         title: "Хүсэлт амжилттай"
       })
-      router.push("/search/work");
+      router.push("/dashboard");
     },
     onError: () => {
       toast({

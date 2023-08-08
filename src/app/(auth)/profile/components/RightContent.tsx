@@ -3,7 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Clapperboard, Shirt, Star, UserSquare2 } from 'lucide-react';
 import Videos from './Videos';
 import Reviews from './Reviews';
-import Portfolio from './Portfolio';
+import Portfolio from './portfolio/Portfolio';
 import Bio from './Bio';
 import Features from './Features';
 import { GanttChartSquare } from 'lucide-react';

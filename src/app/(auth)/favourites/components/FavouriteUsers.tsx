@@ -1,4 +1,6 @@
 "use client"
+import EmptyStatus from '@/components/element/EmptyStatus';
+import BlurImage from '@/components/ui/BlurImage';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Toggle } from '@/components/ui/toggle';
 import { useToast } from '@/components/ui/use-toast';
@@ -14,27 +16,26 @@ import { NumericFormat } from 'react-number-format';
 
 const TalentCard = ({ profile, id, username, onRemove }: { profile?: Profile, id: number, username: string, onRemove:()=>void }) => (
   
-  <Link href={`/talent/${id}`}>
     <div className='w-full bg-white max-w-[360px] rounded-lg overflow-hidden shadow hover:shadow-lg cursor-pointer'>
-      <div className='h-[170px] md:h-[220px] lg:h-[200px] xl:h-[240px] w-full relative'>
-        <img
-          src={Boolean(profile?.profileImage?.data) ? profile?.profileImage?.data?.attributes.url : "/images/no-user.jpg"}
+      <div className='aspect-square relative'>
+        <BlurImage
+          src={Boolean(profile?.profileImage?.data) ? profile?.profileImage?.data?.attributes.url! : "/images/no-user.jpg"}
           alt={username}
-          className="h-full w-full object-cover"
+          fill
+          className="object-cover"
         />
         <Toggle className='absolute top-2 right-2 group z-10' onClick={onRemove}>
           <HeartOff size={18} strokeWidth={3} className='text-white group-hover:text-red-500' />
         </Toggle>
       </div>
-      <div className='p-4 lg:p-5'>
+      <Link href={`/talent/${id}`} className='p-4 lg:p-5'>
         <h4 className='text-lg font-semibold'>{username}</h4>
         <Rating value={4} readOnly />
         <div className='flex gap-1 items-center text-gray-500'><p>{profile?.location}</p></div>
-        <div className='flex gap-1 items-center text-gray-700'><p>{profile?.professions?.slice(0,2).join(", ")}</p></div>
+        <div className='gap-1 text-ellipsis whitespace-nowrap overflow-hidden text-gray-700'>{profile?.professions?.join(", ")}</div>
         <div className='flex gap-1 items-center text-gray-700'><p><NumericFormat thousandSeparator value={profile?.instagramFollowers} /></p></div>
-      </div>
+      </Link>
     </div>
-  </Link>
 )
 
 function FavouriteUsers() {
@@ -107,6 +108,7 @@ function FavouriteUsers() {
     onSuccess: () => {
       queryClient.invalidateQueries(["me"])
       queryClient.invalidateQueries(["profile"])
+      queryClient.invalidateQueries(["favouritesCount"])
     },
     onError: () => {
       toast({
@@ -118,7 +120,9 @@ function FavouriteUsers() {
   })
 
   const handleFavourite = (favId:number) => {
-    favouriteMutation.mutate(favId);
+    if(favId){
+      favouriteMutation.mutate(favId);
+    }
   }
 
   if (isLoading && !Boolean(myFavourites?.length)) return (
@@ -129,12 +133,7 @@ function FavouriteUsers() {
     </div>
   )
 
-  if (!isLoading && !Boolean(myFavourites?.length)) return (
-    <div className='flex select-none text-gray-300 flex-col items-center justify-center'>
-      <Scroll size={80} />
-      <p className='font-medium'>Хоосон байна</p>
-    </div>
-  )
+  if (!isLoading && !Boolean(myFavourites?.length)) return <EmptyStatus/>
 
   return (
     <div className='shadow p-5 bg-white'>

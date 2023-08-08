@@ -1,18 +1,19 @@
-import { H3 } from '@/components/ui/Typography/Heading';
 import React from 'react';
-import MyJobs from './components/MyJobs';
-import Header from '@/components/header';
+import SubHeader from '@/components/header/SubHeader';
+import { ArrowLeft } from 'lucide-react';
+import JobTab from './components/JobTab';
 
-function page() {
+function Dashboard() {
   return (
-    <div className='mt-[75px]'>
-      <Header/>
-      <div className='max-w-[1000px] px-4 mx-auto'>
-        <H3 className='py-10'>Хяналтын самбар</H3>
-        <MyJobs />
-      </div>
-    </div>
+    <>
+      <SubHeader left={<div className='flex gap-2 items-center'>
+        <ArrowLeft />
+        <p>Миний ажилууд</p>
+      </div>} />
+      <JobTab />
+    </>
   );
 }
 
-export default page;
+export default Dashboard;
+

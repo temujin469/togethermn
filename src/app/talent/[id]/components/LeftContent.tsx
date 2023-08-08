@@ -10,7 +10,6 @@ import { myApi } from '@/utils/axios';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Heart } from 'lucide-react';
 import { BadgeCheck, Instagram, MapPin, UserCircle2 } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 import QueryString from 'qs';
 import React from 'react';
@@ -76,35 +75,37 @@ function LeftContent({ profileId }: { profileId: number }) {
 
   const myFavourites = me?.data?.favourites;
 
-  const isFavourite = myFavourites?.find((my: any) => my.favourite.id === profile?.user.data.id)
+  const isExist = myFavourites?.find((my: any) => my?.favourite.id === profile?.user.data.id)
 
   const favouriteMutation = useMutation({
     mutationFn: async () => {
-      if (Boolean(isFavourite)) {
-        const res = await myApi.delete(`/api/favourites/${isFavourite?.id}`, {
-          headers: {
-            Authorization: "Bearer " + token
-          }
-        })
-        return res.data;
-      } else {
-
-        const res = await myApi.post(`/api/favourites`, {
-          data: {
-            user: user?.id,
-            favourite: profile?.user.data.id
-          }
-        }, {
-          headers: {
-            Authorization: "Bearer " + token
-          }
-        })
-        return res.data;
-      }
+      
+        if (Boolean(isExist)) {
+          const res = await myApi.delete(`/api/favourites/${isExist?.id}`, {
+            headers: {
+              Authorization: "Bearer " + token
+            }
+          })
+          return res.data;
+        } else {
+          const res = await myApi.post(`/api/favourites`, {
+            data: {
+              user: user?.id,
+              favourite: profile?.user.data.id
+            }
+          }, {
+            headers: {
+              Authorization: "Bearer " + token
+            }
+          })
+          return res.data;
+        }
+      
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["me"])
       queryClient.invalidateQueries(["profile"])
+      queryClient.invalidateQueries(["favouritesCount"])
     },
     onError: () => {
       toast({
@@ -116,7 +117,9 @@ function LeftContent({ profileId }: { profileId: number }) {
   })
 
   const handleFavourite = () => {
-    favouriteMutation.mutate();
+    if (myFavourites && profile?.user && user?.id) {
+      favouriteMutation.mutate();
+    }
   }
 
   return (
@@ -130,7 +133,7 @@ function LeftContent({ profileId }: { profileId: number }) {
           {
 
             !isMyProfile && (
-              Boolean(isFavourite) ? <Toggle className='absolute top-2 right-2' onClick={handleFavourite}>
+              Boolean(isExist) ? <Toggle className='absolute top-2 right-2' onClick={handleFavourite}>
                 <Heart size={18} strokeWidth={3} className=' text-red-500' />
               </Toggle> : <Toggle className='absolute top-2 right-2' onClick={handleFavourite}>
                 <Heart size={18} className=' text-white' />

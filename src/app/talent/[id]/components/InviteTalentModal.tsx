@@ -5,10 +5,9 @@ import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import { useUser } from '@/hooks/useUser';
 import { myApi } from '@/utils/axios';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, useMediaQuery, useTheme } from '@mui/material';
 import JobsToInvite from './JobsToInvite';
-import QueryString from 'qs';
 
 
 function InviteTalentModal({ talentId }: { talentId?: number }) {
@@ -28,29 +27,12 @@ function InviteTalentModal({ talentId }: { talentId?: number }) {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const query = QueryString.stringify({
-    fields: ["invitedJobs"],
-    populate: {
-      invitedJobs: {
-        fields: ["id"]
-      }
-    }
-  })
-
-  const { data: talent,isLoading } = useQuery<User>({
-    queryKey: ["user"],
-    queryFn: async () => {
-      const res = await myApi.get(`/api/users/${talentId}?${query}`);
-      return res.data;
-    }
-  })
-
-  console.log(talent)
-
   const inviteMutation = useMutation({
     mutationFn: async () => {
-      const res = await myApi.put(`/api/users/${talentId}`,
-        { invitedJobs: talent?.invitedJobs.length ? [...talent?.invitedJobs, jobId] : [jobId] },
+
+      const date = new Date().toJSON()
+      const res = await myApi.put(`/api/azhils/${jobId}`,
+        { data: { invitedUser: talentId, invitedDate: date } },
         {
           headers: {
             Authorization: "Bearer " + token
@@ -105,9 +87,10 @@ function InviteTalentModal({ talentId }: { talentId?: number }) {
         <DialogActions className='p-4'>
           <CircularProgress size={25} hidden={!inviteMutation.isLoading} className='mr-5' />
           <Button variant="ghost" disabled={inviteMutation.isLoading} onClick={handleClose}>Болих</Button>
-          <Button variant="secondary" disabled={inviteMutation.isLoading || Boolean(!jobId) || isLoading} onClick={handleSubmit}>Урих</Button>
+          <Button variant="secondary" disabled={inviteMutation.isLoading || Boolean(!jobId)} onClick={handleSubmit}>Урих</Button>
         </DialogActions>
       </Dialog>
+      {/* <Modal */}
     </div>
   );
 }

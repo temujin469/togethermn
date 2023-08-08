@@ -39,7 +39,7 @@
     "featured_talents": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "plugin::users-permissions.user"
+      "target": "api::talent.talent"
     }
   }
 }
