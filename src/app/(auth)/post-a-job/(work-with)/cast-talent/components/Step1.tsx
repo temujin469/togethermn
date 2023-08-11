@@ -47,7 +47,7 @@ function Step1() {
 
 
 
-  console.log(job)
+  // console.log(job)
 
   const [isAdditionalMaterial, setIsAdditionalMaterial] = useState(job?.isAdditionalMaterial);
 
@@ -189,7 +189,7 @@ function Step1() {
                       <Input type="text" {...field} />
                     </FormControl>
                     <FormDescription>
-                      Хэрэв та тодорхой огноог мэдэхгүй бол ойролцоо тоо эсвэл TBC нэмнэ үү</FormDescription>
+                      Хэрэв та тодорхой огноог мэдэхгүй бол ойролцоо тоо нэмнэ үү</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -213,7 +213,7 @@ function Step1() {
               <h1 className='text-xl font-semibold'>
                 Та хаанаас өргөдөл хүлээн авахыг хүсч байна вэ?</h1>
               <p className='text-gray-500 font-normal mb-4'>
-                Ажил горилогчид дэлхийн аль улс орнуудаас ажилд орохыг хүсч байгаагаа сонгоорой</p>
+                Ажил горилогчид хаанаас ажилд орохыг хүсч байгааг сонгоорой</p>
             </div>
 
             <FormField
@@ -238,13 +238,13 @@ function Step1() {
               defaultValue={String(isAdditionalMaterial)}
             >
               <Label>
-                Авьяас өргөдөл гаргахдаа нэмэлт материал өгөх ёстой юу?</Label>
+                Мэргэжилтэн өргөдөл гаргахдаа нэмэлт материал өгөх ёстой юу?</Label>
               <div className='md:flex gap-10'>
                 <FormItem>
                   <FormControl>
                     <RadioGroupItem value="false" />
                   </FormControl>
-                  <FormLabel className='font-normal pl-2'>Үгүй ээ, дээрх багц одоогоор хангалттай</FormLabel>
+                  <FormLabel className='font-normal pl-2'>Үгүй ээ, дээрх материал одоогоор хангалттай</FormLabel>
                   <FormMessage />
                 </FormItem>
                 <FormItem>
@@ -263,7 +263,7 @@ function Step1() {
                   name="additionalMaterial"
                   render={({ field }) => (
                     <FormItem>
-                      <Label>Өргөдөл гаргагч бүрээс танд хэрэгтэй тодорхой зураг эсвэл видео бичлэгийг тайлбарлана уу</Label>
+                      <Label>Өргөдөл гаргагчаас танд хэрэгтэй тодорхой зураг эсвэл видео бичлэгийг тайлбарлана уу</Label>
                       <FormControl>
                         <Textarea {...field} />
                       </FormControl>

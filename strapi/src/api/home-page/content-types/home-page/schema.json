@@ -40,6 +40,17 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::talent.talent"
+    },
+    "user_comments": {
+      "displayName": "үйлчлүүлэгчидийн сэтгэгдэл",
+      "type": "component",
+      "repeatable": true,
+      "component": "home-page.jlchl-legchidijn-setgegdel"
+    },
+    "featured_articles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::article.article"
     }
   }
 }

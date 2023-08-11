@@ -13,6 +13,7 @@ type Props = {
   description?: string
   trigger?: React.ReactNode
   fullWidth?: boolean
+  fullScreen?:boolean
   maxWidth?: false | Breakpoint
   children?: React.ReactNode
   closeBtnTitle?: string;
@@ -34,6 +35,7 @@ export default function Modal({ fullWidth = true, maxWidth = "sm", ...props }: P
         maxWidth={maxWidth}
         fullWidth={fullWidth}
         onClose={props.onClose}
+        fullScreen={props.fullScreen}
       >
         {
           props.title && (
@@ -42,7 +44,14 @@ export default function Modal({ fullWidth = true, maxWidth = "sm", ...props }: P
             </DialogTitle>
           )
         }
-        <DialogContent>
+        <DialogContent 
+        sx={{
+          paddingX:"15px",
+          // md:{
+          //   paddingX:"30px",
+          // },
+        }}
+        >
           <Backdrop
             sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.modal + 1 }}
             open={props.isLoading === true}

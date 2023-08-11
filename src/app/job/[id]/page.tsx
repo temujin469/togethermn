@@ -1,6 +1,6 @@
 "use client"
 import SubHeader from '@/components/header/SubHeader';
-import { H2 } from '@/components/ui/Typography/Heading';
+import { H2, H4 } from '@/components/ui/Typography/Heading';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { ArrowLeft } from 'lucide-react';
@@ -8,8 +8,8 @@ import { useRouter } from 'next/navigation';
 import React from 'react';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import { NumericFormat } from 'react-number-format';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+
+
 import 'react-photo-view/dist/react-photo-view.css';
 import { useUser } from '@/hooks/useUser';
 import GetAppliedModal from './components/GetAppliedModal';
@@ -51,14 +51,17 @@ function page({ params }: Props) {
 
       <H2>{job?.title}</H2>
       <p className='text-gray-600 font-semibold'>Зар нийтэлсэн огноо: {moment(job?.createdAt).format('ll')}</p>
-      <p className='text-lg font-semibold mb-2'>{job?.profession}</p>
-      <p className='text-lg font-semibold'>Ажлын дэлгэрэнгүй мэдээлэл</p>
+      <H4 className='mb-4'>{job?.profession}</H4>
+      <H4 className='text-lg font-semibold mb-4'>Ажлын дэлгэрэнгүй мэдээлэл</H4>
       <div className='mb-5'>
-        <ReactQuill readOnly modules={{ toolbar: null }} value={job?.description} />
-        {/* <div dangerouslySetInnerHTML={{ __html: job?.description as string | TrustedHTML }}/> */}
+        {/* <ReactQuill readOnly modules={{ toolbar: null }} value={job?.description} /> */}
+        <div className='prose prose-sm sm:prose-lg' dangerouslySetInnerHTML={{ __html: job?.description as string | TrustedHTML }}/>
       </div>
-      <p className='text-lg font-semibold'>
-        Хамгийн тохиромжтой нэр дэвшигч</p>
+      {
+        !job?.creativeProduction && <p className='text-lg font-semibold'>
+          Хамгийн тохиромжтой нэр дэвшигч</p>
+      }
+   
       {job?.influencer && <p className='mb-5'>{job.influencer.descTypeOfInfluencer}</p>}
       {job?.contentCreator && <p className='mb-5'>{job.contentCreator.descTypeOfCreator}</p>}
       {job?.castTalent && <p className='mb-5'>{job.castTalent.descTypeOfTalent}</p>}
@@ -187,79 +190,52 @@ function page({ params }: Props) {
                 </TableBody>
               </Table>
             </div>
-
-            <p className='text-lg font-semibold'>Provide quote for</p>
-            <p>Video for Instagram - 2</p>
-            <p className='mb-5'>Video for tiktok - 2</p>
             <div className='shadow rounded p-5 mb-5'>
-              <Table>
-                <TableCaption>дэлгэрэнгүй</TableCaption>
-                <TableBody>
-                  <TableRow>
-                    <TableCell className="font-medium">Огноо</TableCell>
-                    <TableCell>{ }</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">Өргөдөл гаргагчдад нээлттэй</TableCell>
-                    <TableCell>Paid</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">Үргэлжлэх хугацаа</TableCell>
-                    <TableCell>Paid</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">Төсөв</TableCell>
-                    <TableCell>{job?.budget}</TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
+                  <Table>
+                    <TableBody>
+                      {/* <TableRow>
+                        <TableCell className="font-medium">Огноо</TableCell>
+                        <TableCell>Батлагдсан байх ёстой</TableCell>
+                      </TableRow> */}
+                      <TableRow>
+                        <TableCell className="font-medium">Өргөдөл гаргагчдад нээлттэй</TableCell>
+                        <TableCell>{job.locations.join(",\n")}</TableCell>
+                      </TableRow>
+                      {/* <TableRow>
+                        <TableCell className="font-medium">Үргэлжлэх хугацаа</TableCell>
+                        <TableCell>Батлагдсан байх ёстой</TableCell>
+                      </TableRow> */}
+                      <TableRow>
+                        <TableCell className="font-medium">Төсөв</TableCell>
+                        <TableCell>{job?.budget}</TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
             </div>
           </>
         ) : job?.creativeProduction ? (
           <>
             <div className='shadow rounded p-5 mb-5'>
-              <Table>
-                {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Нас</TableHead>
-                    <TableHead>Хүйс</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  <TableRow>
-                    <TableCell>{job?.minAge} - {job?.maxAge}</TableCell>
-                    <TableCell>{job?.gender}</TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
-            </div>
-
-            <p className='text-lg font-semibold'>Provide quote for</p>
-            <p>Video for Instagram - 2</p>
-            <p className='mb-5'>Video for tiktok - 2</p>
-            <div className='shadow rounded p-5 mb-5'>
-              <Table>
-                <TableCaption>дэлгэрэнгүй</TableCaption>
-                <TableBody>
-                  <TableRow>
-                    <TableCell className="font-medium">Огноо</TableCell>
-                    <TableCell>{ }</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">Өргөдөл гаргагчдад нээлттэй</TableCell>
-                    <TableCell>Paid</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">Үргэлжлэх хугацаа</TableCell>
-                    <TableCell>Paid</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">Төсөв</TableCell>
-                    <TableCell>{job?.budget}</TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
+                    <Table>
+                      <TableBody>
+                        {/* <TableRow>
+                          <TableCell className="font-medium">Огноо</TableCell>
+                          <TableCell>{job.creativeProduction.requiredDate}</TableCell>
+                        </TableRow> */}
+                        <TableRow>
+                          <TableCell className="font-medium">Өргөдөл гаргагчдад нээлттэй</TableCell>
+                          <TableCell>{job.locations.join(",\n")}</TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell className="font-medium">Шаардлагатай хугацаа</TableCell>
+                          <TableCell>{job.creativeProduction.requiredDate}</TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell className="font-medium">Төсөв</TableCell>
+                          <TableCell>{job?.budget}</TableCell>
+                        </TableRow>
+                      </TableBody>
+                    </Table>
             </div>
           </>
         ) : null
@@ -330,7 +306,7 @@ function page({ params }: Props) {
         }
         <div className='text-right mt-[30px]'>
           {
-            !isCreatedByMe && !isLoading && job?.isClosed !== true && (
+            !isCreatedByMe && !isLoading && job?.isClosed !== true && user?.profileType !== "employer" && (
               isAppliedByMe ? (
                 <Button variant="secondary" className='cursor-not-allowed' disabled size="lg">
                   Хүсэлт илгээгдсэн

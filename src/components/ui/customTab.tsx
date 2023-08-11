@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils';
 import { Tab } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
@@ -5,10 +6,11 @@ interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
   value: number;
+  className?:string
 }
 
 export function CustomTabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
+  const { children, value,className, index, ...other } = props;
 
   return (
     <div
@@ -19,7 +21,7 @@ export function CustomTabPanel(props: TabPanelProps) {
       {...other}
     >
       {value === index && (
-        <div className='max-w-[1000px] px-4 mx-auto py-10'>
+        <div className={cn('max-w-[1000px] px-4 mx-auto py-10',className)}>
           {children}
         </div>
       )}

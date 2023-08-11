@@ -9,6 +9,7 @@ import Headsets from '@/components/home/Headsets'
 import HowItWork from '@/components/home/HowItWork'
 import Testimonial from '@/components/home/Testimonial'
 import Video from '@/components/home/Video';
+import NewsSection from '@/components/home/newsSection'
 import useGetHomeContent from '@/hooks/useGetHomeContent'
 import getQueryClient from '@/utils/getQueryClient'
 import { Hydrate, dehydrate } from '@tanstack/react-query'
@@ -33,6 +34,7 @@ export default async function Home() {
       <AreYouReady />
       <BestRated />
       <Testimonial />
+      <NewsSection/>
       <Footer />
       </div>
     </Hydrate>

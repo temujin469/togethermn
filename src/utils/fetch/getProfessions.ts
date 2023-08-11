@@ -13,6 +13,6 @@ export default async function getProfessions(): Promise<
 
     return data.data;
   } catch (err) {
-    console.log(err);
+    console.log("err===>",err);
   }
 }

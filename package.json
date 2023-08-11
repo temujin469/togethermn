@@ -6,14 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "codegen": "graphql-codegen --config codegen.ts"
+    "lint": "next lint"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@hookform/resolvers": "^3.1.1",
     "@mui/material": "^5.14.1",
+    "@mui/x-data-grid": "^6.11.0",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-checkbox": "^1.0.4",
     "@radix-ui/react-collapsible": "^1.0.3",
@@ -28,6 +28,7 @@
     "@radix-ui/react-tabs": "^1.0.4",
     "@radix-ui/react-toast": "^1.1.4",
     "@radix-ui/react-toggle": "^1.0.3",
+    "@tailwindcss/typography": "^0.5.9",
     "@tanstack/react-query": "^4.29.19",
     "@types/node": "20.3.3",
     "@types/react": "18.2.14",
@@ -39,9 +40,9 @@
     "clsx": "^1.2.1",
     "cmdk": "^0.2.0",
     "framer-motion": "^10.12.18",
-    "graphql-request": "^6.1.0",
     "i": "^0.3.7",
     "lucide-react": "^0.258.0",
+    "marked": "^7.0.2",
     "moment": "^2.29.4",
     "next": "13.4.7",
     "npm": "^9.8.1",
@@ -66,9 +67,6 @@
     "zustand": "^4.3.8"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "4.0.1",
-    "@graphql-codegen/client-preset": "^4.0.1",
-    "@graphql-codegen/introspection": "4.0.0",
     "@types/draft-js": "^0.11.12",
     "@types/qs": "^6.9.7",
     "@types/react-modal-video": "^1.2.0",

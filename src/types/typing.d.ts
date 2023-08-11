@@ -219,6 +219,9 @@ interface UserResponse extends User {
     id: number;
     rate: number;
   }[];
+  messages: {
+    id: number;
+  }[];
 }
 
 type Talent = {
@@ -370,6 +373,16 @@ type ContentsResponse = {
         attributes: Profile;
       }[];
     };
+    user_comments: {
+      text: string;
+      username: string;
+    }[];
+    featured_articles:{
+      data:{
+        id:number;
+        attributes:ArticleResponseData["attributes"]
+      }[]
+    }
   };
 };
 
@@ -396,3 +409,88 @@ type Favourites = {
   }[];
   meta: Meta;
 };
+
+type ReviewBody = {
+  description: string;
+  recieved: number;
+  rate: number;
+  user: number;
+  job: number;
+};
+
+interface ReviewsResponse {
+  data: {
+    attributes: {
+      description: string;
+      rate: number;
+      recieved: {
+        data: {
+          attributes: User;
+          id: number;
+        };
+      };
+      user: {
+        data: {
+          attributes: User;
+          id: number;
+        };
+      };
+      job: {
+        data: {
+          attributes: Job;
+          id: number;
+        };
+      };
+    };
+    id: number;
+  }[];
+  meta: Meta;
+}
+
+type MessageResponseData = {
+  id: number;
+  attributes: {
+    createdAt: string;
+    updatedAt: string;
+    user: {
+      data?: {
+        id: number;
+        attributes: UserResponse;
+      };
+    };
+    recievedUser: {
+      data?: {
+        id: number;
+        attributes: UserResponse;
+      };
+    };
+    body: string;
+    title: string;
+    key: number[];
+  };
+};
+
+type ArticleResponseData = {
+  id: number;
+  attributes: {
+    image: {
+      data: {
+        id: number;
+        attributes: {
+          url: string;
+        };
+      };
+    };
+    content: string;
+    title: string;
+    date: string;
+    categories: any;
+  };
+};
+
+type ArticleCategoryData = {
+  id:number;
+  attributes:{
+    name:string
+  }
+}

@@ -11,6 +11,7 @@ import { AxiosResponse } from 'axios';
 import { Rating, useMediaQuery, useTheme } from '@mui/material';
 import BlurImage from '@/components/ui/BlurImage';
 import useGetTalentRate from '@/hooks/talent/useGetTalentRate';
+import EmptyStatus from '@/components/element/EmptyStatus';
 
 
 const TalentCard = ({ attributes, id, firstname }: { attributes: Profile, id: number, firstname: string }) =>{
@@ -138,11 +139,15 @@ function FilteredTalents() {
 
 
   const talents = data?.data;
+  const pagination = data?.meta.pagination
+
 
   console.log("talents", talents)
 
+  if (talents && !talents.length) return <div className='sm:shadow sm:p-5'>
+    <EmptyStatus message='Мэргэжилтэн олдсонүй' />
+  </div>
 
-  const pagination = data?.meta.pagination
   return (
     <div className='sm:shadow sm:p-5'>
       <div className='grid grid-cols-2 md:grid-cols-2 xl:grid-cols-3 sm:gap-5 gap-3'>

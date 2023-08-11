@@ -2,49 +2,56 @@
 import React from 'react';
 // import swiper react components
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css';
 import { slider } from '@/utils/data';
+import useGetHomeContent from '@/hooks/useGetHomeContent';
 // import data
 
 const TestimonialSlider = () => {
+
+  const {data} = useGetHomeContent();
+  const userComments = data?.attributes.user_comments;
   return (
     <Swiper
-      breakpoints={{
-        320: {
-          slidesPerView: 1,
-          spaceBetween: 18,
-        },
-        768: {
-          slidesPerView: 2,
-          spaceBetween: 20,
-        },
-        1200: {
-          slidesPerView: 3,
-          spaceBetween: 30,
-        },
-      }}
+      // breakpoints={{
+      //   320: {
+      //     slidesPerView: 1,
+      //     spaceBetween: 18,
+      //   },
+      //   768: {
+      //     slidesPerView: 2,
+      //     spaceBetween: 20,
+      //   },
+      //   1200: {
+      //     slidesPerView: 3,
+      //     spaceBetween: 30,
+      //   },
+      // }}
+      slidesPerView={1}
+      modules={[Navigation, Pagination, Scrollbar, A11y]}
       autoplay={true}
       pagination={{ clickable: true }}
+      navigation={true}
+      className='lg:px-5 max-w-[800px]'
     >
-      {slider.map((slide, index) => {
+      {userComments?.map((comment, index) => {
         // destructure slide
-        const { message, image, name } = slide;
         return (
           <SwiperSlide
-            className='rounded-lg flex flex-col justify-between p-4 lg:p-6 h-[240px] border-2 border-color1'
+            className='flex justify-center md:px-20 px-2 sm:px-5 pb-10'
             key={index}
           >
-            <p className='lg:text-[15px]'>{message}</p>
-            <div className='flex gap-x-4 flex-row items-center'>
-              <div className='w-14 border-2 border-color1 rounded-full p-[2px]'>
-                <img src={image} alt={name} />
-              </div>
+            <div className='text-center mx-auto relative p-4 lg:p-6 h-[240px] shadow-lg'>
+              <p className='text-xl lg:text-xl mb-5'>{comment.text}</p>
               <div>
-                <div className='font-medium text-base'>{name}</div>
+                <p className='text-gray-500 text-center text-lg'>{comment.username}</p>
               </div>
             </div>
+            
           </SwiperSlide>
         );
       })}

@@ -170,7 +170,7 @@ function BookedTalent() {
                 {/* <Button className='flex-[1]' onClick={() => handleRemove(id)}>
                   Устгах
                 </Button> */}
-                <AddReviewModal talentId={talentId}/>
+                <AddReviewModal jobId={id} talentId={talentId} profileId={attributes.bookedBy.data.attributes.profile.data.id}/>
               </div>
             </div>
           )

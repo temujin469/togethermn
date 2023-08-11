@@ -133,6 +133,9 @@
       "relation": "manyToMany",
       "target": "api::azhil.azhil",
       "mappedBy": "appliedUsers"
+    },
+    "rate": {
+      "type": "integer"
     }
   }
 }

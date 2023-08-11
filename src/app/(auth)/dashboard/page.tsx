@@ -8,7 +8,7 @@ function Dashboard() {
     <>
       <SubHeader left={<div className='flex gap-2 items-center'>
         <ArrowLeft />
-        <p>Миний ажилууд</p>
+        <p>Миний ажлууд</p>
       </div>} />
       <JobTab />
     </>

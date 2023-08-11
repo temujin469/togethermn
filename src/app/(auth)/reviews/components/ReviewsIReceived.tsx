@@ -6,10 +6,11 @@ import qs from "qs"
 import { myApi } from '@/utils/axios';
 import { useUser } from '@/hooks/useUser';
 import Link from 'next/link';
-import { Pagination, Rating  } from '@mui/material';
+import { Pagination, Rating } from '@mui/material';
 import moment from 'moment';
 import EmptyStatus from '@/components/element/EmptyStatus';
 import { Skeleton } from '@/components/ui/skeleton';
+import useGetReviews from '@/hooks/review/useGetReviews';
 moment().locale('mn')
 
 
@@ -21,25 +22,39 @@ function ReviewsIReceived() {
 
   const [page, setPage] = useState(1);
 
+  // filters: {
+  //   $and: [
+  //     {
+  //       recieved: talentId
+  //     },
+  //     {
+  //       job: {
+  //         $ne: jobId
+  //       }
+  //     }
+  //   ]
+  // },
+  // populate: {
+  //   job: {
+  //     fields: ["id"]
+  //   }
+  // },
+
   const query = qs.stringify({
     filters: {
       recieved: user?.id
     },
     populate: {
-     
-      user:{
-        fields:["username","firstname"]
-      }
-    }
-
-  }, { encodeValuesOnly: true });
-
-  const paginationQuery = qs.stringify({
+      user: {
+        fields: ["username", "firstname"]
+      },
+    },
     pagination: {
       page: page,
       pageSize: 5
     }
-  }, { encodeValuesOnly: true })
+  }, { encodeValuesOnly: true });
+
 
 
   // console.log(filter)
@@ -47,19 +62,12 @@ function ReviewsIReceived() {
     setPage(1);
   }, [query])
 
-  const { data, isError, isLoading } = useQuery<any>({
-    queryKey: ["reviewsRecieved", query, paginationQuery, user],
-    queryFn: async () => {
-      const res = await myApi.get(`/api/reviews?${query}&${paginationQuery}`);
-      return res.data;
-    }
-  });
-
+  const { data, isError, isLoading } = useGetReviews({ variables: { query } })
 
   const reviews = data?.data;
   const pagination = data?.meta.pagination;
 
-  // console.log("recieved",reviews)
+  console.log("recieved", reviews)
 
 
   if (isLoading) return (
@@ -75,7 +83,7 @@ function ReviewsIReceived() {
 
   return (
     <div>
-    
+
       {
         reviews?.map(({ attributes, id }: any) => (
           <div key={id} className='flex bg-white p-4 sm:p-8 rounded-lg flex-col pb-5 mb-5 border-b-2'>

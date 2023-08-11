@@ -16,23 +16,23 @@ import getMyFavouritesCount from '@/utils/fetch/getMyFavouritesCount';
 
 const SidebarMenu = () => {
   const { data: professions } = useQuery({ queryKey: ["professions"], queryFn: getProfessions })
-  
+
   const { onOpen } = useRegisterModal();
   const createProfileModal = useCreateProfileModal()
-  const {logout ,user,token} = useUser();
+  const { logout, user, token } = useUser();
 
   const router = useRouter();
   const { setFilter } = useSearchTalent()
-  const handleClick = (profession:string) => {
-    setFilter({ profession})
+  const handleClick = (profession: string) => {
+    setFilter({ profession })
     router.push('/search/talent')
     router.refresh()
   }
 
 
   const favouritesCount = useQuery({
-    queryKey: ["favouritesCount","me", token],
-    queryFn:()=>getMyFavouritesCount(token!)
+    queryKey: ["favouritesCount", "me", token],
+    queryFn: () => getMyFavouritesCount(token!)
   });
 
 
@@ -46,9 +46,9 @@ const SidebarMenu = () => {
             <AccordionContent>
               {
                 professions?.map(pro => (
-                    <div onClick={()=>handleClick(pro.attributes.name)} key={pro.id} className='p-1 py-2 block'>
-                      {pro.attributes.name}
-                    </div>
+                  <div onClick={() => handleClick(pro.attributes.name)} key={pro.id} className='p-1 py-2 block'>
+                    {pro.attributes.name}
+                  </div>
                 ))
               }
             </AccordionContent>
@@ -58,11 +58,21 @@ const SidebarMenu = () => {
 
       <div className='mt-5 flex flex-col gap-5'>
         <Link href="/search/work" className='font-medium text-[16px]'>Ажил олох</Link>
-        <Separator/>
+        <Separator />
+        <Link href="/news" className='font-medium text-[16px]'>Мэдээ мэдээлэл</Link>
+
         {
           user ? (
             <>
-              <Link href="/my-jobs" className='font-medium text-[16px]'>Миний ажилууд</Link>
+
+              {
+                user?.profileType === "talent" ? (
+                  <Link href="/my-jobs" className='font-medium text-[16px]'>Миний ажлууд</Link>
+                  
+                ) : user?.profileType === "employer" ? (
+                    <Link href="/dashboard" className='font-medium text-[16px]'>Миний ажлууд</Link>
+                ) : null
+              }
               <Link href="/favourites" className='font-medium text-[16px] flex gap-2 items-center'>
                 Миний дуртай
                 {
@@ -71,14 +81,15 @@ const SidebarMenu = () => {
                   )
                 }
               </Link>
+              <Link href="/messages" className='font-medium text-[16px]'>Зурвас</Link>
               <Link href="/account" className='font-medium text-[16px]'>Бүртгэлийн тохиргоо</Link>
               {
                 user?.profileType === "talent" && (
-                      user?.isCreatedProfile ? (
-                        <Link href="/profile" className='font-medium text-[16px]'>Профайл</Link>
-                      ) : (
-                        <div onClick={createProfileModal.onOpen} className='font-medium text-[16px]'>Профайл</div>
-                      )
+                  user?.isCreatedProfile ? (
+                    <Link href="/profile" className='font-medium text-[16px]'>Профайл</Link>
+                  ) : (
+                    <div onClick={createProfileModal.onOpen} className='font-medium text-[16px]'>Профайл</div>
+                  )
                 )
               }
               <Link href="/reviews" className='font-medium text-[16px]'>Тойм</Link>

@@ -12,6 +12,7 @@ import { useUser } from '@/hooks/useUser';
 import { useToast } from '@/components/ui/use-toast';
 import { useRouter, useSearchParams } from 'next/navigation';
 import ReactQuill from 'react-quill';
+import { H3, H4 } from '@/components/ui/Typography/Heading';
 
 
 function Step4() {
@@ -90,20 +91,25 @@ function Step4() {
         }
         <div className='space-y-6'>
           <div>
-            <h1 className='text-xl font-semibold mb-3'>
+            <H3 className='mb-3'>
               Урьдчилан үзэх
-            </h1>
+            </H3>
             <p className='text-gray-500 font-normal mb-4'>
               Та орхисон бүх зүйлээ эргэн харж, тааруулж болно. Та бүх зүйлд сэтгэл хангалуун болсны дараа "Илгээх" товчийг дарна уу!
             </p>
           </div>
-          <h1 className='text-lg font-semibold'>
+          <H4 className='text-lg font-semibold'>
             {job?.title}
-          </h1>
+          </H4>
           <div>
-            <Label>
-              Ажлын дэлгэрэнгүй мэдээлэл</Label>
-            <ReactQuill value={job?.description} modules={{ toolbar: null }} readOnly />
+            {/* <Label>
+              Ажлын дэлгэрэнгүй мэдээлэл</Label> */}
+            {/* <ReactQuill value={job?.description} modules={{ toolbar: null }} readOnly /> */}
+            <div className=' sm:p-4'>
+              <div className='prose prose-sm sm:prose-lg ' dangerouslySetInnerHTML={{ __html: job?.description! }} />
+            </div>
+
+
           </div>
           {
             job?.isAdditionalMaterial && (

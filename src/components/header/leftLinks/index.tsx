@@ -13,22 +13,26 @@ import { useUser } from '@/hooks/useUser';
 
 
 function LeftLinks() {
-  const {isAuth,user} = useUser()
+  const { isAuth, user } = useUser()
   // const {token,user} = useUser()
   const registerModal = useRegisterModal()
   const postAJobModal = usePostAJobModal()
-  const {toast} = useToast()
+  const { toast } = useToast()
+  const router = useRouter()
 
-  const handleCLick = () => {
-    if (isAuth) {
+  const protectedRoute = (route: string) => {
+    if (isAuth && route === "/post-a-job") {
       return postAJobModal.onOpen()
+    }
+    if (isAuth) {
+      return router.push(route)
     }
     toast({
       title: "Cистемд нэвтрэх шаардлагатай",
       variant: "default",
     });
     registerModal.onOpen()
-    registerModal.setAfterUrl("/post-a-job");
+    registerModal.setAfterUrl(route);
   }
   // console.log(afterUrl)
   return (
@@ -36,34 +40,57 @@ function LeftLinks() {
       <Link href="/" className="flex items-center pl-6">
         <Image src="/logo.png" alt='logo' className="object-contain" height={60} width={60} />
       </Link>
-      <Button variant="secondary" className="md:text-[16px] text-[14px] px-3" onClick={handleCLick}>
-        Ажил байршуулах
-      </Button>
-      <Link href="/search/work" className='hidden sm:flex  hover:bg-secondary transition-all text-[16px] font-semibold hover:text-white px-3 items-center h-[75px]' >
-        Ажил хайх
+      {
+        user?.profileType === "employer" ? (
+          <>
+            <Button variant="secondary" className="md:text-[16px] whitespace-nowrap text-[14px] px-3" onClick={() => protectedRoute("/post-a-job")}>
+              Ажил байршуулах
+            </Button>
+            <Link href="/search/work" className='hidden sm:flex  hover:bg-secondary transition-all text-[16px] font-semibold hover:text-white px-3 items-center h-[75px]' >
+              Ажил хайх
+            </Link>
+          </>
+
+
+        ) : user?.profileType === "talent" ? (
+
+          <Link href="/search/work" >
+            <Button variant="secondary" className="md:text-[16px] whitespace-nowrap text-[14px] px-3">
+              Ажил хайх
+            </Button>
+          </Link>
+        ) : null
+      }
+
+
+      <MegaLinks />
+      <Link href="/news" className="hover:bg-secondary h-[75px] font-semibold text-[16px] transition-all hover:text-white px-3 items-center hidden sm:flex">
+        Мэдээ
       </Link>
-      <MegaLinks/>
       {
         isAuth && (
           <>
             {
               user?.profileType === "talent" ? (
-                <Link href="/my-jobs" className='hover:bg-secondary h-[75px] font-semibold text-[16px] transition-all hover:text-white px-3 items-center hidden md:flex lg:flex'>
-                  Миний ажилууд
+                <Link href="/my-jobs" className='hover:bg-secondary h-[75px] font-semibold text-[16px] transition-all hover:text-white px-3 items-center hidden xl:flex'>
+                  Миний ажлууд
                 </Link>
               ) : user?.profileType === "employer" ? (
-                  <Link href="/dashboard" className='hover:bg-secondary h-[75px] font-semibold text-[16px] transition-all hover:text-white px-3 items-center hidden md:flex lg:flex'>
-                    Миний ажилууд
-                  </Link>
+                <Link href="/dashboard" className='hover:bg-secondary h-[75px] font-semibold text-[16px] transition-all hover:text-white px-3 items-center hidden  xl:flex'>
+                  Миний ажлууд
+                </Link>
               ) : null
             }
           </>
         )
       }
 
-      <Link href="#" className="hover:bg-secondary h-[75px] font-semibold text-[16px] transition-all hover:text-white px-3 items-center hidden 2xl:flex">
-        Ашиглах заавар
-      </Link>
+
+      <a onClick={() => protectedRoute("/messages")} className='hover:bg-secondary h-[75px] font-semibold text-[16px] transition-all hover:text-white px-3 items-center hidden lg:flex'>
+        Зурвас
+      </a>
+
+
       {/* <Link href="#">
         <p className="hover:bg-secondary h-[75px] font-semibold text-[16px] transition-all hover:text-white px-3 items-center hidden 2xl:flex">Мэдээ мэдээлэл</p>
       </Link> */}

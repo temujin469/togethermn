@@ -31,21 +31,17 @@ const useGetAppliedJobs = createQuery<Response, Variables>({
             },
           },
         },
-      },
-      { encodeValuesOnly: true }
-    );
-
-    const paginationQuery = QueryString.stringify(
-      {
         pagination: {
           page: variables.page,
           pageSize: 5,
         },
+        sort: ["createdAt:desc"],
       },
       { encodeValuesOnly: true }
     );
 
-    const res = await myApi.get(`${primaryKey}?${query}&${paginationQuery}`, {
+
+    const res = await myApi.get(`${primaryKey}?${query}`, {
       headers: {
         Authorization: "Bearer " + variables.token,
       },

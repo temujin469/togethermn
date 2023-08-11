@@ -18,6 +18,8 @@ import MultipleSelect from '@/components/ui/MultipleSelect';
 import ReactQuill from 'react-quill';
 import { useQuery } from '@tanstack/react-query';
 import getAttributes from '@/utils/fetch/getAttributes';
+import { PhotoProvider, PhotoView } from 'react-photo-view';
+import { useSearchParams } from 'next/navigation';
 
 const jobShema = z.object({
   title: z.string(),
@@ -53,6 +55,67 @@ function Step1() {
     setJob({...job, title, description, files, additionalMaterial, isAdditionalMaterial, locations })
     nextStep()
   }
+
+
+  const params = useSearchParams()
+  const update = params.get("update");
+
+
+  let filesField;
+
+  if (Boolean(update)) {
+
+    let docs, images;
+
+    const updateJob: ResponseJob = job as any;
+
+    if (updateJob?.files?.data) {
+      images = updateJob.files.data.filter((file) => file.attributes.ext === ".jpg")
+      docs = updateJob.files.data.filter((file) => file.attributes.ext === ".docx")
+    }
+
+    filesField = updateJob?.files?.data?.length ? (
+      <div>
+        <p className='text-lg font-semibold mb-3'>
+          Хавсралтууд</p>
+        {
+          docs?.map((file) => (
+            <div key={file.id} className='mb-4'>
+              <a className='text-blue-500 hover:underline' href={file.attributes.url}>{file.attributes.name}</a>
+            </div>
+          ))
+        }
+        <PhotoProvider>
+          <div className='grid grid-cols-2 gap-4'>
+            {
+              images?.map((file) => (
+                <PhotoView src={file.attributes.url}>
+                  <img key={file.id} src={file.attributes.url} alt={file.attributes.name} className='rounded-md w-full object-contain' />
+                </PhotoView>
+              ))
+            }
+          </div>
+        </PhotoProvider>
+      </div>
+    ) : null
+  } else {
+    filesField = (
+      <FormField
+        control={form.control}
+        name="files"
+        render={({ field }) => (
+          <FormItem>
+            <Label>Зөв өргөдөл гаргагчдыг олж авахад тань туслахын тулд гэрэл зураг эсвэл лавлах медиа нэмнэ үү!</Label>
+            <FormControl>
+              <FileInput onChange={(file) => field.onChange(file)} files={field.value as File[]} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+    )
+  }
+
 
 
   return (
@@ -94,25 +157,13 @@ function Step1() {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="files"
-              render={({ field }) => (
-                <FormItem>
-                  <Label>Зөв өргөдөл гаргагчдыг олж авахад тань туслахын тулд гэрэл зураг эсвэл лавлах медиа нэмнэ үү!</Label>
-                  <FormControl>
-                    <FileInput onChange={field.onChange} files={field.value as File[]} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            {filesField}
 
             <div>
               <h1 className='text-xl font-semibold'>
                 Та хаанаас өргөдөл хүлээн авахыг хүсч байна вэ?</h1>
               <p className='text-gray-500 font-normal mb-4'>
-                Ажил горилогчид дэлхийн аль улс орнуудаас ажилд орохыг хүсч байгаагаа сонгоорой</p>
+                Ажил горилогчид хаанаас ажилд орохыг хүсч байгааг сонгоорой</p>
             </div>
 
             <FormField
@@ -137,13 +188,13 @@ function Step1() {
               defaultValue={String(isAdditionalMaterial)}
             >
               <Label>
-                Авьяас өргөдөл гаргахдаа нэмэлт материал өгөх ёстой юу?</Label>
+                Мэргэжилтэн өргөдөл гаргахдаа нэмэлт материал өгөх ёстой юу?</Label>
               <div className='md:flex gap-10'>
                 <FormItem>
                   <FormControl>
                     <RadioGroupItem value="false" />
                   </FormControl>
-                  <FormLabel className='font-normal pl-2'>Үгүй ээ, дээрх багц одоогоор хангалттай</FormLabel>
+                  <FormLabel className='font-normal pl-2'>Үгүй ээ, дээрх материал одоогоор хангалттай</FormLabel>
                   <FormMessage />
                 </FormItem>
                 <FormItem>
@@ -162,7 +213,7 @@ function Step1() {
                   name="additionalMaterial"
                   render={({ field }) => (
                     <FormItem>
-                      <Label>Өргөдөл гаргагч бүрээс танд хэрэгтэй тодорхой зураг эсвэл видео бичлэгийг тайлбарлана уу</Label>
+                      <Label>Өргөдөл гаргагчаас танд хэрэгтэй тодорхой зураг эсвэл видео бичлэгийг тайлбарлана уу</Label>
                       <FormControl>
                         <Textarea {...field} />
                       </FormControl>

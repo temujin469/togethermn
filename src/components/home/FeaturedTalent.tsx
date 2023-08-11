@@ -2,7 +2,6 @@
 // import { talents } from '@/utils/data';
 import React  from 'react';
 import Link from 'next/link';
-import { NumericFormat } from 'react-number-format';
 import { Rating, useMediaQuery, useTheme } from '@mui/material';
 import BlurImage from '@/components/ui/BlurImage';
 import useGetHomeContent from '@/hooks/useGetHomeContent';

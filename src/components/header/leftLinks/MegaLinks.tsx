@@ -41,7 +41,7 @@ function MegaLinks() {
   const contentCreators = professions?.filter(pro => pro.attributes.category === "content-creator")
 
   return (
-    <div className="group hidden lg:flex ">
+    <div className="group hidden md:flex ">
       <Link href="/search/talent">
         <p className="flex items-center font-semibold hover:bg-secondary transition-all text-[16px] px-3 h-[75px]">
           Мэргэжилтэн олох <ChevronDown size={28} strokeWidth={3} className="group-hover:rotate-180 px-1 py-1 text-[28px] transition-all duration-300" />
@@ -50,7 +50,7 @@ function MegaLinks() {
       {/* mega menu */}
       <div className="group-hover:opacity-100 group-hover:block bg-primary transition-all duration-300 absolute w-[100%] left-0 hidden opacity-0  z-[-50] top-[70px] md:top-[75px]">
         <div className="bg-primary p-5 flex">
-          <div className="flex border-r-2 border-color3 p-5 flex-col w-[256px] rounded-[20px] mr-5">
+          <div className="hidden border-r-2 border-color3 lg:flex p-5 flex-col w-[256px] rounded-[20px] mr-5">
               <Link href={"#"} className='mb-4 font-[600] text-[24px]'>
                 <p>Мэргэжилтэн</p>
               </Link>

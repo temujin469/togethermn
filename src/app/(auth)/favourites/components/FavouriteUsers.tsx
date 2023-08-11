@@ -28,12 +28,14 @@ const TalentCard = ({ profile, id, username, onRemove }: { profile?: Profile, id
           <HeartOff size={18} strokeWidth={3} className='text-white group-hover:text-red-500' />
         </Toggle>
       </div>
-      <Link href={`/talent/${id}`} className='p-4 lg:p-5'>
+      <Link href={`/talent/${id}`} >
+      <div className='p-4 lg:p-5 overflow-hidden'>
         <h4 className='text-lg font-semibold'>{username}</h4>
         <Rating value={4} readOnly />
         <div className='flex gap-1 items-center text-gray-500'><p>{profile?.location}</p></div>
-        <div className='gap-1 text-ellipsis whitespace-nowrap overflow-hidden text-gray-700'>{profile?.professions?.join(", ")}</div>
-        <div className='flex gap-1 items-center text-gray-700'><p><NumericFormat thousandSeparator value={profile?.instagramFollowers} /></p></div>
+        <div className=' text-ellipsis whitespace-nowrap  overflow-hidden text-gray-700'>{profile?.professions?.join(", ")}</div>
+        {/* <div className='flex gap-1 items-center text-gray-700'><p><NumericFormat thousandSeparator value={profile?.instagramFollowers} /></p></div> */}
+        </div>
       </Link>
     </div>
 )

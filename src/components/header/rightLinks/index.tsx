@@ -10,6 +10,7 @@ import UserMenu from './UserMenu';
 import { useUser } from '@/hooks/useUser';
 import { useQuery } from '@tanstack/react-query';
 import getMyFavouritesCount from '@/utils/fetch/getMyFavouritesCount';
+import { Tooltip } from '@mui/material';
 
 
 function RightLinks() {
@@ -28,7 +29,7 @@ function RightLinks() {
     <div className="flex h-[70px] md:h-[75px] items-center gap-5"
       data-aos="fade-left"
     >
-      <div className="md:hidden mr-4 flex items-center">
+      <div className="lg:hidden mr-4 flex items-center">
           <Sheet>
             <SheetTrigger><Menu /></SheetTrigger>
             <SheetContent>
@@ -38,7 +39,8 @@ function RightLinks() {
       </div>
       {
         user ? (
-          <div className='hidden md:flex items-center gap-6'>
+          <div className='hidden lg:flex items-center gap-6'>
+            <Tooltip title="Миний дуртай">
             <Link href="/favourites" className='relative'>
               {
                 Boolean(favouritesCount.data) && (
@@ -47,6 +49,7 @@ function RightLinks() {
               }
               <Heart size={20} strokeWidth={2.5} className='hover:text-secondary' />
             </Link>
+            </Tooltip>
             <UserMenu user={user} />
           </div>
         ) : (

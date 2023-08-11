@@ -5,23 +5,27 @@ import TestimonialSlider from './TestimonialSlider';
 
 const Testimonial = () => {
   return (
-    <Container>
+    <div className=' bg-gray-100'>
+      <Container>
 
-    <section className='mb-16'>
-      <div className='xl:container mx-auto'>
-        <div className='bg-bgClr max-h-[500px] py-8 sm:p-12 xl:p-16 rounded-lg'>
-          <div className='text-center'>
-            <H2 data-aos='fade-up'
-              data-aos-offset='200' className="mb-10">Манай үйлчлүүлэгчидийн сэтгэгдэл</H2>
+        <section className='mb-20'>
+          <div className='xl:container mx-auto'>
+            <div className=' max-h-[600px] py-20 sm:m-12 xl:m-16'>
+              <div className='text-center'>
+                <H2 data-aos='fade-up'
+                  data-aos-offset='200' className="mb-10 text-gray-800">Манай үйлчлүүлэгчидийн сэтгэгдэл</H2>
+              </div>
+              {/* slider */}
+              <div data-aos='fade-up'>
+                <TestimonialSlider />
+              </div>
+            </div>
           </div>
-          {/* slider */}
-          <div data-aos='fade-up'>
-            <TestimonialSlider />
-          </div>
-        </div>
-      </div>
-    </section>
-    </Container>
+        </section>
+      </Container>
+    </div>
+
+
   );
 };
 

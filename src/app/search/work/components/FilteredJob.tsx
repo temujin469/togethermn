@@ -7,6 +7,7 @@ import qs from "qs"
 import { Skeleton } from '@/components/ui/skeleton';
 import JobItem from './JobItem';
 import useSearchJob from '@/hooks/useSearchJob';
+import EmptyStatus from '@/components/element/EmptyStatus';
 
 
 
@@ -17,8 +18,8 @@ function FilteredJob() {
 
   const query = qs.stringify({
     filters: {
-      status:{
-        $eqi:"батлагдсан"
+      status: {
+        $eqi: "батлагдсан"
       }
     }
   }, { encodeValuesOnly: true });
@@ -43,12 +44,12 @@ function FilteredJob() {
 
 
   // console.log(filter)
-  useEffect(()=>{
+  useEffect(() => {
     setPage(1);
-  },[query])
+  }, [query])
 
   const { data, isError, isLoading } = useQuery<JobsResponse>({
-    queryKey: ["jobs", query, paginationQuery],
+    queryKey: ["jobs", query, paginationQuery,filterquery],
     queryFn: async () => {
       const res = await myApi.get(`/api/azhils?${query}&${filter && filterquery}&${paginationQuery}`);
       setResult(res.data.meta.pagination.total);
@@ -60,40 +61,42 @@ function FilteredJob() {
   const jobs = data?.data
   const pagination = data?.meta.pagination
 
+
+  if (isLoading) return (
+    <div className='space-y-10'>
+      {
+        Array(3).fill(null).map((_, i) => (
+          <div key={i}>
+            <Skeleton className='h-[50px] mb-3' />
+            <Skeleton className='h-[140px]' />
+          </div>
+        ))
+      }
+    </div>
+  )
+
+
+  if (jobs && !jobs.length) return (
+    <div className='sm:shadow sm:p-5'>
+      <EmptyStatus message='Ажил олдсонүй' />
+    </div>
+  );
+
+
+
   return (
     <div className='shadow p-5 xl:p-10'>
       {
-        isLoading ? (
-          <div className='space-y-10'>
-            {
-              Array(3).fill(null).map((_,i) => (
-                <div key={i}>
-                  <Skeleton className='h-[50px] mb-3' />
-                  <Skeleton className='h-[140px]' />
-                </div>
-              ))
-            }
-          </div>
-        ) : jobs ? (
-          <>
-            {
-              jobs?.map((job) => (
-                <JobItem key={job.id} job={job.attributes} id={job.id} />
-              ))
-            }
-            <div className='flex justify-center mt-10'>
-              <Pagination count={pagination?.pageCount} onChange={(e, val) =>{
-                  setPage(val)
-                  window.scrollTo({top:0,behavior:"smooth"})
-              }} page={page} variant="outlined" shape="rounded" size="medium" />
-            </div>
-          </>
-        ) : (
-          <div>
-            Ажил алга
-          </div>
-        )
+        jobs?.map((job) => (
+          <JobItem key={job.id} job={job.attributes} id={job.id} />
+        ))
       }
+      <div className='flex justify-center mt-10'>
+        <Pagination count={pagination?.pageCount} onChange={(e, val) => {
+          setPage(val)
+          window.scrollTo({ top: 0, behavior: "smooth" })
+        }} page={page} variant="outlined" shape="rounded" size="medium" />
+      </div>
     </div>
 
   );

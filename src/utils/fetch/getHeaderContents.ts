@@ -58,7 +58,7 @@ export default async function getHeaderContents(): Promise<ContentsResponse | un
 
     return data.data;
   } catch (err) {
-    console.log(err);
+    console.log("herrr==>",err);
     throw new Error();
   }
 }

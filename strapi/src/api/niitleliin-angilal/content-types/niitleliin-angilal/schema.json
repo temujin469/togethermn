@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "niitleliin_angilals",
+  "info": {
+    "singularName": "niitleliin-angilal",
+    "pluralName": "niitleliin-angilals",
+    "displayName": "Нийтлэлийн ангилал",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 80
+    }
+  }
+}

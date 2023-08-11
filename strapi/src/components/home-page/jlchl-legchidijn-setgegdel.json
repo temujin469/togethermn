@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_home_page_jlchl_legchidijn_setgegdel",
+  "info": {
+    "displayName": "үйлчлүүлэгчидийн сэтгэгдэл",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "text",
+      "required": true
+    },
+    "username": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

@@ -1,31 +1,52 @@
 // http://localhost:1337/api/home-page?populate=*
 
 import QueryString from "qs";
+import myFetch from "../myFetch";
 
 
 
-// const query = QueryString.stringify(
-//   {
-//     populate:"*"
-//   },
-//   { encodeValuesOnly: true }
-// );
+const query = QueryString.stringify(
+  {
+    populate: {
+      banner_images: {
+        fields: ["url"],
+      },
+      section1_image: {
+        fields: ["url"],
+      },
+      section2_video: {
+        fields: ["url"],
+      },
+      featured_talents: {
+        populate: {
+          profileImage: {
+            fields: ["url"],
+          },
+        },
+      },
+      user_comments: true,
+      featured_articles:{
+        populate:{
+          image:{
+            fields:["url"]
+          }
+        }
+      }
+    },
+  },
+  { encodeValuesOnly: true }
+);
+
+type Response = ContentsResponse
+
 
 export default async function getHomePageContents(): Promise<
-  ContentsResponse | undefined
+  Response| undefined
 > {
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/home-page?populate=*`,
-      {
-        headers: { Accept: "*/*", "Content-Type": "application/json" },
+    const data = await myFetch(`/api/home-page?${query}`,{
+      next:{
+        revalidate:5
       }
-    );
-    const data = await res.json();
-
+    });
     return data.data;
-  } catch (err) {
-    console.log(err);
-    throw new Error();
-  }
 }

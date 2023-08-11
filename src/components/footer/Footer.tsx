@@ -1,9 +1,11 @@
 import React from 'react'
-import { professions } from '../../utils/data'
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
+import getProfessions from '@/utils/fetch/getProfessions'
+import Link from 'next/link'
 
-function Footer() {
+async function Footer() {
+  const professions = await getProfessions()
   return (
     <footer className="text-center bg-primary text-white">
       <div className='my-container'>
@@ -38,21 +40,21 @@ function Footer() {
 
                 <ul className="list-none mb-0">
                   <li>
-                    <a href="#!" className="footer-link">Link 1</a>
+                    <a href="/news" className="footer-link">Мэдээ мэдээлэл</a>
                   </li>
                   <li>
-                    <a href="#!" className="footer-link">Link 2</a>
+                    <a href="/search/work" className="footer-link">Ажил хайх</a>
                   </li>
                   <li>
-                    <a href="#!" className="footer-link">Link 3</a>
+                    <a href="/search/talent" className="footer-link">Мэргэжилтэн олох</a>
                   </li>
                   <li>
-                    <a href="#!" className="footer-link">Link 4</a>
+                    <a href="#!" className="footer-link">Ажил байршуулах</a>
                   </li>
                 </ul>
               </div>
 
-              <div className="flex flex-col items-center mb-6">
+              {/* <div className="flex flex-col items-center mb-6">
                 <h5 className="font-semibold text-white mb-2.5">Мэргэжилтэнүүдэд</h5>
 
                 <ul className="list-none mb-0">
@@ -69,16 +71,16 @@ function Footer() {
                     <a href="#!" className="footer-link">Link 4</a>
                   </li>
                 </ul>
-              </div>
+              </div> */}
 
               <div className="flex flex-col items-center mb-6">
                 <h5 className="font-semibold text-white mb-2.5">Нийтлэг төрлүүд</h5>
 
                 <ul className="list-none mb-0">
                   {
-                    professions.map(pro => (
-                      <li key={pro.slug}>
-                        <a href="#!" className="footer-link">{pro.name}</a>
+                    professions?.slice(0,9).map(({attributes}) => (
+                      <li key={attributes.name}>
+                        <Link href={`/search/talent?pro=${attributes.name}`} className="footer-link">{attributes.name}</Link>
                       </li>
                     ))
                   }
@@ -195,8 +197,8 @@ function Footer() {
 
             <div className='mb-6 px-5'>
               <form>
-                <div className="mx-auto flex flex-col gap-5 sm:flex-row sm:justify-center sm:items-center">
-                  <Input placeholder="Email address" />
+                <div className="mx-auto flex flex-col gap-2 sm:flex-row sm:justify-center sm:items-center">
+                  <Input placeholder="Имэйл хаяг" />
                   <Button variant="secondary">
                     Илгээх
                   </Button>

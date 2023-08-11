@@ -13,6 +13,7 @@ import Link from 'next/link';
 import "moment/locale/mn"
 import EmptyStatus from '@/components/element/EmptyStatus';
 import { Skeleton } from '@/components/ui/skeleton';
+import useGetReviews from '@/hooks/review/useGetReviews';
 moment().locale('mn')
 
 
@@ -43,30 +44,20 @@ function ReviewsIGave() {
       },
       user: {
         fields: ["username", "firstname"]
+      },
+      job: {
+        fields: ["id"]
       }
-    }
 
-  }, { encodeValuesOnly: true });
-
-  const paginationQuery = qs.stringify({
+    },
     pagination: {
       page: page,
       pageSize: 5
     }
-  }, { encodeValuesOnly: true })
 
+  }, { encodeValuesOnly: true });
 
-
-
-  const { data, isError, isLoading } = useQuery<any>({
-    queryKey: ["reviewsIGave", query, paginationQuery, user],
-    queryFn: async () => {
-      const res = await myApi.get(`/api/reviews?${query}&${paginationQuery}`);
-      return res.data;
-    }
-  });
-
-
+  const { data, isError, isLoading } = useGetReviews({variables:{query}})
   const reviewsIGave = data?.data;
   const pagination = data?.meta.pagination;
 

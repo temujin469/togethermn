@@ -32,9 +32,10 @@ function FilterWork() {
     setOpenDrawer(!openDrawer)
   }
 
+
   const handleSearch = () => {
     job.setFilter(filter)
-    console.log(filter)
+    // console.log(filter)
     setOpenDrawer(false)
   }
 

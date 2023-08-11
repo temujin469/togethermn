@@ -5,11 +5,9 @@ import { CustomTabPanel, StyledTab } from '@/components/ui/customTab';
 import AppliedJobs from './tabItems/appliedJobs/AppliedJobs';
 import BookedJobs from './tabItems/bookedJobs/BookedJobs';
 import InvitedJobs from './tabItems/invitedJobs/InvitedJobs';
-import { useUser } from '@/hooks/useUser';
 
 function JobTab() {
   const [value, setValue] = React.useState(0);
-  const { user } = useUser()
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
