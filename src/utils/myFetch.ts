@@ -20,7 +20,8 @@ const myFetch:MyFetch = async (endpoint, config) => {
       `${process.env.NEXT_PUBLIC_STRAPI_URL}${endpoint}`,{...initialConfig,...config}
     );
     if (!response.ok) {
-      throw new Error("Өгөгдлийг дуудаж чадсангүй");
+      // throw new Error("Өгөгдлийг дуудаж чадсангүй");
+      console.log("Өгөгдлийг дуудаж чадсангүй");
     }
     return await response.json();
   } catch (err) {
