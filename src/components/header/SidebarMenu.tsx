@@ -60,6 +60,12 @@ const SidebarMenu = () => {
         <Link href="/search/work" className='font-medium text-[16px]'>Ажил олох</Link>
         <Separator />
         <Link href="/news" className='font-medium text-[16px]'>Мэдээ мэдээлэл</Link>
+        <Link href="/aboutUs" className='font-medium text-[16px]'>
+          Бидний тухай
+        </Link>
+        <Link href="/contactUs" className='font-medium text-[16px]'>
+          Холбоо барих
+        </Link>
 
         {
           user ? (

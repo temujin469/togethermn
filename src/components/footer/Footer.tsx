@@ -21,16 +21,10 @@ async function Footer() {
 
                 <ul className="list-none mb-0">
                   <li>
-                    <a href="#!" className="footer-link">Link 1</a>
+                    <Link href="/aboutUs" className="footer-link">Бидний тухай</Link>
                   </li>
                   <li>
-                    <a href="#!" className="footer-link">Link 2</a>
-                  </li>
-                  <li>
-                    <a href="#!" className="footer-link">Link 3</a>
-                  </li>
-                  <li>
-                    <a href="#!" className="footer-link">Link 4</a>
+                    <a href="./contactUs" className="footer-link">Холбоо барих</a>
                   </li>
                 </ul>
               </div>

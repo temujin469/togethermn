@@ -31,7 +31,7 @@ function Auth({params}:Props) {
         localStorage.setItem("token", JSON.stringify(data.jwt));
         // loginModal.afterUrl && router.push(loginModal.afterUrl);
         // loginModal.onClose()
-      console.log(response.data)
+      // console.log(response.data)
       router.push("/")
     }
 

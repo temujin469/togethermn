@@ -13,6 +13,7 @@ type Props = {
   }
 }
 
+
 async function NewsDetail({params}:Props) {
 
   const newsDetail = await getNewsDetail(params.id)

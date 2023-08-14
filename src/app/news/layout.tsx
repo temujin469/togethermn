@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 function layout({children}:{children:React.ReactNode}) {
   return (
-    <div>
+    <div className="bg-white">
       <Header/>
       <Container>
         <div className='min-h-[calc(100vh-75px)]'>

@@ -68,7 +68,7 @@ function LeftLinks() {
         Мэдээ
       </Link>
       {
-        isAuth && (
+        isAuth ? (
           <>
             {
               user?.profileType === "talent" ? (
@@ -82,11 +82,20 @@ function LeftLinks() {
               ) : null
             }
           </>
+        ) : (
+          <>
+              <Link href="/aboutUs" className='hover:bg-secondary h-[75px] font-semibold text-[16px] transition-all hover:text-white px-3 items-center hidden lg:flex'>
+                Бидний тухай
+              </Link>
+              <Link href="/contactUs" className='hover:bg-secondary h-[75px] font-semibold text-[16px] transition-all hover:text-white px-3 items-center hidden lg:flex'>
+                Холбоо барих
+              </Link>
+          </>
         )
       }
 
 
-      <a onClick={() => protectedRoute("/messages")} className='hover:bg-secondary h-[75px] font-semibold text-[16px] transition-all hover:text-white px-3 items-center hidden lg:flex'>
+      <a onClick={() => protectedRoute("/messages")} className='hover:bg-secondary h-[75px] font-semibold text-[16px] transition-all hover:text-white px-3 items-center hidden 2xl:flex'>
         Зурвас
       </a>
 
