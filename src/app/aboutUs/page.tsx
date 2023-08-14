@@ -2,12 +2,19 @@ import Image from 'next/image';
 import React from 'react';
 import { marked } from 'marked';
 import myFetch from '@/utils/myFetch';
+import { useQuery } from '@tanstack/react-query';
 
 
-async function AboutUs() {
+function AboutUs() {
 
 
-  const aboutUs = await myFetch("/api/about-us?populate=*");
+  // const aboutUs = await myFetch("/api/about-us?populate=*");
+  const {data:aboutUs} = useQuery({
+    queryKey:["about-us"],
+    queryFn:async ()=>{
+      return await myFetch("/api/about-us?populate=*");
+    }
+  });
 
   return (
     <div>
