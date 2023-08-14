@@ -9,7 +9,7 @@ async function CategoriesWidget() {
   return (
     <Widget title='Ангилал'>
 {
-        category?.data.map(category => {
+        category?.data?.map(category => {
           // const isActive = Boolean(catId == category.id);
           return (
             <div>

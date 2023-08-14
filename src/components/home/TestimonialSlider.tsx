@@ -7,14 +7,13 @@ import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css';
-import { slider } from '@/utils/data';
 import useGetHomeContent from '@/hooks/useGetHomeContent';
 // import data
 
 const TestimonialSlider = () => {
 
   const {data} = useGetHomeContent();
-  const userComments = data?.attributes.user_comments;
+  const userComments = data?.attributes?.user_comments;
   return (
     <Swiper
       // breakpoints={{

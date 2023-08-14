@@ -13,9 +13,9 @@ import Image from "next/image";
 async function NewsSection() {
 
 
-  const homeContent = await getHomePageContents()
+  const homeContent = await getHomePageContents();
 
-  const articles = homeContent?.attributes.featured_articles.data
+  const articles = homeContent?.attributes.featured_articles?.data
 
   return (
     <Container>

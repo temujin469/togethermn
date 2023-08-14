@@ -55,7 +55,7 @@ function News() {
     queryFn: () => getNews(query)
   })
 
-  const pagination = allnews?.meta.pagination;
+  const pagination = allnews?.meta?.pagination;
 
   const { data: category } = useGetNewsCategory({ variables: { catId: catId as string } })
 
@@ -73,8 +73,8 @@ function News() {
             <div>
               <Skeleton className='h-[200px]' />
             </div>
-          ) : allnews?.data.length ? (
-            allnews.data.map(news => (
+          ) : allnews?.data?.length ? (
+            allnews.data?.map(news => (
               <div>
                 <Link className='flex mb-5 gap-4' href={`/news/${news.id}`}>
                   <div className='aspect-[1/1] w-full max-w-[200px] relative rounded-md overflow-hidden'>
