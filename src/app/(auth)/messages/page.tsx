@@ -9,8 +9,12 @@ import RecievedMessages from './components/tabs/RecievedMessages';
 import SendMessages from './components/tabs/SendMessages';
 import SubHeader from '@/components/header/SubHeader';
 import TabPanel from './components/TabPanel';
-import SendMessageModal from '@/components/modal/messages/SendMessageModal';
+import dynamic from 'next/dynamic'
 
+const SendMessageModal = dynamic(
+  () => import('@/components/modal/messages/SendMessageModal'),
+  { ssr: false }
+)
 
 
 
