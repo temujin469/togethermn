@@ -9,15 +9,18 @@ import HowItWork from '@/components/home/HowItWork'
 import Testimonial from '@/components/home/Testimonial'
 import Video from '@/components/home/Video';
 import NewsSection from '@/components/home/newsSection'
-import useGetHomeContent from '@/hooks/useGetHomeContent'
+import getHeaderContents from '@/utils/fetch/getHeaderContents'
 import getHomePageContents from '@/utils/fetch/getHomePageContents'
 import getQueryClient from '@/utils/getQueryClient'
 import { Hydrate, dehydrate } from '@tanstack/react-query'
 
 export default async function Home() {
 
+  
   const queryClient = getQueryClient()
-  await queryClient.prefetchQuery(["home-page"],getHomePageContents)
+  await queryClient.prefetchQuery(["headerContents"], getHeaderContents);
+  await queryClient.prefetchQuery(["home-page"],getHomePageContents);
+
 
   const dehydratedState = dehydrate(queryClient)
   return (
