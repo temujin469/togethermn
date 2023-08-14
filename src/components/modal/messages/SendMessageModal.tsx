@@ -10,7 +10,7 @@ import { Autocomplete, TextField, Tooltip, useMediaQuery, useTheme } from '@mui/
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Mail } from 'lucide-react';
 import QueryString from 'qs';
-// import ReactQuill from 'react-quill';
+import ReactQuill from 'react-quill';
 
 // type Props = {
 //   recieveUserId?: number
@@ -209,12 +209,12 @@ function SendMessageModal() {
         />
       </div>
       <div className='min-h-[500px]'>
-        {/* <ReactQuill
-        //  placeholder='Захидал...' 
-        // theme="snow" 
-        //  onChange={(val) => setBodyText(val)} 
-         
-        /> */}
+        <ReactQuill
+         placeholder='Захидал...' 
+         value={bodyText}
+        theme="snow" 
+         onChange={(val) => setBodyText(val)} 
+        />
       </div>
     </Modal>
   );
