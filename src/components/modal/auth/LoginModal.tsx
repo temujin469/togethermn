@@ -134,16 +134,18 @@ function LoginModal() {
     <div className="flex flex-col gap-4 mt-3">
       <hr />
       <div className='flex justify-center'>
-        <a href='http://localhost:1337/api/connect/google'>
+        <a href={`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/connect/google`}>
           <Button variant="ghost"
           // onClick={() => signIn('google')}
           >
             <Image src="/images/google.webp" width={30} height={30} alt='google' />
           </Button>
         </a>
+        <a href={`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/connect/facebook`}>
         <Button variant="ghost">
           <Image src="/images/facebook.png" width={30} height={30} alt='facebook' />
         </Button>
+        </a>
       </div>
 
       <div
