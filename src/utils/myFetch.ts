@@ -7,7 +7,6 @@ type MyFetch = (
 
 const initialConfig: RequestInit = {
   headers: { Accept: "*/*", "Content-Type": "application/json" },
-  cache:"force-cache",
   next:{
     revalidate:3600
   }

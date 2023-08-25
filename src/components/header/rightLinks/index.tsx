@@ -54,14 +54,14 @@ function RightLinks() {
           </div>
         ) : (
           <>
-            <div className="hidden sm:flex">
+            <div className="hidden lg:flex">
               <Link href="#">
                 <p className="hover:bg-color1 transition-all hover:text-white px-3 h-[100%] flex items-center">
                   <HelpCircle size={20} />
                 </p>
               </Link>
             </div>
-            <div className="md:flex hidden h-[100%]">
+            <div className="lg:flex hidden h-[100%]">
               <div className=" flex items-center h-[100%] px-7 bg-secondary  gap-1" onClick={onOpen}>
                 <User size={25} strokeWidth={2} />
                 <p className="m-0 text-[16px] font-semibold">Бүртгүүлэх</p>

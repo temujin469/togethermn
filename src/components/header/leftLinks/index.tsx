@@ -59,8 +59,20 @@ function LeftLinks() {
               Ажил хайх
             </Button>
           </Link>
-        ) : null
+        ) : (
+              <>
+                <Button variant="secondary" className="md:text-[16px] whitespace-nowrap text-[14px] px-3" onClick={() => protectedRoute("/post-a-job")}>
+                  Ажил байршуулах
+                </Button>
+                <Link href="/search/work" className='hidden sm:flex  hover:bg-secondary transition-all text-[16px] font-semibold hover:text-white px-3 items-center h-[75px]' >
+                  Ажил хайх
+                </Link>
+              </>
+
+        )
       }
+
+
 
 
       <MegaLinks />
@@ -84,10 +96,10 @@ function LeftLinks() {
           </>
         ) : (
           <>
-              <Link href="/aboutUs" className='hover:bg-secondary h-[75px] font-semibold text-[16px] transition-all hover:text-white px-3 items-center hidden lg:flex'>
+              <Link href="/aboutUs" className='hover:bg-secondary h-[75px] font-semibold text-[16px] transition-all hover:text-white px-3 items-center hidden xl:flex'>
                 Бидний тухай
               </Link>
-              <Link href="/contactUs" className='hover:bg-secondary h-[75px] font-semibold text-[16px] transition-all hover:text-white px-3 items-center hidden lg:flex'>
+              <Link href="/contactUs" className='hover:bg-secondary h-[75px] font-semibold text-[16px] transition-all hover:text-white px-3 items-center hidden xl:flex'>
                 Холбоо барих
               </Link>
           </>

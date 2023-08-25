@@ -85,7 +85,7 @@ function InviteTalentModal({ talentId }: { talentId?: number }) {
           <JobsToInvite onChange={setJobId} jobId={jobId} />
         </DialogContent>
         <DialogActions className='p-4'>
-          <CircularProgress size={25} hidden={!inviteMutation.isLoading} className='mr-5' />
+          {/* <CircularProgress size={25} hidden={!inviteMutation.isLoading} className='mr-5' /> */}
           <Button variant="ghost" disabled={inviteMutation.isLoading} onClick={handleClose}>Болих</Button>
           <Button variant="secondary" disabled={inviteMutation.isLoading || Boolean(!jobId)} onClick={handleSubmit}>Урих</Button>
         </DialogActions>

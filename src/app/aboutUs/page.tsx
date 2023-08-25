@@ -27,7 +27,7 @@ import EmptyStatus from '@/components/element/EmptyStatus';
             </div>
             {
               aboutUs?.data.attributes.content ? (
-                <article className='prose prose-sm sm:prose-lg xl:prose-xl mx-auto'
+                <article className='prose prose-sm sm:prose xl:prose-lg mx-auto'
                   dangerouslySetInnerHTML={{ __html: marked.parse(aboutUs?.data.attributes.content) }}
                 />
               ) : null
