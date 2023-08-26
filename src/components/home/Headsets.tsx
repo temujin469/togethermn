@@ -19,7 +19,7 @@ const Headsets = () => {
         <H2 data-aos='fade-right' className="mb-6">Танд хэн хэрэгтэй вэ?</H2>
         {/* grid */}
         <div>
-          <div className='grid xl:mx-16 gap-5 sm:gap-8 md:gap-10 lg:gap-8 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4'>
+          <div className='grid gap-5 sm:gap-8 md:gap-10 lg:gap-8 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4'>
             {/* item */}
             {
               data?.slice(0,8).map((pro) => (
@@ -34,7 +34,7 @@ const Headsets = () => {
                   >
                     <Image src={pro.attributes.background_image?.data.attributes.url} alt='' className="object-cover w-full rounded-lg" layout="fill" />
                     <div className='absolute rounded-lg left-0 bottom-0 h-full p-6 w-full flex flex-col justify-between items-center hover:backdrop-blur-sm transition-all duration-200'>
-                      <h4 className='text-white sub-heading mb-2'>{pro.attributes.name}</h4>
+                      <h4 className='text-white text-lg font-[600] mb-2'>{pro.attributes.name}</h4>
                         <Link href="/search/talent">
                           <Button variant="outline" className="text-white">
                             бүгдийг үзэх

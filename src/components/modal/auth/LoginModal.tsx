@@ -17,8 +17,10 @@ import { useToast } from '@/components/ui/use-toast';
 import { Dialog, DialogContent, DialogTitle, useMediaQuery, useTheme } from '@mui/material';
 
 const loginFormSchema = z.object({
-  email: z.string().email({
-    message: "хүчингүй мэйл хаяг"
+  email: z.string({
+    required_error:"Мэйл хаягаа оруулан уу!"
+  }).email({
+    message: "хүчингүй мэйл хаяг",
   }),
   password: z.string({
     required_error: "нууц үгээ оруулан уу!",

@@ -50,7 +50,7 @@ function MegaLinks() {
       {/* mega menu */}
       <div className="group-hover:opacity-100 group-hover:block bg-primary transition-all duration-300 absolute w-[100%] left-0 hidden opacity-0  z-[-50] top-[70px] md:top-[75px]">
         <div className="bg-primary p-5 flex">
-          <div className="hidden border-r-2 border-color3 lg:flex p-5 flex-col w-[256px] rounded-[20px] mr-5">
+          <div className="hidden rounded-md border lg:flex p-5 flex-col w-[256px] mr-5">
               <Link href={"#"} className='mb-4 font-[600] text-[24px]'>
                 <p>Мэргэжилтэн</p>
               </Link>
@@ -58,13 +58,13 @@ function MegaLinks() {
               Хэдхэн товшилтоор олон төрлийн загвар өмсөгч,
               жүжигчид, нөлөөлөгчдийг хурдан олж, захиалаарай.
             </p>
-            <Link href={"/post-a-job"}>
-              <Button className="my-5 w-full" variant="outline" >
-                Ажил байршуулах
+            <Link href={"/search/work"}>
+              <Button className="my-5 w-full bg-white" >
+                Ажил хайх
               </Button>
             </Link>
 
-            <Link href={"/search/work"}>
+            <Link href={"/search/talent"}>
               <Button variant="secondary" className="w-full">
                 Мэргэжилтэн  олох
               </Button>

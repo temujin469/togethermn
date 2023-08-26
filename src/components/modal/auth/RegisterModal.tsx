@@ -32,7 +32,9 @@ const registerFormSchema = z.object({
   }).min(2, {
     message: "Хэрэглэгчийн нэр дор хаяж 2 тэмдэгт байх ёстой"
   }),
-  email: z.string().email({
+  email: z.string({
+    required_error: "Мэйл хаягаа оруулан уу!"
+  }).email({
     message: "Мэйл хаяг буруу байна"
   }),
   password: z.string({

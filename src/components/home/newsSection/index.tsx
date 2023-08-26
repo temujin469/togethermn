@@ -6,8 +6,9 @@ import moment from "moment";
 import "moment/locale/mn"
 import getHomePageContents from "@/utils/fetch/getHomePageContents";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Calendar } from "lucide-react";
 import Image from "next/image";
+import { marked } from "marked";
 
 
 async function NewsSection() {
@@ -45,13 +46,12 @@ async function NewsSection() {
                     </div>
                   </div>
                   <div className="p-5 lg:p-6">
-                    <h5 className="mb-3 text-lg font-bold">{article.attributes.title}</h5>
-                    <p className="mb-4 text-neutral-500 dark:text-neutral-300">
-                      <small>Нийтэлсэн <u>{moment(article.attributes.date).format('ll')}</u></small>
+                    <h5 className="mb-3 text-lg h-[56px] overflow-hidden text-ellipsis font-bold">{article.attributes.title}</h5>
+                    <p className="mb-3 text-neutral-500 dark:text-neutral-300">
+                      <small className='flex gap-1 justify-center'><Calendar size={17} />
+                        <u>{moment(article.attributes.date).format('ll')}</u></small>
                     </p>
-                    <p className="mb-4 pb-2 text-gray-500 h-[150px] overflow-hidden text-ellipsis w-full">
-                      {article.attributes.content}
-                    </p>
+                    <p dangerouslySetInnerHTML={{ __html: marked.parse(article.attributes.content) }} className="mb-4 pb-2 text-gray-500 h-[150px] overflow-hidden text-ellipsis w-full"/>
                     <Link href={`/news/${article.id}`} data-te-ripple-init data-te-ripple-color="light"
                       className="inline-block rounded-full bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
                       Цааш унших</Link>

@@ -5,7 +5,7 @@ import TestimonialSlider from './TestimonialSlider';
 
 const Testimonial = () => {
   return (
-    <div className=' bg-gray-100'>
+    <div className=' bg-secondary/20'>
       <Container>
 
         <section className='mb-20'>

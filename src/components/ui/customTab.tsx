@@ -32,7 +32,7 @@ export function CustomTabPanel(props: TabPanelProps) {
 
 
 interface StyledTabProps {
-  label: string;
+  label: React.ReactNode;
 }
 
 export const StyledTab = styled((props: StyledTabProps) => (

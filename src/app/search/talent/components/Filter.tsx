@@ -42,7 +42,7 @@ function FilterTalent() {
   const attributes = attributesData?.attributes;
 
   const filterRow = (
-    <div className='space-y-5 my-5'>
+    <div className='space-y-5 my-5 px-[4px]'>
       <FilterRow label='Түлхүүр үг'>
         <Input value={filter?.searchKey} onChange={(e) => setFilter({ ...filter, searchKey: e.target.value })} placeholder='Хайх' className='placeholder:text-gray-400 placeholder:font-semibold font-semibold' />
       </FilterRow>
@@ -161,7 +161,7 @@ function FilterTalent() {
           }}
           onClose={toggleDrawer}
         >
-          <div className='p-4 bg-white rounded-t-2xl min-h-[calc(100vh-180px)]'>
+          <div className='p-[12px] bg-white rounded-t-2xl min-h-[calc(100vh-180px)]'>
             <div className='overflow-y-scroll max-h-[calc(100vh-200px)] mb-[50px]'>
               {filterRow}
             </div>

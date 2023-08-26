@@ -6,6 +6,7 @@ import useNews from '@/hooks/useNews';
 
 function SearchNewsWidget() {
   const news = useNews()
+  // cons
   return (
     <Widget title='Хайх'>
       <Input placeholder='Хайх...' onChange={(e)=>news.setFilter({searchKey:e.target.value})}/>

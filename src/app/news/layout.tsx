@@ -15,20 +15,21 @@ export const metadata: Metadata = {
 
 function layout({children}:{children:React.ReactNode}) {
   return (
-    <div className="bg-white">
+    <div className="bg-[#f1f1f1]">
       <Header/>
-      <Container>
+      <div className='max-w-[1680px] px-[13px] md:px-[20px] 2xl:px-[30px] mx-auto'>
         <div className='min-h-[calc(100vh-75px)]'>
-          <div className='lg:grid grid-cols-12 py-10 gap-10'>
-            <div className='col-span-3 xl:col-span-4'>
+          <div className='md:grid grid-cols-12 py-10 md:gap-[20px] 2xl:gap-[30px]'>
+            <div className='col-span-4 lg:col-span-3 xl:col-span-3'>
               <SideMenu/>
             </div>
-            <div className='col-span-9 xl:col-span-8'>
+            <div className='col-span-8 lg:col-span-9 xl:col-span-9'>
               {children}
             </div>
           </div>
         </div>
-      </Container>
+      </div>
+      {/* <Scro */}
       <Footer/>
     </div>
   );

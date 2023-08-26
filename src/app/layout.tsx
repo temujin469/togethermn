@@ -7,6 +7,7 @@ import getAttributes from '@/utils/fetch/getAttributes'
 import { Hydrate, dehydrate } from '@tanstack/react-query'
 import getProfessions from '@/utils/fetch/getProfessions'
 import {Commissioner} from "next/font/google"
+import ScrollTop from '@/components/element/ScrollTop'
 
 
 export const metadata = {
@@ -17,6 +18,7 @@ export const metadata = {
 const commissioner = Commissioner({
   weight: '400',
   subsets: ['latin'],
+  variable:"--default-font"
 })
 
 export default async function RootLayout({
@@ -39,6 +41,7 @@ export default async function RootLayout({
             {children}
           </Hydrate>
         </QueryProvider>
+        <ScrollTop/>
       </body>
     </html>
   )

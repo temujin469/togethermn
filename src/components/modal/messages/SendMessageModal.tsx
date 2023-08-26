@@ -136,7 +136,7 @@ function SendMessageModal() {
       const config = {
         headers: {
           Authorization: "Bearer " + token
-        }
+        },
       }
 
       const res = await myApi.post(`/api/messages`,
@@ -179,6 +179,25 @@ function SendMessageModal() {
     </Tooltip>
   )
 
+  const modules = {
+    toolbar: [
+      [{ 'header': [1, 2, false] }],
+      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+      [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
+      ['link', 'image'],
+      // [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+      // [{ 'align': [] }],
+      ['clean'],
+    ],
+  }
+
+  // const formats = [
+  //   'header',
+  //   'bold', 'italic', 'underline', 'strike', 'blockquote',
+  //   'list', 'bullet', 'indent',
+  //   'link', 'image'
+  // ]
+
 
 
 
@@ -213,6 +232,8 @@ function SendMessageModal() {
          placeholder='Захидал...' 
          value={bodyText}
         theme="snow" 
+        modules={modules}
+        // formats={formats}
          onChange={(val) => setBodyText(val)} 
         />
       </div>

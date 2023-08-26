@@ -34,9 +34,9 @@ function MessageDetail({ params }: Props) {
             <p className='text-[15px] text-gray-500 mb-5 text-center'>
               {moment(data?.data?.attributes.createdAt).format('LLL')}
             </p>
-            <div className='shadow p-4 bg-white mx-auto w-fit md:p-16'>
+            <div className='shadow p-4 bg-white mx-auto max-w-[890px] md:p-16'>
 
-              <div className=' prose prose-sm sm:prose-lg' dangerouslySetInnerHTML={{ __html: messageBody as string }} />
+              <div className=' prose prose-sm sm:prose-lg text-justify' dangerouslySetInnerHTML={{ __html: messageBody as string }} />
               {/* <div className='text-gray-600'>{conversation.body}</div> */}
             </div>
           </div>

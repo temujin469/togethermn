@@ -44,7 +44,7 @@ export default function Messages() {
         sx={{ flexGrow: 1, bgcolor: 'background.paper', display: { sx: "block", md: "flex" }, height: "100%", width: "100%" }}
       >
         <Tabs
-        className='shadow md:sticky top-0 md:h-[calc(100vh-75px)]'
+        className='shadow md:sticky top-0 lg:h-[calc(100vh-75px)]'
           orientation={!md ? "horizontal" : "vertical" }
           variant={md ? "standard" : "scrollable"}
           value={value}
@@ -52,9 +52,9 @@ export default function Messages() {
           aria-label="Vertical tabs example"
           sx={{ borderRight: 1, borderColor: 'divider' }}
         >
-          <StyledTab label="Бүх зурвас" {...a11yProps(0)} />
-          <StyledTab label="Надад ирсэн зурвас" {...a11yProps(1)} />
-          <StyledTab label="Илгээсэн зурвас" {...a11yProps(2)} />
+          <StyledTab label={<p className='text-start md:w-full'>Бүх зурвас</p>} {...a11yProps(0)} />
+          <StyledTab label={<p className='text-start md:w-full'>Надад ирсэн зурвас</p>} {...a11yProps(1)} />
+          <StyledTab label={<p className='text-start md:w-full'>Илгээсэн зурвас</p>} {...a11yProps(2)} />
         </Tabs>
         <div className='flex-[1]'>
           <TabPanel value={value} index={0}>
