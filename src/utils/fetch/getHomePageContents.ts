@@ -48,5 +48,5 @@ export default async function getHomePageContents(): Promise<
         revalidate:5
       }
     });
-    return data.data;
+    return data?.data;
 }
