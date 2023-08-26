@@ -13,6 +13,8 @@ import getHomePageContents from '@/utils/fetch/getHomePageContents'
 import getQueryClient from '@/utils/getQueryClient'
 import { Hydrate, dehydrate } from '@tanstack/react-query'
 
+
+
 export default async function Home() {
 
   
